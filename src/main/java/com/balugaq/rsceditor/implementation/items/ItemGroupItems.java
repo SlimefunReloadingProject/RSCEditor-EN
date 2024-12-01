@@ -10,13 +10,16 @@ import org.bukkit.inventory.ItemStack;
 public class ItemGroupItems {
     public static void register() {
         Slimefun.getRegistry().getAllItemGroups().forEach(itemGroup -> {
-            new ItemGroupItem(
-                    new SlimefunItemStack(
-                            "RSC_EDITOR_ITEM_GROUP_" + itemGroup.getKey().getKey().toUpperCase(),
-                            (ItemStack) ReflectionUtil.getValue(itemGroup.getClass(), "item")
-                    ),
-                    itemGroup
-            ).register(RSCEditor.getInstance());
+            ItemStack item = (ItemStack) ReflectionUtil.getValue(itemGroup, "item");
+            if (item != null) {
+                new ItemGroupItem(
+                        new SlimefunItemStack(
+                                "RSC_EDITOR_ITEM_GROUP_" + itemGroup.getKey().getNamespace().toUpperCase() + "_" + itemGroup.getKey().getKey().toUpperCase(),
+                                item
+                        ),
+                        itemGroup
+                ).register(RSCEditor.getInstance());
+            }
         });
     }
 }

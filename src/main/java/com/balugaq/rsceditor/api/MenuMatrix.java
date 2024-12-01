@@ -3,6 +3,7 @@ package com.balugaq.rsceditor.api;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,16 +14,17 @@ public class MenuMatrix {
     private final List<String> labels = new ArrayList<>();
     private final Map<Character, ItemStack> itemStackMap = new HashMap<>();
     private final Map<Character, ChestMenu.MenuClickHandler> handlerMap = new HashMap<>();
+
     public MenuMatrix() {
 
     }
 
-    public MenuMatrix addLine(String label) {
+    public @NotNull MenuMatrix addLine(String label) {
         labels.add(label);
         return this;
     }
 
-    public MenuMatrix addItem(Character label, ItemStack item, ChestMenu.MenuClickHandler handler) {
+    public @NotNull MenuMatrix addItem(Character label, ItemStack item, ChestMenu.MenuClickHandler handler) {
         this.itemStackMap.put(label, item);
         this.handlerMap.put(label, handler);
         return this;
@@ -32,24 +34,24 @@ public class MenuMatrix {
         return addItem(label, item, (p, s, i, a) -> false);
     }
 
-    public MenuMatrix addHandler(Character label, ChestMenu.MenuClickHandler handler) {
+    public @NotNull MenuMatrix addHandler(Character label, ChestMenu.MenuClickHandler handler) {
         this.handlerMap.put(label, handler);
         return this;
     }
 
-    public MenuMatrix addItem(String label, ItemStack item, ChestMenu.MenuClickHandler handler) {
+    public MenuMatrix addItem(@NotNull String label, ItemStack item, ChestMenu.MenuClickHandler handler) {
         return addItem(label.charAt(0), item, handler);
     }
 
-    public MenuMatrix addItem(String label, ItemStack item) {
+    public MenuMatrix addItem(@NotNull String label, ItemStack item) {
         return addItem(label.charAt(0), item, (p, s, i, a) -> false);
     }
 
-    public MenuMatrix addHandler(String label, ChestMenu.MenuClickHandler handler) {
+    public MenuMatrix addHandler(@NotNull String label, ChestMenu.MenuClickHandler handler) {
         return addHandler(label.charAt(0), handler);
     }
 
-    public void build(BlockMenuPreset preset) {
+    public void build(@NotNull BlockMenuPreset preset) {
         int index = 0;
         for (String label : labels) {
             for (int j = 0; j < label.length(); j++) {
@@ -78,7 +80,7 @@ public class MenuMatrix {
         return -1;
     }
 
-    public int getChar(String label) {
+    public int getChar(@NotNull String label) {
         return getChar(label.charAt(0));
     }
 
@@ -101,7 +103,7 @@ public class MenuMatrix {
         return array;
     }
 
-    public int[] getChars(String label) {
+    public int[] getChars(@NotNull String label) {
         return getChars(label.charAt(0));
     }
 }

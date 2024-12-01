@@ -1,6 +1,12 @@
 package com.balugaq.rsceditor.implementation;
 
 
+import com.balugaq.rsceditor.implementation.groups.GroupSetup;
+import com.balugaq.rsceditor.implementation.items.BiomeItems;
+import com.balugaq.rsceditor.implementation.items.ItemGroupItems;
+import com.balugaq.rsceditor.implementation.items.MachineSetup;
+import com.balugaq.rsceditor.implementation.items.RecipeTypeItems;
+import com.balugaq.rsceditor.implementation.items.TypeItems;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,6 +23,14 @@ public class RSCEditor extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public void onEnable() {
+        GroupSetup.register();
+
+        TypeItems.register();
+        MachineSetup.register();
+        RecipeTypeItems.register();
+        ItemGroupItems.register();
+        BiomeItems.register();
+
         getLogger().info("RSCEditor has been enabled.");
     }
 

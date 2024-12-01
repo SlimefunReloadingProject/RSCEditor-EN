@@ -5,15 +5,20 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import lombok.Getter;
+import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class RecipeTypeItem extends PlaceholderItem {
-    private final RecipeType recipeType;
+public class RainbowTypeItem extends PlaceholderItem {
+    private final RainbowType rainbowType;
 
-    public RecipeTypeItem(@NotNull SlimefunItemStack item, RecipeType recipeType) {
-        super(MyItemGroups.RECIPE_TYPE_GROUP, item);
-        this.recipeType = recipeType;
+    public RainbowTypeItem(@NotNull SlimefunItemStack item, RainbowType rainbowType) {
+        super(MyItemGroups.TYPE_GROUP, item);
+        this.rainbowType = rainbowType;
+    }
+
+    public boolean isCustom() {
+        return rainbowType == RainbowType.CUSTOM;
     }
 }

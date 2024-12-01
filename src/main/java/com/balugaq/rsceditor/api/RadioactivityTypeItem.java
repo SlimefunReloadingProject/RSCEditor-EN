@@ -4,16 +4,18 @@ import com.balugaq.rsceditor.implementation.groups.MyItemGroups;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import lombok.Getter;
+import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class RecipeTypeItem extends PlaceholderItem {
-    private final RecipeType recipeType;
+public class RadioactivityTypeItem extends PlaceholderItem {
+    private final Radioactivity radioactivity;
 
-    public RecipeTypeItem(@NotNull SlimefunItemStack item, RecipeType recipeType) {
-        super(MyItemGroups.RECIPE_TYPE_GROUP, item);
-        this.recipeType = recipeType;
+    public RadioactivityTypeItem(@NotNull SlimefunItemStack item, Radioactivity radioactivity) {
+        super(MyItemGroups.TYPE_GROUP, item);
+        this.radioactivity = radioactivity;
     }
 }

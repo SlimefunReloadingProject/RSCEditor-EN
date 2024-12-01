@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
@@ -22,11 +23,14 @@ public class RecipeTypeItems {
         recipeTypes.forEach(type -> {
             ItemStack item = type.toItem();
             if (item == null) {
-                return;
+                item = new CustomItemStack(
+                        Material.BARRIER,
+                        "&4null"
+                );
             }
             new RecipeTypeItem(
                     new SlimefunItemStack(
-                        "RSC_EDITOR_RECIPE_TYPE_" + type.getKey().getKey().toUpperCase(),
+                            "RSC_EDITOR_RECIPE_TYPE_" + type.getKey().getKey().toUpperCase(),
                             item
                     ),
                     type

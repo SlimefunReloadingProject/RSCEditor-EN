@@ -1,0 +1,77 @@
+package com.balugaq.rsceditor.implementation.items.machines.container;
+
+import com.balugaq.rsceditor.api.AbstractContainer;
+import com.balugaq.rsceditor.api.IntegerTypeItem;
+import com.balugaq.rsceditor.api.MenuMatrix;
+import com.balugaq.rsceditor.utils.Icons;
+import com.balugaq.rsceditor.utils.ItemUtil;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class CustomRainbowContainer extends AbstractContainer {
+    private static final MenuMatrix matrix = new MenuMatrix()
+            .addLine("rrrrrrrrrR")
+            .addLine("rrrrrrrrrR")
+            .addLine("rrrrrrrrrR")
+            .addLine("rrrrrrrrrR")
+            .addLine("rrrrrrrrrR")
+            .addLine("rrrrrrrrrR")
+            .addItem("R", Icons.custom_rainbow_block);
+
+    public CustomRainbowContainer(@NotNull SlimefunItemStack item) {
+        super(item);
+    }
+
+    @Override
+    public BlockMenuPreset setBlockMenuPreset() {
+        return new BlockMenuPreset(getId(), getItemName()) {
+            @Override
+            public void init() {
+                matrix.build(this);
+            }
+
+            @Override
+            public boolean canOpen(@NotNull Block block, @NotNull Player player) {
+                return player.isOp();
+            }
+
+            @Override
+            public int[] getSlotsAccessedByItemTransport(ItemTransportFlow itemTransportFlow) {
+                return new int[0];
+            }
+        };
+    }
+
+    public List<Material> getMaterials(BlockMenu menu) {
+        List<Material> materials = new ArrayList<>();
+        for (int slot : matrix.getChars("r")) {
+            ItemStack itemStack = menu.getItemInSlot(slot);
+            if (itemStack != null && itemStack.getType() != Material.AIR) {
+                if (!itemStack.getType().isAir() && itemStack.getType().isBlock()) {
+                    materials.add(itemStack.getType());
+                }
+            }
+        }
+
+        return materials;
+    }
+}

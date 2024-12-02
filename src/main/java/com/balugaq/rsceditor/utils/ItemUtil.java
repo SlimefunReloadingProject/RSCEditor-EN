@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.utils;
 
 import com.balugaq.rsceditor.api.BiomeItem;
 import com.balugaq.rsceditor.api.BooleanTypeItem;
+import com.balugaq.rsceditor.api.DoubleTypeItem;
 import com.balugaq.rsceditor.api.GroupType;
 import com.balugaq.rsceditor.api.GroupTypeItem;
 import com.balugaq.rsceditor.api.IntegerTypeItem;
@@ -44,6 +45,30 @@ public class ItemUtil {
         }
         if (!integers.isEmpty()) {
             return new Pair<>(true, integers);
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, Double> isDouble(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        ItemStack item = menu.getItemInSlot(matrix.getChar(label));
+        if (SlimefunItem.getByItem(item) instanceof DoubleTypeItem typeItem) {
+            return new Pair<>(true, typeItem.getContent(item));
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, List<Double>> isDoubles(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        List<Double> doubles = new ArrayList<>();
+        for (int slot : matrix.getChars(label)) {
+            ItemStack item = menu.getItemInSlot(slot);
+            if (SlimefunItem.getByItem(item) instanceof DoubleTypeItem typeItem) {
+                doubles.add(typeItem.getContent(item));
+            }
+        }
+        if (!doubles.isEmpty()) {
+            return new Pair<>(true, doubles);
         } else {
             return new Pair<>(false, null);
         }

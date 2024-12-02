@@ -1,11 +1,15 @@
 package com.balugaq.rsceditor.implementation.items;
 
 import com.balugaq.rsceditor.implementation.RSCEditor;
+import com.balugaq.rsceditor.implementation.items.machines.ArmorEditor;
+import com.balugaq.rsceditor.implementation.items.machines.CapacitorEditor;
+import com.balugaq.rsceditor.implementation.items.machines.FoodEditor;
 import com.balugaq.rsceditor.implementation.items.machines.GEOResourceEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemGroupEditor;
 import com.balugaq.rsceditor.implementation.items.machines.MobDropEditor;
 import com.balugaq.rsceditor.implementation.items.machines.RecipeTypeEditor;
+import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.CustomRainbowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.SupplyContainer;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -15,6 +19,17 @@ import org.bukkit.Material;
 public class MachineSetup {
     public static void register() {
         // containers
+        ArmorPieceContainer armorPieceContainer = new ArmorPieceContainer(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_ARMOR_PIECE_CONTAINER",
+                        new CustomItemStack(
+                                Material.IRON_BLOCK,
+                                "§b装备部分容器"
+                        )
+                )
+        );
+        armorPieceContainer.register(RSCEditor.getInstance());
+
         CustomRainbowContainer customRainbowContainer = new CustomRainbowContainer(
                 new SlimefunItemStack(
                         "RSC_EDITOR_CUSTOM_RAINBOW_CONTAINER",
@@ -92,5 +107,38 @@ public class MachineSetup {
                 )
         );
         itemEditor.register(RSCEditor.getInstance());
+
+        ArmorEditor armorEditor = new ArmorEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_ARMOR_EDITOR",
+                        new CustomItemStack(
+                                Material.DIAMOND_CHESTPLATE,
+                                "§b装备构造器"
+                        )
+                )
+        );
+        armorEditor.register(RSCEditor.getInstance());
+
+        CapacitorEditor capacitorEditor = new CapacitorEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_CAPACITOR_EDITOR",
+                        new CustomItemStack(
+                                Material.REDSTONE_BLOCK,
+                                "§b电容构造器"
+                        )
+                )
+        );
+        capacitorEditor.register(RSCEditor.getInstance());
+
+        FoodEditor foodEditor = new FoodEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_FOOD_EDITOR",
+                        new CustomItemStack(
+                                Material.HAY_BLOCK,
+                                "§b食物构造器"
+                        )
+                )
+        );
+        foodEditor.register(RSCEditor.getInstance());
     }
 }

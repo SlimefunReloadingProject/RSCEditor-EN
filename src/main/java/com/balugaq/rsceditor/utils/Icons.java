@@ -36,7 +36,7 @@ public class Icons {
     public static final ItemStack id = new CustomItemStack(
             Material.NAME_TAG,
             "&bID",
-            "&b^ 在此处放置 文字占位符 ^"
+            "&b^ 在此处放置 文本占位符 ^"
     );
 
     public static final ItemStack item = new CustomItemStack(
@@ -111,7 +111,7 @@ public class Icons {
     public static final ItemStack action = new CustomItemStack(
             Material.ORANGE_GLAZED_TERRACOTTA,
             "&b操作",
-            "&b^ 在此处放置 文字占位符 ^",
+            "&b^ 在此处放置 文本占位符 ^",
             "&c当此物品组是链接物品组时"
     );
 
@@ -135,7 +135,7 @@ public class Icons {
     public static final ItemStack script = new CustomItemStack(
             Material.SCULK_SENSOR,
             "&b脚本",
-            "&b^ 在此处放置 文字占位符 ^"
+            "&b^ 在此处放置 文本占位符 ^"
     );
 
     public static final ItemStack energy_capacity = new CustomItemStack(
@@ -227,12 +227,100 @@ public class Icons {
     public static final ItemStack geo_name = new CustomItemStack(
             Material.COAL,
             "&bGEO名字",
-            "&b^ 在此处放置 文字占位符 ^"
+            "&b^ 在此处放置 文本占位符 ^"
     );
 
     public static final ItemStack build_geo = new CustomItemStack(
             Material.STRUCTURE_BLOCK,
             "&b构造",
             "&b点击以构造 GEO"
+    );
+    
+    public static final ItemStack potion = new CustomItemStack(
+            Material.POTION,
+            "&b药水",
+            "&b^ 在此处放置 文本占位符 ^"
+    );
+
+    public static final ItemStack fullset = new CustomItemStack(
+            Material.END_CRYSTAL,
+            "&b全套",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
+    public static final ItemStack protection_type = new CustomItemStack(
+            Material.SHIELD,
+            "&b保护类型",
+            "&b^ 在此处放置 保护类型占位符 ^"
+    );
+
+    public static final ItemStack helmet = new CustomItemStack(
+            Material.DIAMOND_HELMET,
+            "&b头盔",
+            "&b在此机器上方第 4 格放置",
+            "&b装备部分容器"
+    );
+
+    public static final ItemStack chestplate = new CustomItemStack(
+            Material.DIAMOND_CHESTPLATE,
+            "&b胸甲",
+            "&b在此机器上方第 3 格放置",
+            "&b装备部分容器"
+    );
+
+    public static final ItemStack leggings = new CustomItemStack(
+            Material.DIAMOND_LEGGINGS,
+            "&b护腿",
+            "&b在此机器上方第 2 格放置",
+            "&b装备部分容器"
+    );
+
+    public static final ItemStack boots = new CustomItemStack(
+            Material.DIAMOND_BOOTS,
+            "&b靴子",
+            "&b在此机器上方第 1 格放置",
+            "&b装备部分容器"
+    );
+
+    public static final ItemStack build_armor = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造装备"
+    );
+
+    public static final ItemStack build_capacitor = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造电容"
+    );
+
+    public static final ItemStack nutrition = new CustomItemStack(
+            Material.BREAD,
+            "&b营养",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack saturation = new CustomItemStack(
+            Material.GOLDEN_CARROT,
+            "&b饱和度",
+            "&b^ 在此处放置 浮点数占位符 ^"
+    );
+
+    public static final ItemStack eatseconds = new CustomItemStack(
+            Material.CLOCK,
+            "&b食入时间",
+            "&b^ 在此处放置 浮点数占位符 ^"
+    );
+
+    public static final ItemStack always_eatable = new CustomItemStack(
+            Material.COOKIE,
+            "&b保持可食用性",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
+    public static final ItemStack build_food = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造食物"
     );
 }

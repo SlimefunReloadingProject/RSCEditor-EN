@@ -5,6 +5,7 @@ import com.balugaq.rsceditor.api.DoubleTypeItem;
 import com.balugaq.rsceditor.api.GroupType;
 import com.balugaq.rsceditor.api.GroupTypeItem;
 import com.balugaq.rsceditor.api.IntegerTypeItem;
+import com.balugaq.rsceditor.api.ProtectionTypeItem;
 import com.balugaq.rsceditor.api.RadioactivityTypeItem;
 import com.balugaq.rsceditor.api.RainbowType;
 import com.balugaq.rsceditor.api.RainbowTypeItem;
@@ -13,6 +14,7 @@ import com.balugaq.rsceditor.api.TextTypeItem;
 import com.balugaq.rsceditor.implementation.RSCEditor;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.core.attributes.ProtectionType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
@@ -305,6 +307,40 @@ public class TypeItems {
         );
         custom.register(RSCEditor.getInstance());
 
+        ProtectionTypeItem BEES = new ProtectionTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_PROTECTION_TYPE_ITEM_BEES",
+                        new CustomItemStack(
+                                Material.BEEHIVE,
+                                "&b保护类型占位符",
+                                "&eBees"
+                        )
+                ),
+                ProtectionType.BEES
+        );
+        BEES.register(RSCEditor.getInstance());
 
+        ProtectionTypeItem RADIATION = new ProtectionTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_PROTECTION_TYPE_ITEM_RADIATION",
+                        new CustomItemStack(
+                                Material.LAVA_BUCKET,
+                                "&b保护类型占位符",
+                                "&eRadiation"
+                        )
+                ),
+                ProtectionType.RADIATION
+        );
+        RADIATION.register(RSCEditor.getInstance());
+
+        ProtectionTypeItem FLYING_INTO_WALL = new ProtectionTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_PROTECTION_TYPE_ITEM_FLYING_INTO_WALL",
+                        new CustomItemStack(
+                                Material.FEATHER,
+                                "&b保护类型占位符",
+                                "&eFlying into Wall"
+                        )
+                ),
+                ProtectionType.FLYING_INTO_WALL
+        );
+        FLYING_INTO_WALL.register(RSCEditor.getInstance());
     }
 }

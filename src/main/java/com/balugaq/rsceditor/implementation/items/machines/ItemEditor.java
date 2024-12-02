@@ -18,10 +18,8 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import io.github.thebusybiscuit.slimefun4.utils.ColoredMaterial;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
@@ -85,6 +83,7 @@ public class ItemEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -98,7 +97,8 @@ public class ItemEditor extends AbstractContainer {
                 // Placeable button
                 menu.addMenuClickHandler(matrix.getChar("e"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
-                        p.closeInventory();
+                        p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, bool -> {
                             typeItem.setContent(i, bool);
                             menu.open(p);
@@ -113,6 +113,7 @@ public class ItemEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("s"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -127,6 +128,7 @@ public class ItemEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("y"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -140,7 +142,8 @@ public class ItemEditor extends AbstractContainer {
                 // Anti wither button
                 menu.addMenuClickHandler(matrix.getChar("h"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
-                        p.closeInventory();
+                        p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, bool -> {
                             typeItem.setContent(i, bool);
                             menu.open(p);
@@ -154,7 +157,8 @@ public class ItemEditor extends AbstractContainer {
                 // Soul bound button
                 menu.addMenuClickHandler(matrix.getChar("o"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
-                        p.closeInventory();
+                        p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, bool -> {
                             typeItem.setContent(i, bool);
                             menu.open(p);
@@ -182,7 +186,8 @@ public class ItemEditor extends AbstractContainer {
                 // Hidden button
                 menu.addMenuClickHandler(matrix.getChar("v"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
-                        p.closeInventory();
+                        p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, bool -> {
                             typeItem.setContent(i, bool);
                             menu.open(p);
@@ -197,6 +202,7 @@ public class ItemEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("c"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -211,6 +217,7 @@ public class ItemEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("a"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);

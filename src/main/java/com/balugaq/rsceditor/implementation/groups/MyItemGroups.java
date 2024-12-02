@@ -1,7 +1,6 @@
 package com.balugaq.rsceditor.implementation.groups;
 
 import com.balugaq.rsceditor.implementation.RSCEditor;
-import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.NestedItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;

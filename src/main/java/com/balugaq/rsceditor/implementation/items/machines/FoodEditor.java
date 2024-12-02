@@ -69,6 +69,7 @@ public class FoodEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -83,6 +84,7 @@ public class FoodEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("s"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -97,6 +99,7 @@ public class FoodEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("u"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -111,6 +114,7 @@ public class FoodEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("o"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof DoubleTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -125,6 +129,7 @@ public class FoodEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("e"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof DoubleTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -139,6 +144,7 @@ public class FoodEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("a"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);

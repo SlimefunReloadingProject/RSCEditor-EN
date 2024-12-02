@@ -30,7 +30,7 @@ public class MenuMatrix {
         return this;
     }
 
-    public MenuMatrix addItem(Character label, ItemStack item) {
+    public @NotNull MenuMatrix addItem(Character label, ItemStack item) {
         return addItem(label, item, (p, s, i, a) -> false);
     }
 
@@ -39,15 +39,15 @@ public class MenuMatrix {
         return this;
     }
 
-    public MenuMatrix addItem(@NotNull String label, ItemStack item, ChestMenu.MenuClickHandler handler) {
+    public @NotNull MenuMatrix addItem(@NotNull String label, ItemStack item, ChestMenu.MenuClickHandler handler) {
         return addItem(label.charAt(0), item, handler);
     }
 
-    public MenuMatrix addItem(@NotNull String label, ItemStack item) {
+    public @NotNull MenuMatrix addItem(@NotNull String label, ItemStack item) {
         return addItem(label.charAt(0), item, (p, s, i, a) -> false);
     }
 
-    public MenuMatrix addHandler(@NotNull String label, ChestMenu.MenuClickHandler handler) {
+    public @NotNull MenuMatrix addHandler(@NotNull String label, ChestMenu.MenuClickHandler handler) {
         return addHandler(label.charAt(0), handler);
     }
 

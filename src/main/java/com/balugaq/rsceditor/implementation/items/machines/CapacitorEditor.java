@@ -1,32 +1,24 @@
 package com.balugaq.rsceditor.implementation.items.machines;
 
 import com.balugaq.rsceditor.api.AbstractContainer;
-import com.balugaq.rsceditor.api.BooleanTypeItem;
 import com.balugaq.rsceditor.api.IntegerTypeItem;
 import com.balugaq.rsceditor.api.MenuMatrix;
-import com.balugaq.rsceditor.api.RainbowTypeItem;
 import com.balugaq.rsceditor.api.TextTypeItem;
-import com.balugaq.rsceditor.implementation.items.machines.container.CustomRainbowContainer;
 import com.balugaq.rsceditor.utils.ClipboardUtil;
 import com.balugaq.rsceditor.utils.Icons;
 import com.balugaq.rsceditor.utils.ItemUtil;
 import com.balugaq.rsceditor.utils.YamlWriter;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
@@ -71,6 +63,7 @@ public class CapacitorEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -85,6 +78,7 @@ public class CapacitorEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("y"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);

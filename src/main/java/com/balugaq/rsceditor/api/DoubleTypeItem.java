@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoubleTypeItem extends TypeItem<Double> {
+public class DoubleTypeItem extends BaseTypeItem<Double> {
     public DoubleTypeItem(@NotNull SlimefunItemStack item) {
         super(item, PlaceHolderType.DOUBLE_PLACEHOLDER);
     }

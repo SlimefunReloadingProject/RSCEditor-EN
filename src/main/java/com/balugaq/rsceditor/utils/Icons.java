@@ -235,7 +235,7 @@ public class Icons {
             "&b构造",
             "&b点击以构造 GEO"
     );
-    
+
     public static final ItemStack potion = new CustomItemStack(
             Material.POTION,
             "&b药水",
@@ -322,5 +322,35 @@ public class Icons {
             Material.STRUCTURE_BLOCK,
             "&b构造",
             "&b点击以构造食物"
+    );
+
+    public static final ItemStack recipe_name = new CustomItemStack(
+            Material.NAME_TAG,
+            "&b配方名称",
+            "&b^ 在此处放置 文本占位符 ^"
+    );
+
+    public static final ItemStack energy_cost = new CustomItemStack(
+            Material.REDSTONE,
+            "&b能量消耗",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack processing_time = new CustomItemStack(
+            Material.CLOCK,
+            "&b处理时间",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack build_machine_recipe = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造机器配方"
+    );
+
+    public static final ItemStack build_linked_machine_recipe = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造链接机器配方"
     );
 }

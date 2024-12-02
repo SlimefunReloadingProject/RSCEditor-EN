@@ -5,24 +5,21 @@ import com.balugaq.rsceditor.api.DoubleTypeItem;
 import com.balugaq.rsceditor.api.GroupType;
 import com.balugaq.rsceditor.api.GroupTypeItem;
 import com.balugaq.rsceditor.api.IntegerTypeItem;
+import com.balugaq.rsceditor.api.ItemFlowType;
+import com.balugaq.rsceditor.api.ItemFlowTypeItem;
+import com.balugaq.rsceditor.api.LinkedMachineRecipeItem;
+import com.balugaq.rsceditor.api.MachineRecipeItem;
 import com.balugaq.rsceditor.api.ProtectionTypeItem;
 import com.balugaq.rsceditor.api.RadioactivityTypeItem;
 import com.balugaq.rsceditor.api.RainbowType;
 import com.balugaq.rsceditor.api.RainbowTypeItem;
-import com.balugaq.rsceditor.api.RecipeTypeItem;
 import com.balugaq.rsceditor.api.TextTypeItem;
 import com.balugaq.rsceditor.implementation.RSCEditor;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.ProtectionType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class TypeItems {
     public static void register() {
@@ -342,5 +339,85 @@ public class TypeItems {
                 ProtectionType.FLYING_INTO_WALL
         );
         FLYING_INTO_WALL.register(RSCEditor.getInstance());
+
+        ItemFlowTypeItem none = new ItemFlowTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_NONE",
+                        new CustomItemStack(
+                                Material.GRAY_STAINED_GLASS_PANE,
+                                "&b物品流向占位符",
+                                "&eNone"
+                        )
+                ),
+                ItemFlowType.NONE
+        );
+        none.register(RSCEditor.getInstance());
+
+        ItemFlowTypeItem insert = new ItemFlowTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_INSERT",
+                        new CustomItemStack(
+                                Material.BLUE_STAINED_GLASS_PANE,
+                                "&b物品流向占位符",
+                                "&eInsert"
+                        )
+                ),
+                ItemFlowType.INSERT
+        );
+        insert.register(RSCEditor.getInstance());
+
+        ItemFlowTypeItem withdraw = new ItemFlowTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_WITHDRAW",
+                        new CustomItemStack(
+                                Material.ORANGE_STAINED_GLASS_PANE,
+                                "&b物品流向占位符",
+                                "&eWithdraw"
+                        )
+                ),
+                ItemFlowType.WITHDRAW
+        );
+        withdraw.register(RSCEditor.getInstance());
+
+        ItemFlowTypeItem insert_and_withdraw = new ItemFlowTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_INSERT_AND_WITHDRAW",
+                        new CustomItemStack(
+                                Material.PURPLE_STAINED_GLASS_PANE,
+                                "&b物品流向占位符",
+                                "&eInsert and Withdraw"
+                        )
+                ),
+                ItemFlowType.INSERT_AND_WITHDRAW
+        );
+        insert_and_withdraw.register(RSCEditor.getInstance());
+
+        ItemFlowTypeItem free_output = new ItemFlowTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_FREE_OUTPUT",
+                        new CustomItemStack(
+                                Material.GREEN_STAINED_GLASS_PANE,
+                                "&b物品流向占位符",
+                                "&eFree Output"
+                        )
+                ),
+                ItemFlowType.FREE_OUTPUT
+        );
+        free_output.register(RSCEditor.getInstance());
+
+        MachineRecipeItem mri = new MachineRecipeItem(
+                new SlimefunItemStack("RSC_EDITOR_MACHINE_RECIPE_ITEM",
+                        new CustomItemStack(
+                                Material.KNOWLEDGE_BOOK,
+                                "&b机器配方占位符"
+                        )
+                )
+        );
+        mri.register(RSCEditor.getInstance());
+
+        LinkedMachineRecipeItem lmri = new LinkedMachineRecipeItem(
+                new SlimefunItemStack("RSC_EDITOR_LINKED_MACHINE_RECIPE_ITEM",
+                        new CustomItemStack(
+                                Material.KNOWLEDGE_BOOK,
+                                "&b链接机器配方占位符"
+                        )
+                )
+        );
+        lmri.register(RSCEditor.getInstance());
     }
 }

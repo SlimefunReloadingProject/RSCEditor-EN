@@ -15,12 +15,12 @@ import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +34,17 @@ public class ArmorPieceContainer extends AbstractContainer {
             .addLine("ppppppppp")
             .addLine("PPPPPPPPP")
             .addItem("B", ChestMenuUtils.getBackground())
-            .addItem("N",Icons.id)
+            .addItem("N", Icons.id)
             .addItem("I", Icons.item)
             .addItem("T", Icons.recipe_type)
             .addItem("P", Icons.potion);
+
     public ArmorPieceContainer(@NotNull SlimefunItemStack item) {
         super(item);
     }
 
     @Override
-    public BlockMenuPreset setBlockMenuPreset() {
+    public @NotNull BlockMenuPreset setBlockMenuPreset() {
         return new BlockMenuPreset(getId(), getItemName()) {
             @Override
             public void init() {
@@ -68,6 +69,7 @@ public class ArmorPieceContainer extends AbstractContainer {
                     });
                 }
             }
+
             @Override
             public boolean canOpen(@NotNull Block block, @NotNull Player player) {
                 return player.isOp();
@@ -80,7 +82,7 @@ public class ArmorPieceContainer extends AbstractContainer {
         };
     }
 
-    public ArmorPiece getArmorPiece(BlockMenu menu) {
+    public @Nullable ArmorPiece getArmorPiece(@NotNull BlockMenu menu) {
         Pair<Boolean, String> p0 = ItemUtil.isString(menu, matrix, "n");
         if (!p0.getFirstValue()) {
             return null;

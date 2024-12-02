@@ -8,12 +8,10 @@ import com.balugaq.rsceditor.utils.ItemUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -22,7 +20,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +42,7 @@ public class SupplyContainer extends AbstractContainer {
     }
 
     @Override
-    public BlockMenuPreset setBlockMenuPreset() {
+    public @NotNull BlockMenuPreset setBlockMenuPreset() {
         return new BlockMenuPreset(getId(), getItemName()) {
             @Override
             public void init() {
@@ -90,7 +87,7 @@ public class SupplyContainer extends AbstractContainer {
         };
     }
 
-    public Map<World.Environment, Map<Biome, Integer>> getSupply(BlockMenu menu) {
+    public @NotNull Map<World.Environment, Map<Biome, Integer>> getSupply(@NotNull BlockMenu menu) {
         if (menu.getPreset().getID().equals(getId())) {
             Map<World.Environment, Map<Biome, Integer>> supply = new HashMap<>();
 

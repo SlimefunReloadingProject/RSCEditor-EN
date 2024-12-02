@@ -15,9 +15,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -78,6 +76,7 @@ public class GEOResourceEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -92,6 +91,7 @@ public class GEOResourceEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("m"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -106,6 +106,7 @@ public class GEOResourceEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("d"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -118,6 +119,7 @@ public class GEOResourceEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("c"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -130,6 +132,7 @@ public class GEOResourceEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("a"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -142,6 +145,7 @@ public class GEOResourceEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("o"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);

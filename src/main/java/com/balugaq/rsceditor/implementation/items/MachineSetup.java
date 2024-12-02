@@ -9,6 +9,8 @@ import com.balugaq.rsceditor.implementation.items.machines.ItemEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemGroupEditor;
 import com.balugaq.rsceditor.implementation.items.machines.MobDropEditor;
 import com.balugaq.rsceditor.implementation.items.machines.RecipeTypeEditor;
+import com.balugaq.rsceditor.implementation.items.machines.builder.LinkedMachineRecipeBuilder;
+import com.balugaq.rsceditor.implementation.items.machines.builder.MachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.CustomRainbowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.SupplyContainer;
@@ -51,6 +53,29 @@ public class MachineSetup {
                 )
         );
         supplyContainer.register(RSCEditor.getInstance());
+
+        // builders
+        MachineRecipeBuilder machineRecipeBuilder = new MachineRecipeBuilder(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_MACHINE_RECIPE_BUILDER",
+                        new CustomItemStack(
+                                Material.LOOM,
+                                "§b机器配方构造器"
+                        )
+                )
+        );
+        machineRecipeBuilder.register(RSCEditor.getInstance());
+
+        LinkedMachineRecipeBuilder linkedMachineRecipeBuilder = new LinkedMachineRecipeBuilder(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_LINKED_MACHINE_RECIPE_BUILDER",
+                        new CustomItemStack(
+                                Material.LOOM,
+                                "§b链接机器配方构造器"
+                        )
+                )
+        );
+        linkedMachineRecipeBuilder.register(RSCEditor.getInstance());
 
         // editors
         ItemGroupEditor itemGroupEditor = new ItemGroupEditor(

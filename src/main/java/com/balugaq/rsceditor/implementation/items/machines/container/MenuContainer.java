@@ -2,31 +2,28 @@ package com.balugaq.rsceditor.implementation.items.machines.container;
 
 import com.balugaq.rsceditor.api.AbstractContainer;
 import com.balugaq.rsceditor.api.MenuMatrix;
-import com.balugaq.rsceditor.utils.Icons;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class CustomRainbowContainer extends AbstractContainer {
+public class MenuContainer extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
-            .addItem("R", Icons.custom_rainbow_block);
+            .addLine("NNNNNNNNN")
+            .addLine("NNNNNNNNN")
+            .addLine("NNNNNNNNN")
+            .addLine("NNNNNNNNN")
+            .addLine("NNNNNNNNN")
+            .addLine("NNNNNNNNN");
 
-    public CustomRainbowContainer(@NotNull SlimefunItemStack item) {
+    public MenuContainer(@NotNull SlimefunItemStack item) {
         super(item);
     }
 
@@ -50,17 +47,13 @@ public class CustomRainbowContainer extends AbstractContainer {
         };
     }
 
-    public @NotNull List<Material> getMaterials(@NotNull BlockMenu menu) {
-        List<Material> materials = new ArrayList<>();
-        for (int slot : matrix.getChars("r")) {
-            ItemStack itemStack = menu.getItemInSlot(slot);
-            if (itemStack != null && itemStack.getType() != Material.AIR) {
-                if (!itemStack.getType().isAir() && itemStack.getType().isBlock()) {
-                    materials.add(itemStack.getType());
-                }
-            }
+    public @NotNull Map<Integer, ItemStack> getMenuContent(@NotNull BlockMenu menu) {
+        Map<Integer, ItemStack> content = new HashMap<>();
+        for (int i = 0; i < 54; i++) {
+            ItemStack item = menu.getItemInSlot(i);
+            content.put(i, item);
         }
 
-        return materials;
+        return content;
     }
 }

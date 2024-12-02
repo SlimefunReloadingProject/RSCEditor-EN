@@ -9,6 +9,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractContainer extends AContainer {
     public AbstractContainer(@NotNull SlimefunItemStack item) {
@@ -25,7 +26,7 @@ public abstract class AbstractContainer extends AContainer {
     }
 
     @Override
-    public ItemStack getProgressBar() {
+    public @Nullable ItemStack getProgressBar() {
         return null;
     }
 

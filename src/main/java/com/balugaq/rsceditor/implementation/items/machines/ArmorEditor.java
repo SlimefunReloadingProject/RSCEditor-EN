@@ -66,6 +66,7 @@ public class ArmorEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -80,6 +81,7 @@ public class ArmorEditor extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("f"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, integer -> {
                             typeItem.setContent(i, integer);
                             menu.open(p);

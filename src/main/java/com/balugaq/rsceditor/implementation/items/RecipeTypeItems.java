@@ -17,9 +17,7 @@ import java.util.Set;
 public class RecipeTypeItems {
     public static void register() {
         Set<RecipeType> recipeTypes = new HashSet<>();
-        Slimefun.getRegistry().getAllSlimefunItems().forEach(item -> {
-            recipeTypes.add(item.getRecipeType());
-        });
+        Slimefun.getRegistry().getAllSlimefunItems().forEach(item -> recipeTypes.add(item.getRecipeType()));
         recipeTypes.forEach(type -> {
             ItemStack item = type.toItem();
             if (item == null) {

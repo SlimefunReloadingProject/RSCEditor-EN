@@ -4,6 +4,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class ArmorPiece {
     private final RecipeType recipeType;
     private final ItemStack[] recipe;
     private final List<String> protections;
+
     public ArmorPiece(String id, ItemStack item, RecipeType recipeType, ItemStack[] recipe, List<String> protections) {
         this.id = id;
         this.item = item;
@@ -21,7 +23,8 @@ public class ArmorPiece {
         this.recipe = recipe;
         this.protections = protections;
     }
-    public ArmorPiece(SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, List<String> protections) {
+
+    public ArmorPiece(@NotNull SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, List<String> protections) {
         this(item.getItemId(), new ItemStack(item), recipeType, recipe, protections);
     }
 }

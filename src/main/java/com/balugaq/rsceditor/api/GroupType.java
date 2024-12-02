@@ -6,5 +6,5 @@ public enum GroupType {
     SUB,
     SEASONAL,
     BUTTON,
-    LOCKED;
+    LOCKED
 }

@@ -6,11 +6,11 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class GroupTypeItem extends PlaceholderItem {
-    private final GroupType type;
+public class ItemFlowTypeItem extends PlaceholderItem {
+    private final ItemFlowType itemFlowType;
 
-    public GroupTypeItem(@NotNull SlimefunItemStack item, GroupType type) {
+    public ItemFlowTypeItem(@NotNull SlimefunItemStack item, ItemFlowType itemFlowType) {
         super(MyItemGroups.TYPE_GROUP, item);
-        this.type = type;
+        this.itemFlowType = itemFlowType;
     }
 }

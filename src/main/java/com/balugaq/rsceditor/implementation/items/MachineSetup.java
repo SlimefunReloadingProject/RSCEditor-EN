@@ -5,6 +5,7 @@ import com.balugaq.rsceditor.implementation.items.machines.ArmorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.CapacitorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.FoodEditor;
 import com.balugaq.rsceditor.implementation.items.machines.GEOResourceEditor;
+import com.balugaq.rsceditor.implementation.items.machines.GeneratorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemGroupEditor;
 import com.balugaq.rsceditor.implementation.items.machines.MachineEditor;
@@ -177,5 +178,16 @@ public class MachineSetup {
                 )
         );
         machineEditor.register(RSCEditor.getInstance());
+
+        GeneratorEditor generatorEditor = new GeneratorEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_GENERATOR_EDITOR",
+                        new CustomItemStack(
+                                Material.GLOWSTONE,
+                                "§b发电机构造器"
+                        )
+                )
+        );
+        generatorEditor.register(RSCEditor.getInstance());
     }
 }

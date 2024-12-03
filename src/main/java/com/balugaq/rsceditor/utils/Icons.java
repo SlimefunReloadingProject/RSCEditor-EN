@@ -396,15 +396,27 @@ public class Icons {
             "&b^ 在此处放置 整数占位符 ^"
     );
 
+    public static final ItemStack build_machine = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造机器"
+    );
+
     public static final ItemStack machine_recipes = new CustomItemStack(
             Material.JIGSAW,
             "&b机器配方",
             "&b< 在此处放置 机器配方占位符"
     );
 
-    public static final ItemStack build_machine = new CustomItemStack(
+    public static final ItemStack production = new CustomItemStack(
+            Material.GLOWSTONE,
+            "&b产电量",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack build_generator = new CustomItemStack(
             Material.STRUCTURE_BLOCK,
             "&b构造",
-            "&b点击以构造机器"
+            "&b点击以构造发电机"
     );
 }

@@ -47,8 +47,8 @@ public class MachineEditor extends AbstractContainer {
             .addLine("NPITSBrrr")
             .addLine("celwaBrrr")
             .addLine("CELWABBBB")
-            .addLine("mmmmmmmMB")
-            .addLine("mmmmmmmMG")
+            .addLine("BBBBBBBBB")
+            .addLine("BBBBBBBBG")
             .addItem("B", ChestMenuUtils.getBackground())
             .addItem("N", Icons.id)
             .addItem("P", Icons.item_group)
@@ -60,7 +60,6 @@ public class MachineEditor extends AbstractContainer {
             .addItem("L", Icons.title)
             .addItem("W", Icons.work)
             .addItem("A", Icons.progress_bar_slot)
-            .addItem("M", Icons.machine_recipes)
             .addItem("G", Icons.build_machine);
 
     public MachineEditor(@NotNull SlimefunItemStack item) {

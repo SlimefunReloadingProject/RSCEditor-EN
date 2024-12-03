@@ -74,6 +74,9 @@ public class GEOResourceEditor extends AbstractContainer {
             public void newInstance(@NotNull BlockMenu menu, @NotNull Block b) {
                 // Id button
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -89,6 +92,9 @@ public class GEOResourceEditor extends AbstractContainer {
 
                 // Geo Name button
                 menu.addMenuClickHandler(matrix.getChar("m"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -104,6 +110,9 @@ public class GEOResourceEditor extends AbstractContainer {
 
                 // Max Deviation button
                 menu.addMenuClickHandler(matrix.getChar("d"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -117,6 +126,9 @@ public class GEOResourceEditor extends AbstractContainer {
 
                 // Drop Chance button
                 menu.addMenuClickHandler(matrix.getChar("c"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -130,6 +142,9 @@ public class GEOResourceEditor extends AbstractContainer {
 
                 // Drop Amount button
                 menu.addMenuClickHandler(matrix.getChar("a"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -143,6 +158,9 @@ public class GEOResourceEditor extends AbstractContainer {
 
                 // Obtain From Geo Miner button
                 menu.addMenuClickHandler(matrix.getChar("o"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");

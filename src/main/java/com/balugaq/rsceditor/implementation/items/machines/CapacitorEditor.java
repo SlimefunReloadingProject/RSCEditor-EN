@@ -61,6 +61,9 @@ public class CapacitorEditor extends AbstractContainer {
             public void newInstance(@NotNull BlockMenu menu, @NotNull Block b) {
                 // Id button
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -76,6 +79,9 @@ public class CapacitorEditor extends AbstractContainer {
 
                 // Energy Capacity button
                 menu.addMenuClickHandler(matrix.getChar("y"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");

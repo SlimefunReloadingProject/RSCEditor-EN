@@ -45,7 +45,7 @@ public class YamlWriter {
     }
 
     @CanIgnoreReturnValue
-    public @NotNull YamlWriter set(String key, MachineRecipe recipe) {
+    public @NotNull YamlWriter set(String key, @NotNull MachineRecipe recipe) {
         String recipeKey = getKey(key + recipe.getName());
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
         String inputKey = recipeKey + ".input";
@@ -66,7 +66,7 @@ public class YamlWriter {
     }
 
     @CanIgnoreReturnValue
-    public @NotNull YamlWriter set(String key, LinkedMachineRecipe recipe) {
+    public @NotNull YamlWriter set(String key, @NotNull LinkedMachineRecipe recipe) {
         String recipeKey = getKey(key + recipe.getName());
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
         String inputKey = recipeKey + ".input";
@@ -119,10 +119,12 @@ public class YamlWriter {
 
         SlimefunItem slimefunItem = SlimefunItem.getByItem(itemStack);
         if (slimefunItem != null) {
-            configuration.set(getKey(key + ".material_type"), "slimefun");
-            configuration.set(getKey(key + ".material"), slimefunItem.getId());
-            configuration.set(getKey(key + ".amount"), itemStack.getAmount());
-            return this;
+            if (!slimefunItem.getId().equals("LOGITECH_SAMPLE_HEAD")) {
+                configuration.set(getKey(key + ".material_type"), "slimefun");
+                configuration.set(getKey(key + ".material"), slimefunItem.getId());
+                configuration.set(getKey(key + ".amount"), itemStack.getAmount());
+                return this;
+            }
         }
 
         if (itemStack.getType() == Material.PLAYER_HEAD) {

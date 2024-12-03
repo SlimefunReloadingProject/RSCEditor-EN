@@ -20,18 +20,20 @@ public class TextTypeItem extends BaseTypeItem<String> {
         if (itemStack == null) {
             return;
         }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta == null) {
             return;
         }
 
-        itemMeta.getPersistentDataContainer().set(CONTENT_KEY, PersistentDataType.STRING, content);
-        List<String> lore = itemMeta.getLore();
-        if (lore == null) {
-            lore = new ArrayList<>();
+        if ("!cancel".equals(content)) {
+            return;
         }
 
-        lore.set(0, "§a已设置内容: " + content);
+        itemMeta.getPersistentDataContainer().set(CONTENT_KEY, PersistentDataType.STRING, content);
+        List<String> lore = new ArrayList<>();
+
+        lore.add("§a已设置内容: " + content);
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
     }

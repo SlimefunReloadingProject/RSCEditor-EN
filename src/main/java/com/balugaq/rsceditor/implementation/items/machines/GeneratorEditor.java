@@ -78,6 +78,9 @@ public class GeneratorEditor extends AbstractContainer {
             public void newInstance(@NotNull BlockMenu menu, @NotNull Block b) {
                 // Id button
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -93,6 +96,9 @@ public class GeneratorEditor extends AbstractContainer {
 
                 // Energy capacity button
                 menu.addMenuClickHandler(matrix.getChar("c"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -109,6 +115,9 @@ public class GeneratorEditor extends AbstractContainer {
 
                 // Production button
                 menu.addMenuClickHandler(matrix.getChar("o"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -125,6 +134,9 @@ public class GeneratorEditor extends AbstractContainer {
 
                 // Title button
                 menu.addMenuClickHandler(matrix.getChar("l"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -141,6 +153,9 @@ public class GeneratorEditor extends AbstractContainer {
 
                 // Progress bar slot button
                 menu.addMenuClickHandler(matrix.getChar("a"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");

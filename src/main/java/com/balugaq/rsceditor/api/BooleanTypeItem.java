@@ -20,20 +20,22 @@ public class BooleanTypeItem extends BaseTypeItem<Boolean> {
         if (itemStack == null) {
             return;
         }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta == null) {
+            return;
+        }
+
+        if ("!cancel".equals(content)) {
             return;
         }
 
         try {
             boolean value = Boolean.parseBoolean(content);
             itemMeta.getPersistentDataContainer().set(CONTENT_KEY, DataType.BOOLEAN, value);
-            List<String> lore = itemMeta.getLore();
-            if (lore == null) {
-                lore = new ArrayList<>();
-            }
+            List<String> lore = new ArrayList<>();
 
-            lore.set(0, "§a已设置内容: " + value);
+            lore.add("§a已设置内容: " + value);
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
         } catch (NumberFormatException ignored) {

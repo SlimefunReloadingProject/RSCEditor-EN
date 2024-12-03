@@ -15,6 +15,8 @@ import com.balugaq.rsceditor.implementation.items.machines.builder.LinkedMachine
 import com.balugaq.rsceditor.implementation.items.machines.builder.MachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.CustomRainbowContainer;
+import com.balugaq.rsceditor.implementation.items.machines.container.ItemFlowContainer;
+import com.balugaq.rsceditor.implementation.items.machines.container.MenuContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.SupplyContainer;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
@@ -55,6 +57,28 @@ public class MachineSetup {
                 )
         );
         supplyContainer.register(RSCEditor.getInstance());
+
+        ItemFlowContainer itemFlowContainer = new ItemFlowContainer(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_ITEM_FLOW_CONTAINER",
+                        new CustomItemStack(
+                                Material.IRON_BARS,
+                                "§b物品流容器"
+                        )
+                )
+        );
+        itemFlowContainer.register(RSCEditor.getInstance());
+
+        MenuContainer menuContainer = new MenuContainer(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_MENU_CONTAINER",
+                        new CustomItemStack(
+                                Material.BOOKSHELF,
+                                "§b菜单容器"
+                        )
+                )
+        );
+        menuContainer.register(RSCEditor.getInstance());
 
         // builders
         MachineRecipeBuilder machineRecipeBuilder = new MachineRecipeBuilder(
@@ -139,7 +163,7 @@ public class MachineSetup {
                 new SlimefunItemStack(
                         "RSC_EDITOR_ARMOR_EDITOR",
                         new CustomItemStack(
-                                Material.DIAMOND_CHESTPLATE,
+                                Material.GOLD_BLOCK,
                                 "§b装备构造器"
                         )
                 )

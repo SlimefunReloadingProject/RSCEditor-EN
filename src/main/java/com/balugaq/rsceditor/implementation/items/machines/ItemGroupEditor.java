@@ -65,6 +65,9 @@ public class ItemGroupEditor extends AbstractContainer {
             public void newInstance(@NotNull BlockMenu menu, @NotNull Block b) {
                 // Id button
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -80,6 +83,9 @@ public class ItemGroupEditor extends AbstractContainer {
 
                 // Tier button
                 menu.addMenuClickHandler(matrix.getChar("e"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -94,6 +100,9 @@ public class ItemGroupEditor extends AbstractContainer {
 
                 // Month button
                 menu.addMenuClickHandler(matrix.getChar("m"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");

@@ -20,20 +20,22 @@ public class DoubleTypeItem extends BaseTypeItem<Double> {
         if (itemStack == null) {
             return;
         }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta == null) {
+            return;
+        }
+
+        if ("!cancel".equals(content)) {
             return;
         }
 
         try {
             double value = Double.parseDouble(content);
             itemMeta.getPersistentDataContainer().set(CONTENT_KEY, PersistentDataType.DOUBLE, value);
-            List<String> lore = itemMeta.getLore();
-            if (lore == null) {
-                lore = new ArrayList<>();
-            }
+            List<String> lore = new ArrayList<>(itemMeta.getLore());
 
-            lore.set(0, "§a已设置内容: " + content);
+            lore.add("§a已设置内容: " + content);
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
         } catch (NumberFormatException ignored) {

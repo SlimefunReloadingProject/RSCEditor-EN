@@ -1,6 +1,7 @@
 package com.balugaq.rsceditor.implementation.items.machines.builder;
 
 import com.balugaq.rsceditor.api.AbstractContainer;
+import com.balugaq.rsceditor.api.BooleanTypeItem;
 import com.balugaq.rsceditor.api.IntegerTypeItem;
 import com.balugaq.rsceditor.api.ItemFlowType;
 import com.balugaq.rsceditor.api.LinkedMachineRecipe;
@@ -36,16 +37,18 @@ import java.util.Map;
 
 public class LinkedMachineRecipeBuilder extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
-            .addLine("cnetBBBBB")
-            .addLine("CNETBBBBB")
+            .addLine("cntodhBBB")
+            .addLine("CNTODHBBB")
             .addLine("BBBBBBBBB")
             .addLine("BBBBBBBBB")
             .addLine("BBBBBBBBB")
             .addLine("BBBBBBBBG")
             .addItem("B", ChestMenuUtils.getBackground())
             .addItem("N", Icons.recipe_name)
-            .addItem("E", Icons.energy_cost)
             .addItem("T", Icons.processing_time)
+            .addItem("O", Icons.choose_one)
+            .addItem("D", Icons.for_display)
+            .addItem("H", Icons.hide)
             .addItem("G", Icons.build_linked_machine_recipe);
 
     public LinkedMachineRecipeBuilder(@NotNull SlimefunItemStack item) {
@@ -77,9 +80,39 @@ public class LinkedMachineRecipeBuilder extends AbstractContainer {
                     return true;
                 });
 
-                // Energy Cost button
-                menu.addMenuClickHandler(matrix.getChar("e"), (p, s, i, a) -> {
-                    if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
+                // Choose One button
+                menu.addMenuClickHandler(matrix.getChar("o"), (p, s, i, a) -> {
+                    if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
+                        p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
+                        ChatUtils.awaitInput(p, text -> {
+                            typeItem.setContent(i, text);
+                            menu.open(p);
+                        });
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                // For Display button
+                menu.addMenuClickHandler(matrix.getChar("d"), (p, s, i, a) -> {
+                    if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
+                        p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
+                        ChatUtils.awaitInput(p, text -> {
+                            typeItem.setContent(i, text);
+                            menu.open(p);
+                        });
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                // Hide button
+                menu.addMenuClickHandler(matrix.getChar("h"), (p, s, i, a) -> {
+                    if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {
@@ -108,14 +141,6 @@ public class LinkedMachineRecipeBuilder extends AbstractContainer {
 
                     String name = p0.getSecondValue();
 
-                    Pair<Boolean, Integer> p1 = ItemUtil.isInteger(menu, matrix, "e");
-                    if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个配方的能量消耗");
-                        return false;
-                    }
-
-                    int energyCost = p1.getSecondValue();
-
                     Pair<Boolean, Integer> p2 = ItemUtil.isInteger(menu, matrix, "t");
                     if (!p2.getFirstValue()) {
                         p.sendMessage("你还没有设置这个配方的处理时间");
@@ -130,7 +155,7 @@ public class LinkedMachineRecipeBuilder extends AbstractContainer {
                     SlimefunItem flowItem = StorageCacheUtils.getSfItem(flowContainer);
                     if (flowItem instanceof ItemFlowContainer ifc) {
                         BlockMenu flowMenu = StorageCacheUtils.getMenu(flowContainer);
-                        if (flowItem == null) {
+                        if (flowMenu == null) {
                             p.sendMessage("物流容器不正确!");
                             return false;
                         }
@@ -147,7 +172,7 @@ public class LinkedMachineRecipeBuilder extends AbstractContainer {
                     SlimefunItem menuItem = StorageCacheUtils.getSfItem(menuContainer);
                     if (menuItem instanceof MenuContainer mc) {
                         BlockMenu menuBlockMenu = StorageCacheUtils.getMenu(menuContainer);
-                        if (menuItem == null) {
+                        if (menuBlockMenu == null) {
                             p.sendMessage("菜单容器不正确!");
                             return false;
                         }
@@ -187,7 +212,25 @@ public class LinkedMachineRecipeBuilder extends AbstractContainer {
                         freeOutputs[j] = lFreeOutputs.get(j);
                     }
 
-                    LinkedMachineRecipe recipe = new LinkedMachineRecipe(name, energyCost, processingTime, linkedInputs, linkedOutputs, freeOutputs);
+                    boolean chooseOne = false;
+                    Pair<Boolean, Boolean> p1 = ItemUtil.isBoolean(menu, matrix, "o");
+                    if (p1.getFirstValue()) {
+                        chooseOne = p1.getSecondValue();
+                    }
+
+                    boolean forDisplay = false;
+                    Pair<Boolean, Boolean> p3 = ItemUtil.isBoolean(menu, matrix, "d");
+                    if (p3.getFirstValue()) {
+                        forDisplay = p3.getSecondValue();
+                    }
+
+                    boolean hide = false;
+                    Pair<Boolean, Boolean> p4 = ItemUtil.isBoolean(menu, matrix, "h");
+                    if (p4.getFirstValue()) {
+                        hide = p4.getSecondValue();
+                    }
+
+                    LinkedMachineRecipe recipe = new LinkedMachineRecipe(name, chooseOne, forDisplay, hide, processingTime, linkedInputs, linkedOutputs, freeOutputs);
                     lmri.setRecipe(machineRecipeCard, recipe);
 
                     p.sendMessage("链接机器配方已保存!");

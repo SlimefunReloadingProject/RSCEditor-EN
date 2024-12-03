@@ -31,7 +31,6 @@ public class LinkedMachineRecipeItem extends PlaceholderItem {
         List<String> lore = new ArrayList<>();
         lore.add("&bLinked Machine Recipe Data");
         lore.add("&b Name: " + recipe.getName());
-        lore.add("&e Energy Cost: " + recipe.getEnergyCost());
         lore.add("&d Processing Time: " + recipe.getProcessingTime());
 
         for (Map.Entry<Integer, ItemStack> entry : recipe.getLinkedInputs().entrySet()) {

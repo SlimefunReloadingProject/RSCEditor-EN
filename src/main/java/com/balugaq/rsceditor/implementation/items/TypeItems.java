@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.implementation.items;
 
 import com.balugaq.rsceditor.api.BooleanTypeItem;
 import com.balugaq.rsceditor.api.DoubleTypeItem;
+import com.balugaq.rsceditor.api.EnergyNetComponentTypeItem;
 import com.balugaq.rsceditor.api.GroupType;
 import com.balugaq.rsceditor.api.GroupTypeItem;
 import com.balugaq.rsceditor.api.IntegerTypeItem;
@@ -18,6 +19,7 @@ import com.balugaq.rsceditor.implementation.RSCEditor;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.ProtectionType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
+import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import org.bukkit.Material;
 
@@ -419,5 +421,65 @@ public class TypeItems {
                 )
         );
         lmri.register(RSCEditor.getInstance());
+
+        EnergyNetComponentTypeItem capacitor = new EnergyNetComponentTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_CAPACITOR",
+                        new CustomItemStack(
+                                Material.IRON_INGOT,
+                                "&b能源组件类型占位符",
+                                "&eCapacitor"
+                        )
+                ),
+                EnergyNetComponentType.CAPACITOR
+        );
+        capacitor.register(RSCEditor.getInstance());
+
+        EnergyNetComponentTypeItem connector = new EnergyNetComponentTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_CONNECTOR",
+                        new CustomItemStack(
+                                Material.OBSIDIAN,
+                                "&b能源组件类型占位符",
+                                "&eConnector"
+                        )
+                ),
+                EnergyNetComponentType.CONNECTOR
+        );
+        connector.register(RSCEditor.getInstance());
+
+        EnergyNetComponentTypeItem consumer = new EnergyNetComponentTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_CONSUMER",
+                        new CustomItemStack(
+                                Material.REDSTONE,
+                                "&b能源组件类型占位符",
+                                "&eConsumer"
+                        )
+                ),
+                EnergyNetComponentType.CONSUMER
+        );
+        consumer.register(RSCEditor.getInstance());
+
+        EnergyNetComponentTypeItem generator = new EnergyNetComponentTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_GENERATOR",
+                        new CustomItemStack(
+                                Material.DIAMOND,
+                                "&b能源组件类型占位符",
+                                "&eGenerator"
+                        )
+                ),
+                EnergyNetComponentType.GENERATOR
+        );
+        generator.register(RSCEditor.getInstance());
+
+        EnergyNetComponentTypeItem enct_none = new EnergyNetComponentTypeItem(
+                new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_NONE",
+                        new CustomItemStack(
+                                Material.GRAY_STAINED_GLASS_PANE,
+                                "&b能源组件类型占位符",
+                                "&eNone"
+                        )
+                ),
+                EnergyNetComponentType.NONE
+        );
+        enct_none.register(RSCEditor.getInstance());
     }
 }

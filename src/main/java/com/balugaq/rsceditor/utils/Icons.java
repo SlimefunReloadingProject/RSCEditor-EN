@@ -342,6 +342,24 @@ public class Icons {
             "&b^ 在此处放置 整数占位符 ^"
     );
 
+    public static final ItemStack choose_one = new CustomItemStack(
+            Material.BARRIER,
+            "&b仅输出一个物品",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
+    public static final ItemStack for_display = new CustomItemStack(
+            Material.BARRIER,
+            "&b仅用于显示",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
+    public static final ItemStack hide = new CustomItemStack(
+            Material.BARRIER,
+            "&b隐藏",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
     public static final ItemStack build_machine_recipe = new CustomItemStack(
             Material.STRUCTURE_BLOCK,
             "&b构造",
@@ -352,5 +370,41 @@ public class Icons {
             Material.STRUCTURE_BLOCK,
             "&b构造",
             "&b点击以构造链接机器配方"
+    );
+
+    public static final ItemStack energy_net_component_type = new CustomItemStack(
+            Material.BLAZE_ROD,
+            "&b能源网络组件类型",
+            "&b^ 在此处放置 能源网络组件类型占位符 ^"
+    );
+
+    public static final ItemStack title = new CustomItemStack(
+            Material.MAP,
+            "&b标题",
+            "&b^ 在此处放置 文本占位符 ^"
+    );
+
+    public static final ItemStack work = new CustomItemStack(
+            Material.STONE_BUTTON,
+            "&b工作槽位",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack progress_bar_slot = new CustomItemStack(
+            Material.COMPARATOR,
+            "&b进度条槽位",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack machine_recipes = new CustomItemStack(
+            Material.JIGSAW,
+            "&b机器配方",
+            "&b< 在此处放置 机器配方占位符"
+    );
+
+    public static final ItemStack build_machine = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造机器"
     );
 }

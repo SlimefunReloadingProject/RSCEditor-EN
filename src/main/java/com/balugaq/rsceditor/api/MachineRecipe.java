@@ -6,14 +6,18 @@ import org.bukkit.inventory.ItemStack;
 @Getter
 public class MachineRecipe {
     private final String name;
-    private final int energyCost;
+    private final boolean chooseOne;
+    private final boolean forDisplay;
+    private final boolean hide;
     private final int processingTime;
     private final ItemStack[] inputs;
     private final ItemStack[] outputs;
 
-    public MachineRecipe(String name, int energyCost, int processingTime, ItemStack[] inputs, ItemStack[] outputs) {
+    public MachineRecipe(String name, boolean chooseOne, boolean forDisplay, boolean hide, int processingTime, ItemStack[] inputs, ItemStack[] outputs) {
         this.name = name;
-        this.energyCost = energyCost;
+        this.chooseOne = chooseOne;
+        this.forDisplay = forDisplay;
+        this.hide = hide;
         this.processingTime = processingTime;
         this.inputs = inputs;
         this.outputs = outputs;

@@ -19,7 +19,9 @@ public class PersistentLinkedMachineRecipeType implements PersistentDataType<Per
     public static final PersistentDataType<PersistentDataContainer, LinkedMachineRecipe> TYPE = new PersistentLinkedMachineRecipeType();
 
     public static final NamespacedKey NAME = KeyUtil.newKey("name");
-    public static final NamespacedKey ENERGY_COST = KeyUtil.newKey("energy_cost");
+    public static final NamespacedKey CHOOSE_ONE = KeyUtil.newKey("choose_one");
+    public static final NamespacedKey FOR_DISPLAY = KeyUtil.newKey("for_display");
+    public static final NamespacedKey HIDE = KeyUtil.newKey("hide");
     public static final NamespacedKey PROCESSING_TIME = KeyUtil.newKey("processing_time");
     public static final NamespacedKey LINKED_INPUTS = KeyUtil.newKey("linked_inputs");
     public static final NamespacedKey LINKED_OUTPUTS = KeyUtil.newKey("linked_outputs");
@@ -43,7 +45,9 @@ public class PersistentLinkedMachineRecipeType implements PersistentDataType<Per
         final PersistentDataContainer container = context.newPersistentDataContainer();
 
         container.set(NAME, PersistentDataType.STRING, complex.getName());
-        container.set(ENERGY_COST, PersistentDataType.INTEGER, complex.getEnergyCost());
+        container.set(CHOOSE_ONE, DataType.BOOLEAN, complex.isChooseOne());
+        container.set(FOR_DISPLAY, DataType.BOOLEAN, complex.isForDisplay());
+        container.set(HIDE, DataType.BOOLEAN, complex.isHide());
         container.set(PROCESSING_TIME, PersistentDataType.INTEGER, complex.getProcessingTime());
         Map<Integer, ItemStack> inputs = complex.getLinkedInputs();
         ItemStack[] inputArray = new ItemStack[inputs.size() * 2];
@@ -74,15 +78,17 @@ public class PersistentLinkedMachineRecipeType implements PersistentDataType<Per
     @Nonnull
     public LinkedMachineRecipe fromPrimitive(@Nonnull PersistentDataContainer primitive, @Nonnull PersistentDataAdapterContext context) {
         final String name = primitive.getOrDefault(NAME, PersistentDataType.STRING, "");
-        final int energyCost = primitive.getOrDefault(ENERGY_COST, PersistentDataType.INTEGER, 0);
+        final boolean chooseOne = primitive.getOrDefault(CHOOSE_ONE, DataType.BOOLEAN, false);
+        final boolean forDisplay = primitive.getOrDefault(FOR_DISPLAY, DataType.BOOLEAN, false);
+        final boolean hide = primitive.getOrDefault(HIDE, DataType.BOOLEAN, false);
         final int processingTime = primitive.getOrDefault(PROCESSING_TIME, PersistentDataType.INTEGER, 0);
         final ItemStack[] inputArray = primitive.get(LINKED_INPUTS, DataType.ITEM_STACK_ARRAY);
         if (inputArray == null) {
-            return new LinkedMachineRecipe(name, energyCost, processingTime, new HashMap<>(), new HashMap<>(), new ItemStack[0]);
+            return new LinkedMachineRecipe(name, chooseOne, forDisplay, hide, processingTime, new HashMap<>(), new HashMap<>(), new ItemStack[0]);
         }
         final ItemStack[] outputArray = primitive.get(LINKED_OUTPUTS, DataType.ITEM_STACK_ARRAY);
         if (outputArray == null) {
-            return new LinkedMachineRecipe(name, energyCost, processingTime, new HashMap<>(), new HashMap<>(), new ItemStack[0]);
+            return new LinkedMachineRecipe(name, chooseOne, forDisplay, hide, processingTime, new HashMap<>(), new HashMap<>(), new ItemStack[0]);
         }
         final ItemStack[] freeOutputArray = primitive.get(FREE_OUTPUTS, DataType.ITEM_STACK_ARRAY);
 
@@ -96,6 +102,6 @@ public class PersistentLinkedMachineRecipeType implements PersistentDataType<Per
             outputs.put(outputArray[i].getAmount(), outputArray[i + 1]);
         }
 
-        return new LinkedMachineRecipe(name, energyCost, processingTime, inputs, outputs, freeOutputArray);
+        return new LinkedMachineRecipe(name, chooseOne, forDisplay, hide, processingTime, inputs, outputs, freeOutputArray);
     }
 }

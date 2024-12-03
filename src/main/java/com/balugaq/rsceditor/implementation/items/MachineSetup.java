@@ -7,6 +7,7 @@ import com.balugaq.rsceditor.implementation.items.machines.FoodEditor;
 import com.balugaq.rsceditor.implementation.items.machines.GEOResourceEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemGroupEditor;
+import com.balugaq.rsceditor.implementation.items.machines.MachineEditor;
 import com.balugaq.rsceditor.implementation.items.machines.MobDropEditor;
 import com.balugaq.rsceditor.implementation.items.machines.RecipeTypeEditor;
 import com.balugaq.rsceditor.implementation.items.machines.builder.LinkedMachineRecipeBuilder;
@@ -165,5 +166,16 @@ public class MachineSetup {
                 )
         );
         foodEditor.register(RSCEditor.getInstance());
+
+        MachineEditor machineEditor = new MachineEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_MACHINE_EDITOR",
+                        new CustomItemStack(
+                                Material.BLAST_FURNACE,
+                                "§b机器构造器"
+                        )
+                )
+        );
+        machineEditor.register(RSCEditor.getInstance());
     }
 }

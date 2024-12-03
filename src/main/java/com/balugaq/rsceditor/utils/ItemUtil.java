@@ -3,10 +3,13 @@ package com.balugaq.rsceditor.utils;
 import com.balugaq.rsceditor.api.BiomeItem;
 import com.balugaq.rsceditor.api.BooleanTypeItem;
 import com.balugaq.rsceditor.api.DoubleTypeItem;
+import com.balugaq.rsceditor.api.EnergyNetComponentTypeItem;
 import com.balugaq.rsceditor.api.GroupType;
 import com.balugaq.rsceditor.api.GroupTypeItem;
 import com.balugaq.rsceditor.api.IntegerTypeItem;
 import com.balugaq.rsceditor.api.ItemGroupItem;
+import com.balugaq.rsceditor.api.MachineRecipe;
+import com.balugaq.rsceditor.api.MachineRecipeItem;
 import com.balugaq.rsceditor.api.MenuMatrix;
 import com.balugaq.rsceditor.api.RadioactivityTypeItem;
 import com.balugaq.rsceditor.api.RecipeTypeItem;
@@ -15,6 +18,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
+import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.block.Biome;
@@ -226,6 +230,75 @@ public class ItemUtil {
         ItemStack item = menu.getItemInSlot(matrix.getChar(label));
         if (SlimefunItem.getByItem(item) instanceof RadioactivityTypeItem typeItem) {
             return new Pair<>(true, typeItem.getRadioactivity());
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, List<Radioactivity>> isRadioactivities(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        List<Radioactivity> radioactivities = new ArrayList<>();
+        for (int slot : matrix.getChars(label)) {
+            ItemStack item = menu.getItemInSlot(slot);
+            if (SlimefunItem.getByItem(item) instanceof RadioactivityTypeItem typeItem) {
+                radioactivities.add(typeItem.getRadioactivity());
+            }
+        }
+        if (!radioactivities.isEmpty()) {
+            return new Pair<>(true, radioactivities);
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, EnergyNetComponentType> isEnergyNetComponentType(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        ItemStack item = menu.getItemInSlot(matrix.getChar(label));
+        if (SlimefunItem.getByItem(item) instanceof EnergyNetComponentTypeItem typeItem) {
+            return new Pair<>(true, typeItem.getType());
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, List<EnergyNetComponentType>> isEnergyNetComponentTypes(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        List<EnergyNetComponentType> types = new ArrayList<>();
+        for (int slot : matrix.getChars(label)) {
+            ItemStack item = menu.getItemInSlot(slot);
+            if (SlimefunItem.getByItem(item) instanceof EnergyNetComponentTypeItem typeItem) {
+                types.add(typeItem.getType());
+            }
+        }
+        if (!types.isEmpty()) {
+            return new Pair<>(true, types);
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, MachineRecipe> isMachineRecipe(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        ItemStack item = menu.getItemInSlot(matrix.getChar(label));
+        if (SlimefunItem.getByItem(item) instanceof MachineRecipeItem mri) {
+            MachineRecipe mr = mri.getRecipe(item);
+            if (mr != null) {
+                return new Pair<>(true, mr);
+            }
+        }
+
+        return new Pair<>(false, null);
+    }
+
+    public static @NotNull Pair<Boolean, List<MachineRecipe>> isMachineRecipes(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        List<MachineRecipe> recipes = new ArrayList<>();
+        for (int slot : matrix.getChars(label)) {
+            ItemStack item = menu.getItemInSlot(slot);
+            if (SlimefunItem.getByItem(item) instanceof MachineRecipeItem mri) {
+                MachineRecipe mr = mri.getRecipe(item);
+                if (mr != null) {
+                    recipes.add(mr);
+                }
+            }
+        }
+        if (!recipes.isEmpty()) {
+            return new Pair<>(true, recipes);
         } else {
             return new Pair<>(false, null);
         }

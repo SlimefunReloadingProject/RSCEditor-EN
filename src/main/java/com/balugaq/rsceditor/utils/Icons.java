@@ -419,4 +419,106 @@ public class Icons {
             "&b构造",
             "&b点击以构造发电机"
     );
+
+    public static final ItemStack day_energy = new CustomItemStack(
+            Material.WHITE_BANNER,
+            "&b白日产点量",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack night_energy = new CustomItemStack(
+            Material.BLACK_BANNER,
+            "&b夜晚产点量",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack light_level = new CustomItemStack(
+            Material.SUNFLOWER,
+            "&b光照强度",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack build_solar_generator = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造太阳能发电机"
+    );
+
+    public static final ItemStack tick_rate = new CustomItemStack(
+            Material.CLOCK,
+            "&b每生成一次物品所需时间",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack per = new CustomItemStack(
+            Material.DIAMOND_SWORD,
+            "&b每生成一次物品所需电量",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack status = new CustomItemStack(
+            Material.BARREL,
+            "&b状态",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack build_material_generator = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造材料发电机"
+    );
+
+    public static final ItemStack hide_all_recipes = new CustomItemStack(
+            Material.BARRIER,
+            "&b隐藏所有配方",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
+    public static final ItemStack energy_per_craft = new CustomItemStack(
+            Material.REDSTONE,
+            "&b每合成一次所需能量",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack speed = new CustomItemStack(
+            Material.CLOCK,
+            "&b速度",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack build_recipe_machine = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造配方机器"
+    );
+
+    public static final ItemStack energy_consumption = new CustomItemStack(
+            Material.REDSTONE,
+            "&b能量消耗",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack radius = new CustomItemStack(
+            Material.STICK,
+            "&b范围",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack repair_factor = new CustomItemStack(
+            Material.ANVIL,
+            "&b修理因子",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack simple_machine_type = new CustomItemStack(
+            Material.IRON_BLOCK,
+            "&b简单机器类型",
+            "&b^ 在此处放置 简单机器类型占位符 ^"
+    );
+
+    public static final ItemStack build_simple_machine = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造简单机器"
+    );
 }

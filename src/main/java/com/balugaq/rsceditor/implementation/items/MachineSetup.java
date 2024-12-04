@@ -9,8 +9,12 @@ import com.balugaq.rsceditor.implementation.items.machines.GeneratorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemGroupEditor;
 import com.balugaq.rsceditor.implementation.items.machines.MachineEditor;
+import com.balugaq.rsceditor.implementation.items.machines.MaterialGeneratorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.MobDropEditor;
+import com.balugaq.rsceditor.implementation.items.machines.RecipeMachineEditor;
 import com.balugaq.rsceditor.implementation.items.machines.RecipeTypeEditor;
+import com.balugaq.rsceditor.implementation.items.machines.SimpleMachineEditor;
+import com.balugaq.rsceditor.implementation.items.machines.SolarGeneratorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.builder.LinkedMachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.builder.MachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
@@ -213,5 +217,49 @@ public class MachineSetup {
                 )
         );
         generatorEditor.register(RSCEditor.getInstance());
+
+        SolarGeneratorEditor solarGeneratorEditor = new SolarGeneratorEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_SOLAR_GENERATOR_EDITOR",
+                        new CustomItemStack(
+                                Material.SHROOMLIGHT,
+                                "§b太阳能发电机构造器"
+                        )
+                )
+        );
+        solarGeneratorEditor.register(RSCEditor.getInstance());
+
+        MaterialGeneratorEditor materialGeneratorEditor = new MaterialGeneratorEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_MATERIAL_GENERATOR_EDITOR",
+                        new CustomItemStack(
+                                Material.DIAMOND_BLOCK,
+                                "§b材料生成器构造器"
+                        )
+                )
+        );
+        materialGeneratorEditor.register(RSCEditor.getInstance());
+
+        RecipeMachineEditor recipeMachineEditor = new RecipeMachineEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_RECIPE_MACHINE_EDITOR",
+                        new CustomItemStack(
+                                Material.FURNACE,
+                                "§b配方机器构造器"
+                        )
+                )
+        );
+        recipeMachineEditor.register(RSCEditor.getInstance());
+
+        SimpleMachineEditor simpleMachineEditor = new SimpleMachineEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_SIMPLE_MACHINE_EDITOR",
+                        new CustomItemStack(
+                                Material.SMOKER,
+                                "§b简单机器构造器"
+                        )
+                )
+        );
+        simpleMachineEditor.register(RSCEditor.getInstance());
     }
 }

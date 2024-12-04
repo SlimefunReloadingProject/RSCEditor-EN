@@ -14,6 +14,8 @@ import com.balugaq.rsceditor.api.ProtectionTypeItem;
 import com.balugaq.rsceditor.api.RadioactivityTypeItem;
 import com.balugaq.rsceditor.api.RainbowType;
 import com.balugaq.rsceditor.api.RainbowTypeItem;
+import com.balugaq.rsceditor.api.SimpleMachineType;
+import com.balugaq.rsceditor.api.SimpleMachineTypeItem;
 import com.balugaq.rsceditor.api.TextTypeItem;
 import com.balugaq.rsceditor.implementation.RSCEditor;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -481,5 +483,19 @@ public class TypeItems {
                 EnergyNetComponentType.NONE
         );
         enct_none.register(RSCEditor.getInstance());
+
+        for (SimpleMachineType type : SimpleMachineType.values()) {
+            SimpleMachineTypeItem smti = new SimpleMachineTypeItem(
+                    new SlimefunItemStack("RSC_EDITOR_SIMPLE_MACHINE_TYPE_ITEM_" + type.name().toUpperCase(),
+                            new CustomItemStack(
+                                    Material.HEART_OF_THE_SEA,
+                                    "&b简单机器类型占位符",
+                                    "&e" + type.name().toUpperCase()
+                            )
+                    ),
+                    type
+            );
+            smti.register(RSCEditor.getInstance());
+        }
     }
 }

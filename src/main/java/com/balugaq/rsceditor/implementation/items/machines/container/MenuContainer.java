@@ -59,7 +59,14 @@ public class MenuContainer extends AbstractContainer {
         return content;
     }
 
+    public @NotNull YamlWriter getAsYamlWriter(@NotNull BlockMenu menu, int[] input_slots, int[] output_slots, @NotNull String id, String title) {
+        return getAsYamlWriter(menu, input_slots, output_slots, id, title, 100);
+    }
+
     public @NotNull YamlWriter getAsYamlWriter(@NotNull BlockMenu menu, int[] input_slots, int[] output_slots, @NotNull String id, String title, int progress_bar_slot) {
+        if (progress_bar_slot < 0 || progress_bar_slot > 53) {
+            progress_bar_slot = 100; // ignore progress bar slot
+        }
         YamlWriter writer = new YamlWriter();
         Map<Integer, ItemStack> content = getMenuContent(menu);
 

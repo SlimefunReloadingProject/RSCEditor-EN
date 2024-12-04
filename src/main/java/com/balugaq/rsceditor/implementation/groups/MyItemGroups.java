@@ -37,4 +37,9 @@ public class MyItemGroups {
             RSC_EDITOR_GROUP,
             new CustomItemStack(Material.MOSS_BLOCK, "&bBiomes")
     );
+    public static final SubItemGroup SOUND_TYPE_GROUP = new SubItemGroup(
+            new NamespacedKey(RSCEditor.getInstance(), "sound_type_group"),
+            RSC_EDITOR_GROUP,
+            new CustomItemStack(Material.NOTE_BLOCK, "&bSound Types")
+    );
 }

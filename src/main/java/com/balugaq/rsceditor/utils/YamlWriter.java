@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.utils;
 
 import com.balugaq.rsceditor.api.LinkedMachineRecipe;
 import com.balugaq.rsceditor.api.MachineRecipe;
+import com.balugaq.rsceditor.api.TemplateMachineRecipe;
 import com.google.common.collect.Multimap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -47,6 +48,27 @@ public class YamlWriter {
     @CanIgnoreReturnValue
     public @NotNull YamlWriter set(String key, @NotNull MachineRecipe recipe) {
         String recipeKey = getKey(key + recipe.getName());
+        configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
+        String inputKey = recipeKey + ".input";
+        for (int i = 0; i < recipe.getInputs().length; i++) {
+            configuration.set(inputKey + "." + i, recipe.getInputs()[i]);
+        }
+
+        String outputKey = recipeKey + ".output";
+        for (int i = 0; i < recipe.getOutputs().length; i++) {
+            configuration.set(outputKey + "." + i, recipe.getOutputs()[i]);
+        }
+
+        configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());
+        configuration.set(recipeKey + ".forDisplay", recipe.isForDisplay());
+        configuration.set(recipeKey + ".hide", recipe.isHide());
+
+        return this;
+    }
+
+    @CanIgnoreReturnValue
+    public @NotNull YamlWriter set(String key, @NotNull TemplateMachineRecipe recipe) {
+        String recipeKey = getKey(key + recipe.getId() + recipe.getName());
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
         String inputKey = recipeKey + ".input";
         for (int i = 0; i < recipe.getInputs().length; i++) {
@@ -146,7 +168,7 @@ public class YamlWriter {
 
         ItemMeta meta = itemStack.getItemMeta();
         Multimap<Attribute, AttributeModifier> modifier = meta.getAttributeModifiers();
-        // unsupport args
+        // unsupported args
         if (
                 meta.isUnbreakable()
                         || !meta.getPersistentDataContainer().isEmpty()
@@ -155,7 +177,7 @@ public class YamlWriter {
                         || (modifier != null && !modifier.isEmpty())
         ) {
             configuration.set(getKey(key + ".material_type"), "saveditem");
-            configuration.set(getKey(key + ".material"), "unsupport_saveditem");
+            configuration.set(getKey(key + ".material"), "unsupported_saveditem");
             configuration.set(getKey(key + ".amount"), itemStack.getAmount());
             return this;
         }

@@ -8,11 +8,16 @@ import com.balugaq.rsceditor.api.GroupType;
 import com.balugaq.rsceditor.api.GroupTypeItem;
 import com.balugaq.rsceditor.api.IntegerTypeItem;
 import com.balugaq.rsceditor.api.ItemGroupItem;
+import com.balugaq.rsceditor.api.LinkedMachineRecipe;
+import com.balugaq.rsceditor.api.LinkedMachineRecipeItem;
 import com.balugaq.rsceditor.api.MachineRecipe;
 import com.balugaq.rsceditor.api.MachineRecipeItem;
 import com.balugaq.rsceditor.api.MenuMatrix;
 import com.balugaq.rsceditor.api.RadioactivityTypeItem;
 import com.balugaq.rsceditor.api.RecipeTypeItem;
+import com.balugaq.rsceditor.api.SoundTypeItem;
+import com.balugaq.rsceditor.api.TemplateMachineRecipe;
+import com.balugaq.rsceditor.api.TemplateMachineRecipeItem;
 import com.balugaq.rsceditor.api.TextTypeItem;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -21,6 +26,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+import org.bukkit.Sound;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -294,6 +300,90 @@ public class ItemUtil {
                 MachineRecipe mr = mri.getRecipe(item);
                 if (mr != null) {
                     recipes.add(mr);
+                }
+            }
+        }
+        if (!recipes.isEmpty()) {
+            return new Pair<>(true, recipes);
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, Sound> isSound(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        ItemStack item = menu.getItemInSlot(matrix.getChar(label));
+        if (SlimefunItem.getByItem(item) instanceof SoundTypeItem typeItem) {
+            return new Pair<>(true, typeItem.getSound());
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, List<Sound>> isSounds(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        List<Sound> sounds = new ArrayList<>();
+        for (int slot : matrix.getChars(label)) {
+            ItemStack item = menu.getItemInSlot(slot);
+            if (SlimefunItem.getByItem(item) instanceof SoundTypeItem typeItem) {
+                sounds.add(typeItem.getSound());
+            }
+        }
+        if (!sounds.isEmpty()) {
+            return new Pair<>(true, sounds);
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, TemplateMachineRecipe> isTemplateMachineRecipe(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        ItemStack item = menu.getItemInSlot(matrix.getChar(label));
+        if (SlimefunItem.getByItem(item) instanceof TemplateMachineRecipeItem tmr) {
+            TemplateMachineRecipe tmrp = tmr.getRecipe(item);
+            if (tmrp != null) {
+                return new Pair<>(true, tmrp);
+            }
+        }
+
+        return new Pair<>(false, null);
+    }
+
+    public static @NotNull Pair<Boolean, List<TemplateMachineRecipe>> isTemplateMachineRecipes(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        List<TemplateMachineRecipe> recipes = new ArrayList<>();
+        for (int slot : matrix.getChars(label)) {
+            ItemStack item = menu.getItemInSlot(slot);
+            if (SlimefunItem.getByItem(item) instanceof TemplateMachineRecipeItem tmr) {
+                TemplateMachineRecipe tmrp = tmr.getRecipe(item);
+                if (tmrp != null) {
+                    recipes.add(tmrp);
+                }
+            }
+        }
+        if (!recipes.isEmpty()) {
+            return new Pair<>(true, recipes);
+        } else {
+            return new Pair<>(false, null);
+        }
+    }
+
+    public static @NotNull Pair<Boolean, LinkedMachineRecipe> isLinkedMachineRecipe(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        ItemStack item = menu.getItemInSlot(matrix.getChar(label));
+        if (SlimefunItem.getByItem(item) instanceof LinkedMachineRecipeItem lmr) {
+            LinkedMachineRecipe lmrp = lmr.getLinkedRecipe(item);
+            if (lmrp != null) {
+                return new Pair<>(true, lmrp);
+            }
+        }
+
+        return new Pair<>(false, null);
+    }
+
+    public static @NotNull Pair<Boolean, List<LinkedMachineRecipe>> isLinkedMachineRecipes(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
+        List<LinkedMachineRecipe> recipes = new ArrayList<>();
+        for (int slot : matrix.getChars(label)) {
+            ItemStack item = menu.getItemInSlot(slot);
+            if (SlimefunItem.getByItem(item) instanceof LinkedMachineRecipeItem lmr) {
+                LinkedMachineRecipe lmrp = lmr.getLinkedRecipe(item);
+                if (lmrp != null) {
+                    recipes.add(lmrp);
                 }
             }
         }

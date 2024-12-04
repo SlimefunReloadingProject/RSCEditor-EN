@@ -8,13 +8,18 @@ import com.balugaq.rsceditor.implementation.items.machines.GEOResourceEditor;
 import com.balugaq.rsceditor.implementation.items.machines.GeneratorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ItemGroupEditor;
+import com.balugaq.rsceditor.implementation.items.machines.LinkedRecipeMachineEditor;
 import com.balugaq.rsceditor.implementation.items.machines.MachineEditor;
 import com.balugaq.rsceditor.implementation.items.machines.MaterialGeneratorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.MobDropEditor;
+import com.balugaq.rsceditor.implementation.items.machines.MultiBlockEditor;
 import com.balugaq.rsceditor.implementation.items.machines.RecipeMachineEditor;
 import com.balugaq.rsceditor.implementation.items.machines.RecipeTypeEditor;
+import com.balugaq.rsceditor.implementation.items.machines.ResearchEditor;
 import com.balugaq.rsceditor.implementation.items.machines.SimpleMachineEditor;
 import com.balugaq.rsceditor.implementation.items.machines.SolarGeneratorEditor;
+import com.balugaq.rsceditor.implementation.items.machines.TemplateRecipeMachineEditor;
+import com.balugaq.rsceditor.implementation.items.machines.WorkbenchEditor;
 import com.balugaq.rsceditor.implementation.items.machines.builder.LinkedMachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.builder.MachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
@@ -261,5 +266,60 @@ public class MachineSetup {
                 )
         );
         simpleMachineEditor.register(RSCEditor.getInstance());
+
+        MultiBlockEditor multiBlockEditor = new MultiBlockEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_MULTI_BLOCK_EDITOR",
+                        new CustomItemStack(
+                                Material.BRICKS,
+                                "§b多方块构造器"
+                        )
+                )
+        );
+        multiBlockEditor.register(RSCEditor.getInstance());
+
+        TemplateRecipeMachineEditor templateRecipeMachineEditor = new TemplateRecipeMachineEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_TEMPLATE_RECIPE_MACHINE_EDITOR",
+                        new CustomItemStack(
+                                Material.EMERALD_BLOCK,
+                                "§b模板配方机器构造器"
+                        )
+                )
+        );
+        templateRecipeMachineEditor.register(RSCEditor.getInstance());
+
+        LinkedRecipeMachineEditor linkedRecipeMachineEditor = new LinkedRecipeMachineEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_LINKED_RECIPE_MACHINE_EDITOR",
+                        new CustomItemStack(
+                                Material.SEA_LANTERN,
+                                "§b链接配方机器构造器"
+                        )
+                )
+        );
+        linkedRecipeMachineEditor.register(RSCEditor.getInstance());
+
+        WorkbenchEditor workbenchEditor = new WorkbenchEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_WORKBENCH_EDITOR",
+                        new CustomItemStack(
+                                Material.CRAFTING_TABLE,
+                                "§b工作台机器构造器"
+                        )
+                )
+        );
+        workbenchEditor.register(RSCEditor.getInstance());
+
+        ResearchEditor researchEditor = new ResearchEditor(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_RESEARCH_EDITOR",
+                        new CustomItemStack(
+                                Material.ENCHANTING_TABLE,
+                                "§b研究构造器"
+                        )
+                )
+        );
+        researchEditor.register(RSCEditor.getInstance());
     }
 }

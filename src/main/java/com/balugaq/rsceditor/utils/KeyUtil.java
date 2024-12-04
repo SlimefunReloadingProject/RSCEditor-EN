@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class KeyUtil {
     public static final NamespacedKey MACHINE_RECIPE_KEY = newKey("machine_recipe");
+    public static final NamespacedKey TEMPLATE_MACHINE_RECIPE_KEY = newKey("template_machine_recipe");
     public static final NamespacedKey LINKED_MACHINE_RECIPE_KEY = newKey("linked_machine_recipe");
 
     public static @NotNull NamespacedKey newKey(@NotNull String key) {

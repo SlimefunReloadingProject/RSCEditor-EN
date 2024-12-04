@@ -521,4 +521,129 @@ public class Icons {
             "&b构造",
             "&b点击以构造简单机器"
     );
+
+    public static final ItemStack work_block = new CustomItemStack(
+            Material.STONE_BUTTON,
+            "&b工作区块",
+            "&b^ 在此处放置 方块 ^"
+    );
+
+    public static final ItemStack sound = new CustomItemStack(
+            Material.NOTE_BLOCK,
+            "&b音效",
+            "&b^ 在此处放置 音效占位符 ^"
+    );
+
+    public static final ItemStack build_multi_block = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造多方块结构"
+    );
+
+    public static final ItemStack template_item = new CustomItemStack(
+            Material.BARRIER,
+            "&b模板物品",
+            "&b^ 在此处放置 物品 ^"
+    );
+
+    public static final ItemStack build_template_machine_recipe = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造模板机器配方"
+    );
+
+    public static final ItemStack template_slot = new CustomItemStack(
+            Material.BARRIER,
+            "&b模板槽位",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack template_machine_recipes = new CustomItemStack(
+            Material.JIGSAW,
+            "&b模板机器配方",
+            "&b< 在此处放置 模板机器配方占位符"
+    );
+
+    public static final ItemStack faster_if_more_templates = new CustomItemStack(
+            Material.DIAMOND,
+            "&b模板越多越快",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+    public static final ItemStack more_output_if_more_templates = new CustomItemStack(
+            Material.GOLD_INGOT,
+            "&b模板越多越多产",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
+    public static final ItemStack build_template_machine = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造模板机器"
+    );
+
+    public static final ItemStack linked_machine_recipes = new CustomItemStack(
+            Material.JIGSAW,
+            "&b链接机器配方",
+            "&b< 在此处放置 链接机器配方占位符"
+    );
+
+    public static final ItemStack save_amount = new CustomItemStack(
+            Material.HOPPER,
+            "&b保存数量",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack build_linked_recipe_machine = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造链接配方机器"
+    );
+
+    public static final ItemStack click = new CustomItemStack(
+            Material.OAK_BUTTON,
+            "&b点击槽位",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack build_workbench = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造工作台机器"
+    );
+
+    public static final ItemStack research_id = new CustomItemStack(
+            Material.NAME_TAG,
+            "&b研究ID",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack name = new CustomItemStack(
+            Material.ANVIL,
+            "&b名称",
+            "&b^ 在此处放置 文本占位符 ^"
+    );
+
+    public static final ItemStack level_cost = new CustomItemStack(
+            Material.IRON_INGOT,
+            "&b等级消耗",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack currency_cost = new CustomItemStack(
+            Material.GOLD_INGOT,
+            "&b货币消耗",
+            "&b^ 在此处放置 整数占位符 ^"
+    );
+
+    public static final ItemStack slimefun_items = new CustomItemStack(
+            Material.CHEST,
+            "&b粘液物品",
+            "&b↓ 在此处放置 粘液物品 ↓"
+    );
+
+    public static final ItemStack build_research = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b构造",
+            "&b点击以构造研究"
+    );
 }

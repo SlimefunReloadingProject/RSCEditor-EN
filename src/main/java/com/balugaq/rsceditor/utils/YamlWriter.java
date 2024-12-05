@@ -1,8 +1,8 @@
 package com.balugaq.rsceditor.utils;
 
-import com.balugaq.rsceditor.api.LinkedMachineRecipe;
-import com.balugaq.rsceditor.api.MachineRecipe;
-import com.balugaq.rsceditor.api.TemplateMachineRecipe;
+import com.balugaq.rsceditor.api.objects.types.LinkedMachineRecipe;
+import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
+import com.balugaq.rsceditor.api.objects.types.TemplateMachineRecipe;
 import com.google.common.collect.Multimap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -47,16 +47,16 @@ public class YamlWriter {
 
     @CanIgnoreReturnValue
     public @NotNull YamlWriter set(String key, @NotNull MachineRecipe recipe) {
-        String recipeKey = getKey(key + recipe.getName());
+        String recipeKey = getKey(key + "." + recipe.getName());
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
         String inputKey = recipeKey + ".input";
         for (int i = 0; i < recipe.getInputs().length; i++) {
-            configuration.set(inputKey + "." + i, recipe.getInputs()[i]);
+            set(inputKey + "." + i, recipe.getInputs()[i]);
         }
 
         String outputKey = recipeKey + ".output";
         for (int i = 0; i < recipe.getOutputs().length; i++) {
-            configuration.set(outputKey + "." + i, recipe.getOutputs()[i]);
+            set(outputKey + "." + i, recipe.getOutputs()[i]);
         }
 
         configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());
@@ -68,16 +68,16 @@ public class YamlWriter {
 
     @CanIgnoreReturnValue
     public @NotNull YamlWriter set(String key, @NotNull TemplateMachineRecipe recipe) {
-        String recipeKey = getKey(key + recipe.getId() + recipe.getName());
+        String recipeKey = getKey(key + "." + recipe.getId() + "." + recipe.getName());
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
         String inputKey = recipeKey + ".input";
         for (int i = 0; i < recipe.getInputs().length; i++) {
-            configuration.set(inputKey + "." + i, recipe.getInputs()[i]);
+            set(inputKey + "." + i, recipe.getInputs()[i]);
         }
 
         String outputKey = recipeKey + ".output";
         for (int i = 0; i < recipe.getOutputs().length; i++) {
-            configuration.set(outputKey + "." + i, recipe.getOutputs()[i]);
+            set(outputKey + "." + i, recipe.getOutputs()[i]);
         }
 
         configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());
@@ -89,7 +89,7 @@ public class YamlWriter {
 
     @CanIgnoreReturnValue
     public @NotNull YamlWriter set(String key, @NotNull LinkedMachineRecipe recipe) {
-        String recipeKey = getKey(key + recipe.getName());
+        String recipeKey = getKey(key + "." + recipe.getName());
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
         String inputKey = recipeKey + ".input";
         int i = 0;
@@ -98,7 +98,7 @@ public class YamlWriter {
             if (itemStack == null || itemStack.getType() == Material.AIR) {
                 continue;
             }
-            configuration.set(inputKey + "." + i, itemStack.clone());
+            set(inputKey + "." + i, itemStack.clone());
             configuration.set(inputKey + "." + i + ".slot", slot);
             i++;
         }
@@ -109,7 +109,7 @@ public class YamlWriter {
             if (itemStack == null || itemStack.getType() == Material.AIR) {
                 continue;
             }
-            configuration.set(recipeKey + ".output." + i, itemStack.clone());
+            set(recipeKey + ".output." + i, itemStack.clone());
             configuration.set(recipeKey + ".output." + i + ".slot", slot);
             i++;
         }
@@ -118,7 +118,7 @@ public class YamlWriter {
             if (itemStack == null || itemStack.getType() == Material.AIR) {
                 continue;
             }
-            configuration.set(recipeKey + ".output." + i, itemStack.clone());
+            set(recipeKey + ".output." + i, itemStack.clone());
         }
 
         configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());

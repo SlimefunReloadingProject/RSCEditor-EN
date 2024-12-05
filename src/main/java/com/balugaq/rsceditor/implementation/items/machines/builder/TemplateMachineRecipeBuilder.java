@@ -1,14 +1,13 @@
 package com.balugaq.rsceditor.implementation.items.machines.builder;
 
-import com.balugaq.rsceditor.api.AbstractContainer;
-import com.balugaq.rsceditor.api.BooleanTypeItem;
-import com.balugaq.rsceditor.api.ItemFlowType;
-import com.balugaq.rsceditor.api.MachineRecipe;
-import com.balugaq.rsceditor.api.MachineRecipeItem;
-import com.balugaq.rsceditor.api.MenuMatrix;
-import com.balugaq.rsceditor.api.TemplateMachineRecipe;
-import com.balugaq.rsceditor.api.TemplateMachineRecipeItem;
-import com.balugaq.rsceditor.api.TextTypeItem;
+import com.balugaq.rsceditor.api.base.AbstractContainer;
+import com.balugaq.rsceditor.api.items.BooleanTypeItem;
+import com.balugaq.rsceditor.api.items.IntegerTypeItem;
+import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
+import com.balugaq.rsceditor.api.objects.MenuMatrix;
+import com.balugaq.rsceditor.api.objects.types.TemplateMachineRecipe;
+import com.balugaq.rsceditor.api.items.TemplateMachineRecipeItem;
+import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.implementation.items.machines.container.ItemFlowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.MenuContainer;
 import com.balugaq.rsceditor.utils.Icons;
@@ -44,6 +43,7 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
             .addLine("BBBBBBBBB")
             .addLine("BBBBBBBBG")
             .addItem("B", ChestMenuUtils.getBackground())
+            .addItem("C", Icons.template_machine_recipe_card)
             .addItem("N", Icons.recipe_name)
             .addItem("T", Icons.processing_time)
             .addItem("O", Icons.choose_one)
@@ -69,6 +69,21 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
                 // Name button
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
+                        p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
+                        ChatUtils.awaitInput(p, text -> {
+                            typeItem.setContent(i, text);
+                            menu.open(p);
+                        });
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                // Processing Time button
+                menu.addMenuClickHandler(matrix.getChar("t"), (p, s, i, a) -> {
+                    if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
                         ChatUtils.awaitInput(p, text -> {

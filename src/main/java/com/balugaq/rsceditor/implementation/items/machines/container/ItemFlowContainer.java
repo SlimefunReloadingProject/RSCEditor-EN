@@ -1,9 +1,9 @@
 package com.balugaq.rsceditor.implementation.items.machines.container;
 
-import com.balugaq.rsceditor.api.AbstractContainer;
-import com.balugaq.rsceditor.api.ItemFlowType;
-import com.balugaq.rsceditor.api.ItemFlowTypeItem;
-import com.balugaq.rsceditor.api.MenuMatrix;
+import com.balugaq.rsceditor.api.base.AbstractContainer;
+import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
+import com.balugaq.rsceditor.api.items.ItemFlowTypeItem;
+import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -35,6 +35,7 @@ public class ItemFlowContainer extends AbstractContainer {
         return new BlockMenuPreset(getId(), getItemName()) {
             @Override
             public void init() {
+                setSize(54);
                 matrix.build(this);
             }
 

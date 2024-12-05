@@ -1,8 +1,8 @@
 package com.balugaq.rsceditor.implementation.items.machines.container;
 
-import com.balugaq.rsceditor.api.AbstractContainer;
-import com.balugaq.rsceditor.api.IntegerTypeItem;
-import com.balugaq.rsceditor.api.MenuMatrix;
+import com.balugaq.rsceditor.api.base.AbstractContainer;
+import com.balugaq.rsceditor.api.items.IntegerTypeItem;
+import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.utils.Icons;
 import com.balugaq.rsceditor.utils.ItemUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;

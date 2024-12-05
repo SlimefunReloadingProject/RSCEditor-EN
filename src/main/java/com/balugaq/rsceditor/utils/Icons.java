@@ -369,7 +369,7 @@ public class Icons {
     public static final ItemStack build_linked_machine_recipe = new CustomItemStack(
             Material.STRUCTURE_BLOCK,
             "&b构造",
-            "&b点击以构造链接机器配方"
+            "&b点击以构造强配方机器配方"
     );
 
     public static final ItemStack energy_net_component_type = new CustomItemStack(
@@ -583,8 +583,8 @@ public class Icons {
 
     public static final ItemStack linked_machine_recipes = new CustomItemStack(
             Material.JIGSAW,
-            "&b链接机器配方",
-            "&b< 在此处放置 链接机器配方占位符"
+            "&b强配方机器配方",
+            "&b< 在此处放置 强配方机器配方占位符"
     );
 
     public static final ItemStack save_amount = new CustomItemStack(
@@ -645,5 +645,23 @@ public class Icons {
             Material.STRUCTURE_BLOCK,
             "&b构造",
             "&b点击以构造研究"
+    );
+
+    public static final ItemStack machine_recipe_card = new CustomItemStack(
+            Material.PAPER,
+            "&b机器配方卡片",
+            "&b^ 在此处放置 机器配方卡片占位符 ^"
+    );
+
+    public static final ItemStack linked_machine_recipe_card = new CustomItemStack(
+            Material.PAPER,
+            "&b强配方机器配方卡片",
+            "&b^ 在此处放置 强配方机器配方卡片占位符 ^"
+    );
+
+    public static final ItemStack template_machine_recipe_card = new CustomItemStack(
+            Material.PAPER,
+            "&b模板机器配方卡片",
+            "&b^ 在此处放置 模板机器配方卡片占位符 ^"
     );
 }

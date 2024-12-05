@@ -1,7 +1,7 @@
 package com.balugaq.rsceditor.implementation.items.machines.container;
 
-import com.balugaq.rsceditor.api.AbstractContainer;
-import com.balugaq.rsceditor.api.MenuMatrix;
+import com.balugaq.rsceditor.api.base.AbstractContainer;
+import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.utils.YamlWriter;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
@@ -34,6 +34,7 @@ public class MenuContainer extends AbstractContainer {
         return new BlockMenuPreset(getId(), getItemName()) {
             @Override
             public void init() {
+                setSize(54);
                 matrix.build(this);
             }
 

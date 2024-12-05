@@ -1,6 +1,6 @@
 package com.balugaq.rsceditor.utils.datatypes;
 
-import com.balugaq.rsceditor.api.LinkedMachineRecipe;
+import com.balugaq.rsceditor.api.objects.types.LinkedMachineRecipe;
 import com.balugaq.rsceditor.utils.KeyUtil;
 import com.jeff_media.morepersistentdatatypes.DataType;
 import org.bukkit.Material;

@@ -1,6 +1,6 @@
 package com.balugaq.rsceditor.implementation.items;
 
-import com.balugaq.rsceditor.api.ItemGroupItem;
+import com.balugaq.rsceditor.api.items.ItemGroupItem;
 import com.balugaq.rsceditor.implementation.RSCEditor;
 import com.balugaq.rsceditor.utils.ReflectionUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;

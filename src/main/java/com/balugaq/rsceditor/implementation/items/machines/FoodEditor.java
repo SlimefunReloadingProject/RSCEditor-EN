@@ -1,11 +1,11 @@
 package com.balugaq.rsceditor.implementation.items.machines;
 
-import com.balugaq.rsceditor.api.AbstractContainer;
-import com.balugaq.rsceditor.api.BooleanTypeItem;
-import com.balugaq.rsceditor.api.DoubleTypeItem;
-import com.balugaq.rsceditor.api.IntegerTypeItem;
-import com.balugaq.rsceditor.api.MenuMatrix;
-import com.balugaq.rsceditor.api.TextTypeItem;
+import com.balugaq.rsceditor.api.base.AbstractContainer;
+import com.balugaq.rsceditor.api.items.BooleanTypeItem;
+import com.balugaq.rsceditor.api.items.DoubleTypeItem;
+import com.balugaq.rsceditor.api.items.IntegerTypeItem;
+import com.balugaq.rsceditor.api.objects.MenuMatrix;
+import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.utils.ClipboardUtil;
 import com.balugaq.rsceditor.utils.Icons;
 import com.balugaq.rsceditor.utils.ItemUtil;

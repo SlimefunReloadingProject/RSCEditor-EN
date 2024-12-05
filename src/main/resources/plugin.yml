@@ -2,6 +2,6 @@ name: RSCEditor
 version: ${project.version}
 main: com.balugaq.rsceditor.implementation.RSCEditor
 api-version: 1.18
-depend: [ Slimefun, RykenSlimefunCustomizer ]
+depend: [ Slimefun, GuizhanLibPlugin, RykenSlimefunCustomizer ]
 authors: [ balugaq ]
 description: An editor for RykenSlimeCustomizer.

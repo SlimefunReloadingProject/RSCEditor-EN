@@ -1,6 +1,6 @@
 package com.balugaq.rsceditor.implementation.items;
 
-import com.balugaq.rsceditor.api.RecipeTypeItem;
+import com.balugaq.rsceditor.api.items.RecipeTypeItem;
 import com.balugaq.rsceditor.implementation.RSCEditor;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;

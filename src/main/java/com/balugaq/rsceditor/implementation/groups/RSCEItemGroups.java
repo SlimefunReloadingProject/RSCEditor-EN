@@ -4,9 +4,11 @@ import com.balugaq.rsceditor.implementation.RSCEditor;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.NestedItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
+@UtilityClass
 public class RSCEItemGroups {
     public static final NestedItemGroup RSC_EDITOR_GROUP = new NestedItemGroup(
             new NamespacedKey(RSCEditor.getInstance(), "rsc_editor_group"),
@@ -41,5 +43,10 @@ public class RSCEItemGroups {
             new NamespacedKey(RSCEditor.getInstance(), "sound_type_group"),
             RSC_EDITOR_GROUP,
             new CustomItemStack(Material.NOTE_BLOCK, "&b音效占位符")
+    );
+    public static final SubItemGroup TOOL_GROUP = new SubItemGroup(
+            new NamespacedKey(RSCEditor.getInstance(), "tool_group"),
+            RSC_EDITOR_GROUP,
+            new CustomItemStack(Material.DIAMOND_PICKAXE, "&b工具")
     );
 }

@@ -29,8 +29,10 @@ import com.balugaq.rsceditor.implementation.items.machines.container.MenuContain
 import com.balugaq.rsceditor.implementation.items.machines.container.SupplyContainer;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 
+@UtilityClass
 public class MachineSetup {
     public static void register() {
         // containers

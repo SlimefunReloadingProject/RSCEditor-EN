@@ -4,12 +4,15 @@ import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
 import com.balugaq.rsceditor.api.objects.types.RainbowType;
 import com.balugaq.rsceditor.api.objects.types.SimpleMachineType;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
+import lombok.experimental.UtilityClass;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
 import org.bukkit.Sound;
 import org.bukkit.block.Biome;
+import org.jetbrains.annotations.NotNull;
 
+@UtilityClass
 public class TextUtil {
-    public static String getName(SimpleMachineType type) {
+    public static @NotNull String getName(@NotNull SimpleMachineType type) {
         return switch (type) {
             case ELECTRIC_CRUCIBLE -> "电动坩埚";
             case ELECTRIC_FURNACE -> "电炉";
@@ -40,7 +43,7 @@ public class TextUtil {
         };
     }
 
-    public static String getName(Biome biome) {
+    public static @NotNull String getName(@NotNull Biome biome) {
         String key = biome.translationKey();
         String name = LanguageHelper.getLangOrNull(key);
         if (name == null) {
@@ -50,7 +53,7 @@ public class TextUtil {
         return name;
     }
 
-    public static String getName(EnergyNetComponentType type) {
+    public static @NotNull String getName(@NotNull EnergyNetComponentType type) {
         return switch (type) {
             case GENERATOR -> "发电机";
             case CAPACITOR -> "电容";
@@ -61,7 +64,7 @@ public class TextUtil {
         };
     }
 
-    public static String getName(ItemFlowType type) {
+    public static @NotNull String getName(@NotNull ItemFlowType type) {
         return switch (type) {
             case NONE -> "无";
             case INSERT -> "输入";
@@ -72,7 +75,7 @@ public class TextUtil {
         };
     }
 
-    public static String getName(RainbowType type) {
+    public static @NotNull String getName(@NotNull RainbowType type) {
         return switch (type) {
             case WOOL -> "羊毛";
             case CARPET -> "地毯";
@@ -88,7 +91,7 @@ public class TextUtil {
     }
 
     // Sound enum is too huge, so we just use the name of the sound.
-    public static String getName(Sound sound) {
+    public static @NotNull String getName(@NotNull Sound sound) {
         String rawName = sound.name().replace("_", " ").toLowerCase();
         return rawName.substring(0, 1).toUpperCase() + rawName.substring(1);
     }

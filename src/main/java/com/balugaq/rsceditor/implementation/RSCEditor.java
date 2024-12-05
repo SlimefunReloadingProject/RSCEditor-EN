@@ -7,6 +7,7 @@ import com.balugaq.rsceditor.implementation.items.ItemGroupItems;
 import com.balugaq.rsceditor.implementation.items.MachineSetup;
 import com.balugaq.rsceditor.implementation.items.RecipeTypeItems;
 import com.balugaq.rsceditor.implementation.items.SoundTypeItems;
+import com.balugaq.rsceditor.implementation.items.ToolSetup;
 import com.balugaq.rsceditor.implementation.items.TypeItems;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class RSCEditor extends JavaPlugin implements SlimefunAddon {
         ItemGroupItems.register();
         BiomeItems.register();
         SoundTypeItems.register();
+        ToolSetup.register();
 
         getLogger().info("RSCEditor has been enabled.");
     }

@@ -1,5 +1,6 @@
 package com.balugaq.rsceditor.utils;
 
+import lombok.experimental.UtilityClass;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -8,6 +9,8 @@ import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("deprecation")
+@UtilityClass
 public class ClipboardUtil {
     public static void send(@NotNull Player player, String text) {
         send(player, "YAML 配置", text);

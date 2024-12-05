@@ -1,5 +1,6 @@
 package com.balugaq.rsceditor.utils;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -9,6 +10,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@UtilityClass
 public class PersistentUtil {
     public static <T, Z> Z get(@Nullable ItemStack itemStack, @NotNull PersistentDataType<T, Z> dataType, @NotNull NamespacedKey key) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {

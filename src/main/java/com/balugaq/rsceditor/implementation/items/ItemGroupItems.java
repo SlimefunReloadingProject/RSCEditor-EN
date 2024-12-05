@@ -5,8 +5,10 @@ import com.balugaq.rsceditor.implementation.RSCEditor;
 import com.balugaq.rsceditor.utils.ReflectionUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import lombok.experimental.UtilityClass;
 import org.bukkit.inventory.ItemStack;
 
+@UtilityClass
 public class ItemGroupItems {
     public static void register() {
         Slimefun.getRegistry().getAllItemGroups().forEach(itemGroup -> {

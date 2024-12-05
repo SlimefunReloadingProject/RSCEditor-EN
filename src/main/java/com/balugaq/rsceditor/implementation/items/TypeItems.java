@@ -25,8 +25,10 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.ProtectionType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 
+@UtilityClass
 public class TypeItems {
     public static void register() {
         BooleanTypeItem booleanTypeItem = new BooleanTypeItem(

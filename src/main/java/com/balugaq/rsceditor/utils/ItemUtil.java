@@ -25,6 +25,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
+import lombok.experimental.UtilityClass;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.Sound;
 import org.bukkit.block.Biome;
@@ -34,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@UtilityClass
 public class ItemUtil {
     public static @NotNull Pair<Boolean, Integer> isInteger(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
         ItemStack item = menu.getItemInSlot(matrix.getChar(label));

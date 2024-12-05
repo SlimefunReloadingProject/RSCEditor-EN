@@ -6,8 +6,10 @@ import com.balugaq.rsceditor.utils.MaterialUtil;
 import com.balugaq.rsceditor.utils.TextUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Sound;
 
+@UtilityClass
 public class SoundTypeItems {
     public static void register() {
         for (Sound sound : Sound.values()) {

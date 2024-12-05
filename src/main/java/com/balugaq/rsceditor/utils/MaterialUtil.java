@@ -5,12 +5,15 @@ import com.balugaq.rsceditor.api.objects.types.RainbowType;
 import com.balugaq.rsceditor.api.objects.types.SimpleMachineType;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Biome;
+import org.jetbrains.annotations.NotNull;
 
+@UtilityClass
 public class MaterialUtil {
-    public static Material getMaterial(SimpleMachineType type) {
+    public static @NotNull Material getMaterial(@NotNull SimpleMachineType type) {
         return switch (type) {
             case ELECTRIC_CRUCIBLE, ELECTRIC_INGOT_FACTORY -> Material.RED_TERRACOTTA;
             case ELECTRIC_FURNACE, ELECTRIC_ORE_GRINDER, ELECTRIC_INGOT_PULVERIZER, ELECTRIC_SMELTERY ->
@@ -34,7 +37,7 @@ public class MaterialUtil {
         };
     }
 
-    public static Material getMaterial(Biome biome) {
+    public static @NotNull Material getMaterial(@NotNull Biome biome) {
         return switch (biome) {
             case OCEAN, RIVER, DEEP_LUKEWARM_OCEAN, DEEP_COLD_OCEAN, COLD_OCEAN, LUKEWARM_OCEAN, DEEP_OCEAN, WARM_OCEAN ->
                     Material.WATER_BUCKET;
@@ -72,7 +75,7 @@ public class MaterialUtil {
         };
     }
 
-    public static Material getMaterial(RainbowType type) {
+    public static @NotNull Material getMaterial(@NotNull RainbowType type) {
         return switch (type) {
             case WOOL -> Material.WHITE_WOOL;
             case CARPET -> Material.WHITE_CARPET;
@@ -86,7 +89,7 @@ public class MaterialUtil {
         };
     }
 
-    public static Material getMaterial(EnergyNetComponentType type) {
+    public static @NotNull Material getMaterial(@NotNull EnergyNetComponentType type) {
         return switch (type) {
             case GENERATOR -> Material.GLOWSTONE;
             case CAPACITOR -> Material.IRON_BLOCK;
@@ -96,7 +99,7 @@ public class MaterialUtil {
         };
     }
 
-    public static Material getMaterial(ItemFlowType type) {
+    public static @NotNull Material getMaterial(@NotNull ItemFlowType type) {
         return switch (type) {
             case NONE -> Material.GRAY_STAINED_GLASS_PANE;
             case INSERT -> Material.BLUE_STAINED_GLASS_PANE;
@@ -107,7 +110,7 @@ public class MaterialUtil {
         };
     }
 
-    public static Material getMaterial(Sound sound) {
+    public static Material getMaterial(@NotNull Sound sound) {
         return switch (sound) {
             case AMBIENT_BASALT_DELTAS_ADDITIONS, AMBIENT_BASALT_DELTAS_LOOP, AMBIENT_BASALT_DELTAS_MOOD, BLOCK_BASALT_BREAK, BLOCK_BASALT_FALL, BLOCK_BASALT_HIT, BLOCK_BASALT_PLACE, BLOCK_BASALT_STEP ->
                     Material.BASALT;

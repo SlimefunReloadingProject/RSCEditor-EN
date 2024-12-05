@@ -1,5 +1,6 @@
 package com.balugaq.rsceditor.api.objects;
 
+import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.inventory.ItemStack;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Getter
 public class MenuMatrix {
     private final List<String> labels = new ArrayList<>();
     private final Map<Character, ItemStack> itemStackMap = new HashMap<>();

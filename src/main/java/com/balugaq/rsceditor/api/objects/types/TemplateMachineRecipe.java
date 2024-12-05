@@ -3,6 +3,7 @@ package com.balugaq.rsceditor.api.objects.types;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class TemplateMachineRecipe {
@@ -15,7 +16,7 @@ public class TemplateMachineRecipe {
     private final ItemStack[] inputs;
     private final ItemStack[] outputs;
 
-    public TemplateMachineRecipe(SlimefunItem item, String name, boolean chooseOne, boolean forDisplay, boolean hide, int processingTime, ItemStack[] inputs, ItemStack[] outputs) {
+    public TemplateMachineRecipe(@NotNull SlimefunItem item, String name, boolean chooseOne, boolean forDisplay, boolean hide, int processingTime, ItemStack[] inputs, ItemStack[] outputs) {
         this(item.getId(), name, chooseOne, forDisplay, hide, processingTime, inputs, outputs);
     }
 

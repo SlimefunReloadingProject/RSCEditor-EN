@@ -1,9 +1,11 @@
 package com.balugaq.rsceditor.utils;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+@UtilityClass
 public class Icons {
     public static final ItemStack amount = new CustomItemStack(
             Material.LADDER,

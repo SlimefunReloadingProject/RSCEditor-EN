@@ -3,9 +3,9 @@ package com.balugaq.rsceditor.implementation.items.machines;
 import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.BooleanTypeItem;
 import com.balugaq.rsceditor.api.items.IntegerTypeItem;
-import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.api.items.RainbowTypeItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
+import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.implementation.items.machines.container.CustomRainbowContainer;
 import com.balugaq.rsceditor.utils.ClipboardUtil;
 import com.balugaq.rsceditor.utils.Icons;
@@ -317,12 +317,9 @@ public class ItemEditor extends AbstractContainer {
                     }
 
                     // energy charge
-                    int energyCapacity = 0;
                     Pair<Boolean, Integer> p6 = ItemUtil.isInteger(menu, matrix, "y");
                     if (p6.getFirstValue()) {
-                        energyCapacity = p6.getSecondValue();
-                    }
-                    if (energyCapacity > 0) {
+                        int energyCapacity = p6.getSecondValue();
                         writer.set("energy_capacity", energyCapacity);
                     }
 

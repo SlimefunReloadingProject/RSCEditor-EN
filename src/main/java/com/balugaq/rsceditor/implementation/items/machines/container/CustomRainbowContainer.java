@@ -18,12 +18,12 @@ import java.util.List;
 
 public class CustomRainbowContainer extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
-            .addLine("rrrrrrrrrR")
+            .addLine("rrrrrrrrR")
+            .addLine("rrrrrrrrR")
+            .addLine("rrrrrrrrR")
+            .addLine("rrrrrrrrR")
+            .addLine("rrrrrrrrR")
+            .addLine("rrrrrrrrR")
             .addItem("R", Icons.custom_rainbow_block);
 
     public CustomRainbowContainer(@NotNull SlimefunItemStack item) {

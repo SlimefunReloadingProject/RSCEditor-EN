@@ -1,9 +1,9 @@
 package com.balugaq.rsceditor.implementation.items.machines.container;
 
 import com.balugaq.rsceditor.api.base.AbstractContainer;
-import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
 import com.balugaq.rsceditor.api.items.ItemFlowTypeItem;
 import com.balugaq.rsceditor.api.objects.MenuMatrix;
+import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;

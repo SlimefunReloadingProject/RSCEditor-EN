@@ -26,12 +26,12 @@ import java.util.Map;
 
 public class SupplyContainer extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
-            .addLine("OOOOOOOOOA")
-            .addLine("ooooooooo1")
-            .addLine("NNNNNNNNNA")
-            .addLine("nnnnnnnnn2")
-            .addLine("EEEEEEEEEA")
-            .addLine("eeeeeeeee3")
+            .addLine("OOOOOOOOA")
+            .addLine("oooooooo1")
+            .addLine("NNNNNNNNA")
+            .addLine("nnnnnnnn2")
+            .addLine("EEEEEEEEA")
+            .addLine("eeeeeeee3")
             .addItem("A", Icons.amount)
             .addItem("1", Icons.overworld)
             .addItem("2", Icons.nether)

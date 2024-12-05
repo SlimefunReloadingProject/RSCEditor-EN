@@ -3,8 +3,8 @@ package com.balugaq.rsceditor.implementation.items.machines;
 import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.ArmorPiece;
 import com.balugaq.rsceditor.api.items.BooleanTypeItem;
-import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
+import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
 import com.balugaq.rsceditor.utils.ClipboardUtil;
 import com.balugaq.rsceditor.utils.Icons;
@@ -116,6 +116,13 @@ public class ArmorEditor extends AbstractContainer {
                     }
                     ItemGroup itemGroup = p2.getSecondValue();
                     writer.set("item_group", itemGroup.getKey().getKey());
+
+                    boolean fullset = false;
+                    Pair<Boolean, Boolean> p3 = ItemUtil.isBoolean(menu, matrix, "f");
+                    if (p3.getFirstValue()) {
+                        fullset = p3.getSecondValue();
+                    }
+                    writer.set("fullset", fullset);
 
                     // helmet
                     ArmorPiece helmetPart = null;

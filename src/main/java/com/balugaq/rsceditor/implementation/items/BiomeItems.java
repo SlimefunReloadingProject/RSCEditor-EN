@@ -6,8 +6,6 @@ import com.balugaq.rsceditor.utils.MaterialUtil;
 import com.balugaq.rsceditor.utils.TextUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
-import org.bukkit.Material;
 import org.bukkit.block.Biome;
 
 public class BiomeItems {
@@ -18,9 +16,8 @@ public class BiomeItems {
                             "RSC_EDITOR_BIOME_" + biome.name().toUpperCase(),
                             new CustomItemStack(
                                     MaterialUtil.getMaterial(biome),
-                                    "&6群系占位符",
-                                    "&b" + biome.name().toUpperCase(),
-                                    "&b" + TextUtil.getName(biome)
+                                    "&6群系占位符: " + "&b" + TextUtil.getName(biome),
+                                    "&b" + biome.name().toUpperCase()
                             )
                     ),
                     biome

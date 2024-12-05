@@ -71,7 +71,7 @@ public class MachineSetup {
                 new SlimefunItemStack(
                         "RSC_EDITOR_ITEM_FLOW_CONTAINER",
                         new CustomItemStack(
-                                Material.IRON_BARS,
+                                Material.LODESTONE,
                                 "&b物品流容器"
                         )
                 )

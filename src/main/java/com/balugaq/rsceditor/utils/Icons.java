@@ -8,29 +8,29 @@ public class Icons {
     public static final ItemStack amount = new CustomItemStack(
             Material.LADDER,
             "&e数量",
-            "< 在此处放置 整数占位符"
+            "&b< 在此处放置 整数占位符"
     );
     public static final ItemStack overworld = new CustomItemStack(
             Material.GRASS_BLOCK,
             "&e世界类型: 主世界",
-            "< 在此处放置 群系占位符"
+            "&b< 在此处放置 群系占位符"
     );
 
     public static final ItemStack nether = new CustomItemStack(
             Material.NETHERRACK,
             "&e世界类型: 下界",
-            "< 在此处放置 群系占位符"
+            "&b< 在此处放置 群系占位符"
     );
 
     public static final ItemStack end = new CustomItemStack(
             Material.END_STONE,
             "&e世界类型: 末地",
-            "< 在此处放置 群系占位符"
+            "&b< 在此处放置 群系占位符"
     );
 
     public static final ItemStack custom_rainbow_block = new CustomItemStack(
             Material.PINK_WOOL,
-            "< 在此处放置 方块"
+            "&b< 在此处放置 方块"
     );
 
     public static final ItemStack id = new CustomItemStack(
@@ -96,7 +96,7 @@ public class Icons {
 
     public static final ItemStack month = new CustomItemStack(
             Material.MOSS_BLOCK,
-            "&月份",
+            "&b月份",
             "&b^ 在此处放置 整数占位符 ^",
             "&c当此物品组是季节性物品组时"
     );
@@ -123,19 +123,22 @@ public class Icons {
     public static final ItemStack recipe_type = new CustomItemStack(
             Material.BOOK,
             "&b配方类型",
-            "&b^ 在此处放置 配方类型占位符 ^"
+            "&b^ 在此处放置 配方类型占位符 ^",
+            "&c默认值: NULL"
     );
 
     public static final ItemStack placeable = new CustomItemStack(
             Material.REDSTONE_BLOCK,
             "&b放置性",
-            "&b^ 在此处放置 布尔占位符 ^"
+            "&b^ 在此处放置 布尔占位符 ^",
+            "&d默认值: true"
     );
 
     public static final ItemStack script = new CustomItemStack(
             Material.SCULK_SENSOR,
             "&b脚本",
-            "&b^ 在此处放置 文本占位符 ^"
+            "&b^ 在此处放置 文本占位符 ^",
+            "&d默认值: [无设置]"
     );
 
     public static final ItemStack energy_capacity = new CustomItemStack(
@@ -147,7 +150,8 @@ public class Icons {
     public static final ItemStack radiation = new CustomItemStack(
             Material.LIME_DYE,
             "&b辐射",
-            "&b^ 在此处放置 辐射类型占位符 ^"
+            "&b^ 在此处放置 辐射类型占位符 ^",
+            "&d默认值: [无设置]"
     );
 
     public static final ItemStack rainbow = new CustomItemStack(
@@ -161,31 +165,36 @@ public class Icons {
     public static final ItemStack anti_wither = new CustomItemStack(
             Material.WITHER_ROSE,
             "&b防凋灵",
-            "&b^ 在此处放置 布尔占位符 ^"
+            "&b^ 在此处放置 布尔占位符 ^",
+            "&d默认值: false"
     );
 
     public static final ItemStack soul_bound = new CustomItemStack(
             Material.PLAYER_HEAD,
             "&b灵魂绑定",
-            "&b^ 在此处放置 布尔占位符 ^"
+            "&b^ 在此处放置 布尔占位符 ^",
+            "&d默认值: false"
     );
 
     public static final ItemStack piglin_chance = new CustomItemStack(
             Material.GOLD_INGOT,
             "&b猪灵交易几率",
-            "&b^ 在此处放置 整数占位符 ^"
+            "&b^ 在此处放置 整数占位符 ^",
+            "&d默认值: 0"
     );
 
     public static final ItemStack man_made = new CustomItemStack(
             Material.CONDUIT,
             "&b人造",
-            "&b^ 在此处放置 布尔占位符 ^"
+            "&b^ 在此处放置 布尔占位符 ^",
+            "&d默认值: false"
     );
 
     public static final ItemStack hidden = new CustomItemStack(
             Material.GRAY_DYE,
             "&b隐藏",
-            "&b^ 在此处放置 布尔占位符 ^"
+            "&b^ 在此处放置 布尔占位符 ^",
+            "&d默认值: false"
     );
 
     public static final ItemStack drop_from = new CustomItemStack(
@@ -197,13 +206,15 @@ public class Icons {
     public static final ItemStack drop_chance = new CustomItemStack(
             Material.BONE_MEAL,
             "&b掉落几率",
-            "&b^ 在此处放置 整数占位符 ^"
+            "&b^ 在此处放置 整数占位符 ^",
+            "&d默认值: 100"
     );
 
     public static final ItemStack drop_amount = new CustomItemStack(
             Material.LADDER,
             "&b掉落数量",
-            "&b^ 在此处放置 整数占位符 ^"
+            "&b^ 在此处放置 整数占位符 ^",
+            "&d默认值: 1"
     );
 
     public static final ItemStack build_item = new CustomItemStack(
@@ -215,19 +226,22 @@ public class Icons {
     public static final ItemStack max_deviation = new CustomItemStack(
             Material.CHAIN,
             "&b资源最大偏差",
-            "&b^ 在此处放置 整数占位符 ^"
+            "&b^ 在此处放置 整数占位符 ^",
+            "&d默认值: 1"
     );
 
     public static final ItemStack obtain_from_geo_miner = new CustomItemStack(
             Material.IRON_PICKAXE,
-            "&bGEO矿机采集",
-            "&b^ 在此处放置 布尔占位符 ^"
+            "&b允许GEO矿机采集",
+            "&b^ 在此处放置 布尔占位符 ^",
+            "&d默认值: true"
     );
 
     public static final ItemStack geo_name = new CustomItemStack(
             Material.COAL,
             "&bGEO名字",
-            "&b^ 在此处放置 文本占位符 ^"
+            "&b^ 在此处放置 文本占位符 ^",
+            "&d默认值: [物品模型的名字]"
     );
 
     public static final ItemStack build_geo = new CustomItemStack(
@@ -245,7 +259,8 @@ public class Icons {
     public static final ItemStack fullset = new CustomItemStack(
             Material.END_CRYSTAL,
             "&b全套",
-            "&b^ 在此处放置 布尔占位符 ^"
+            "&b^ 在此处放置 布尔占位符 ^",
+            "&c默认值: false"
     );
 
     public static final ItemStack protection_type = new CustomItemStack(
@@ -297,25 +312,29 @@ public class Icons {
     public static final ItemStack nutrition = new CustomItemStack(
             Material.BREAD,
             "&b营养",
-            "&b^ 在此处放置 整数占位符 ^"
+            "&b^ 在此处放置 整数占位符 ^",
+            "&d默认值: 0"
     );
 
     public static final ItemStack saturation = new CustomItemStack(
             Material.GOLDEN_CARROT,
             "&b饱和度",
-            "&b^ 在此处放置 浮点数占位符 ^"
+            "&b^ 在此处放置 浮点数占位符 ^",
+            "&d默认值: 0.0"
     );
 
     public static final ItemStack eatseconds = new CustomItemStack(
             Material.CLOCK,
             "&b食入时间",
-            "&b^ 在此处放置 浮点数占位符 ^"
+            "&b^ 在此处放置 浮点数占位符 ^",
+            "&d默认值: 1.0"
     );
 
     public static final ItemStack always_eatable = new CustomItemStack(
             Material.COOKIE,
-            "&b保持可食用性",
-            "&b^ 在此处放置 布尔占位符 ^"
+            "&b总是可食用",
+            "&b^ 在此处放置 布尔占位符 ^",
+            "&d默认值: false"
     );
 
     public static final ItemStack build_food = new CustomItemStack(
@@ -375,7 +394,8 @@ public class Icons {
     public static final ItemStack energy_net_component_type = new CustomItemStack(
             Material.BLAZE_ROD,
             "&b能源网络组件类型",
-            "&b^ 在此处放置 能源网络组件类型占位符 ^"
+            "&b^ 在此处放置 能源网络组件类型占位符 ^",
+            "&d默认值: NONE"
     );
 
     public static final ItemStack title = new CustomItemStack(
@@ -446,19 +466,19 @@ public class Icons {
 
     public static final ItemStack tick_rate = new CustomItemStack(
             Material.CLOCK,
-            "&b每生成一次物品所需时间",
+            "&b工作耗时",
             "&b^ 在此处放置 整数占位符 ^"
     );
 
     public static final ItemStack per = new CustomItemStack(
             Material.DIAMOND_SWORD,
-            "&b每生成一次物品所需电量",
+            "&b工作耗电量",
             "&b^ 在此处放置 整数占位符 ^"
     );
 
     public static final ItemStack status = new CustomItemStack(
             Material.BARREL,
-            "&b状态",
+            "&b状态槽",
             "&b^ 在此处放置 整数占位符 ^"
     );
 
@@ -476,14 +496,15 @@ public class Icons {
 
     public static final ItemStack energy_per_craft = new CustomItemStack(
             Material.REDSTONE,
-            "&b每合成一次所需能量",
+            "&b工作耗电量",
             "&b^ 在此处放置 整数占位符 ^"
     );
 
     public static final ItemStack speed = new CustomItemStack(
             Material.CLOCK,
             "&b速度",
-            "&b^ 在此处放置 整数占位符 ^"
+            "&b^ 在此处放置 整数占位符 ^",
+            "&d默认值: 1"
     );
 
     public static final ItemStack build_recipe_machine = new CustomItemStack(
@@ -524,7 +545,7 @@ public class Icons {
 
     public static final ItemStack work_block = new CustomItemStack(
             Material.STONE_BUTTON,
-            "&b工作区块",
+            "&b工作方块",
             "&b^ 在此处放置 方块 ^"
     );
 
@@ -543,7 +564,7 @@ public class Icons {
     public static final ItemStack template_item = new CustomItemStack(
             Material.BARRIER,
             "&b模板物品",
-            "&b^ 在此处放置 物品 ^"
+            "&b^ 在此处放置 粘液物品 ^"
     );
 
     public static final ItemStack build_template_machine_recipe = new CustomItemStack(
@@ -614,7 +635,8 @@ public class Icons {
     public static final ItemStack research_id = new CustomItemStack(
             Material.NAME_TAG,
             "&b研究ID",
-            "&b^ 在此处放置 整数占位符 ^"
+            "&b^ 在此处放置 整数占位符 ^",
+            "&d默认值: [随机整数]"
     );
 
     public static final ItemStack name = new CustomItemStack(

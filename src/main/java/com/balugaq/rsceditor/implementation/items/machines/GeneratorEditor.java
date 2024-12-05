@@ -2,10 +2,10 @@ package com.balugaq.rsceditor.implementation.items.machines;
 
 import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.IntegerTypeItem;
+import com.balugaq.rsceditor.api.items.TextTypeItem;
+import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
 import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
-import com.balugaq.rsceditor.api.objects.MenuMatrix;
-import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.implementation.items.machines.container.ItemFlowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.MenuContainer;
 import com.balugaq.rsceditor.utils.ClipboardUtil;
@@ -44,8 +44,8 @@ public class GeneratorEditor extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
             .addLine("npitBBrrr")
             .addLine("NPITBBrrr")
-            .addLine("colaBrrr")
-            .addLine("COLABBBB")
+            .addLine("colaBBrrr")
+            .addLine("COLABBBBB")
             .addLine("mmmmmmmMB")
             .addLine("mmmmmmmMG")
             .addItem("B", ChestMenuUtils.getBackground())

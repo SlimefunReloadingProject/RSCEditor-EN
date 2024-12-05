@@ -3,8 +3,8 @@ package com.balugaq.rsceditor.implementation.items.machines;
 import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.BooleanTypeItem;
 import com.balugaq.rsceditor.api.items.IntegerTypeItem;
-import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
+import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.implementation.items.machines.container.SupplyContainer;
 import com.balugaq.rsceditor.utils.ClipboardUtil;
 import com.balugaq.rsceditor.utils.Icons;
@@ -207,14 +207,14 @@ public class GEOResourceEditor extends AbstractContainer {
                     writer.set("recipe_type", recipeType.getKey().getKey().toUpperCase());
 
                     Pair<Boolean, Integer> p3 = ItemUtil.isInteger(menu, matrix, "d");
-                    int maxDeviation = 0;
+                    int maxDeviation = 1;
                     if (p3.getFirstValue()) {
                         maxDeviation = p3.getSecondValue();
                     }
                     writer.set("max_deviation", maxDeviation);
 
                     Pair<Boolean, Boolean> p4 = ItemUtil.isBoolean(menu, matrix, "o");
-                    boolean obtainFromGeoMiner = false;
+                    boolean obtainFromGeoMiner = true;
                     if (p4.getFirstValue()) {
                         obtainFromGeoMiner = p4.getSecondValue();
                     }

@@ -1,7 +1,7 @@
 package com.balugaq.rsceditor.api.items;
 
-import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
 import com.balugaq.rsceditor.api.base.PlaceholderItem;
+import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
 import com.balugaq.rsceditor.implementation.groups.RSCEItemGroups;
 import com.balugaq.rsceditor.utils.KeyUtil;
 import com.balugaq.rsceditor.utils.PersistentUtil;

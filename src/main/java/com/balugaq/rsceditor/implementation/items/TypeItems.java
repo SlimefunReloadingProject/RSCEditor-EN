@@ -18,6 +18,8 @@ import com.balugaq.rsceditor.api.objects.types.SimpleMachineType;
 import com.balugaq.rsceditor.api.items.SimpleMachineTypeItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.implementation.RSCEditor;
+import com.balugaq.rsceditor.utils.MaterialUtil;
+import com.balugaq.rsceditor.utils.TextUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.ProtectionType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
@@ -72,7 +74,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.PAPER,
                                 "&b物品组类型占位符",
-                                "&eNested"
+                                "&e父物品组"
                         )
                 ),
                 GroupType.NESTED
@@ -84,7 +86,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.PAPER,
                                 "&b物品组类型占位符",
-                                "&eNormal"
+                                "&e正常物品组"
                         )
                 ),
                 GroupType.NORMAL
@@ -96,7 +98,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.PAPER,
                                 "&b物品组类型占位符",
-                                "&eSub"
+                                "&e子物品组"
                         )
                 ),
                 GroupType.SUB
@@ -108,7 +110,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.PAPER,
                                 "&b物品组类型占位符",
-                                "&eSeasonal"
+                                "&e季节性物品组"
                         )
                 ),
                 GroupType.SEASONAL
@@ -120,7 +122,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.PAPER,
                                 "&b物品组类型占位符",
-                                "&eButton"
+                                "&e链接物品组"
                         )
                 ),
                 GroupType.BUTTON
@@ -132,7 +134,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.PAPER,
                                 "&b物品组类型占位符",
-                                "&eLocked"
+                                "&e锁定物品组"
                         )
                 ),
                 GroupType.LOCKED
@@ -204,7 +206,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.WHITE_WOOL,
                                 "&b彩虹类型占位符",
-                                "&eWool"
+                                "&e羊毛"
                         )
                 ),
                 RainbowType.WOOL
@@ -216,7 +218,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.WHITE_CARPET,
                                 "&b彩虹类型占位符",
-                                "&eCarpet"
+                                "&e地毯"
                         )
                 ),
                 RainbowType.CARPET
@@ -228,7 +230,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.WHITE_STAINED_GLASS,
                                 "&b彩虹类型占位符",
-                                "&eStained Glass"
+                                "&e玻璃"
                         )
                 ),
                 RainbowType.STAINED_GLASS
@@ -240,7 +242,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.WHITE_STAINED_GLASS_PANE,
                                 "&b彩虹类型占位符",
-                                "&eStained Glass Pane"
+                                "&e玻璃板"
                         )
                 ),
                 RainbowType.STAINED_GLASS_PANE
@@ -252,7 +254,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.TERRACOTTA,
                                 "&b彩虹类型占位符",
-                                "&eTerracotta"
+                                "&e陶瓦"
                         )
                 ),
                 RainbowType.TERRACOTTA
@@ -264,7 +266,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.WHITE_GLAZED_TERRACOTTA,
                                 "&b彩虹类型占位符",
-                                "&eGlazed Terracotta"
+                                "&e带釉陶瓦"
                         )
                 ),
                 RainbowType.GLAZED_TERRACOTTA
@@ -277,7 +279,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.WHITE_CONCRETE,
                                 "&b彩虹类型占位符",
-                                "&eConcrete"
+                                "&e混凝土"
                         )
                 ),
                 RainbowType.CONCRETE
@@ -289,7 +291,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.WHITE_SHULKER_BOX,
                                 "&b彩虹类型占位符",
-                                "&eShulker Box"
+                                "&e潜影盒"
                         )
                 ),
                 RainbowType.SHULKER_BOX
@@ -301,7 +303,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.WHITE_BANNER,
                                 "&b彩虹类型占位符",
-                                "&eCustom"
+                                "&e自定义"
                         )
                 ),
                 RainbowType.CUSTOM
@@ -313,7 +315,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.BEEHIVE,
                                 "&b保护类型占位符",
-                                "&eBees"
+                                "&e蜜蜂毒针保护"
                         )
                 ),
                 ProtectionType.BEES
@@ -325,7 +327,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.LAVA_BUCKET,
                                 "&b保护类型占位符",
-                                "&eRadiation"
+                                "&e抗辐射"
                         )
                 ),
                 ProtectionType.RADIATION
@@ -337,7 +339,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.FEATHER,
                                 "&b保护类型占位符",
-                                "&eFlying into Wall"
+                                "&e鞘翅动能免疫"
                         )
                 ),
                 ProtectionType.FLYING_INTO_WALL
@@ -349,7 +351,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.GRAY_STAINED_GLASS_PANE,
                                 "&b物品流向占位符",
-                                "&eNone"
+                                "&e无"
                         )
                 ),
                 ItemFlowType.NONE
@@ -361,7 +363,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.BLUE_STAINED_GLASS_PANE,
                                 "&b物品流向占位符",
-                                "&eInsert"
+                                "&e输入槽"
                         )
                 ),
                 ItemFlowType.INSERT
@@ -373,7 +375,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.ORANGE_STAINED_GLASS_PANE,
                                 "&b物品流向占位符",
-                                "&eWithdraw"
+                                "&e输出槽"
                         )
                 ),
                 ItemFlowType.WITHDRAW
@@ -385,7 +387,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.PURPLE_STAINED_GLASS_PANE,
                                 "&b物品流向占位符",
-                                "&eInsert and Withdraw"
+                                "&e输入且输出"
                         )
                 ),
                 ItemFlowType.INSERT_AND_WITHDRAW
@@ -397,7 +399,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.GREEN_STAINED_GLASS_PANE,
                                 "&b物品流向占位符",
-                                "&eFree Output"
+                                "&e自由输出"
                         )
                 ),
                 ItemFlowType.FREE_OUTPUT
@@ -429,7 +431,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.IRON_INGOT,
                                 "&b能源组件类型占位符",
-                                "&eCapacitor"
+                                "&e电容"
                         )
                 ),
                 EnergyNetComponentType.CAPACITOR
@@ -441,7 +443,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.OBSIDIAN,
                                 "&b能源组件类型占位符",
-                                "&eConnector"
+                                "&e连接器"
                         )
                 ),
                 EnergyNetComponentType.CONNECTOR
@@ -453,7 +455,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.REDSTONE,
                                 "&b能源组件类型占位符",
-                                "&eConsumer"
+                                "&e用电器"
                         )
                 ),
                 EnergyNetComponentType.CONSUMER
@@ -465,7 +467,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.DIAMOND,
                                 "&b能源组件类型占位符",
-                                "&eGenerator"
+                                "&e发电机"
                         )
                 ),
                 EnergyNetComponentType.GENERATOR
@@ -477,7 +479,7 @@ public class TypeItems {
                         new CustomItemStack(
                                 Material.GRAY_STAINED_GLASS_PANE,
                                 "&b能源组件类型占位符",
-                                "&eNone"
+                                "&e无"
                         )
                 ),
                 EnergyNetComponentType.NONE
@@ -488,9 +490,10 @@ public class TypeItems {
             SimpleMachineTypeItem smti = new SimpleMachineTypeItem(
                     new SlimefunItemStack("RSC_EDITOR_SIMPLE_MACHINE_TYPE_ITEM_" + type.name().toUpperCase(),
                             new CustomItemStack(
-                                    Material.HEART_OF_THE_SEA,
+                                    MaterialUtil.getMaterial(type),
                                     "&b简单机器类型占位符",
-                                    "&e" + type.name().toUpperCase()
+                                    "&e" + type.name().toUpperCase(),
+                                    TextUtil.getName(type)
                             )
                     ),
                     type

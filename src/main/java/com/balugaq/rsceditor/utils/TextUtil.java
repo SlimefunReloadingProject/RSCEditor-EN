@@ -5,6 +5,7 @@ import com.balugaq.rsceditor.api.objects.types.RainbowType;
 import com.balugaq.rsceditor.api.objects.types.SimpleMachineType;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import net.guizhanss.guizhanlib.minecraft.LanguageHelper;
+import org.bukkit.Sound;
 import org.bukkit.block.Biome;
 
 public class TextUtil {
@@ -84,5 +85,11 @@ public class TextUtil {
             case CUSTOM -> "自定义";
             default -> "未知";
         };
+    }
+
+    // Sound enum is too huge, so we just use the name of the sound.
+    public static String getName(Sound sound) {
+        String rawName = sound.name().replace("_", " ").toLowerCase();
+        return rawName.substring(0, 1).toUpperCase() + rawName.substring(1);
     }
 }

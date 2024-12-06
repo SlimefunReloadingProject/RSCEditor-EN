@@ -56,7 +56,8 @@ public class Icons {
     public static final ItemStack mob = new CustomItemStack(
             Material.SPAWNER,
             "&b生物",
-            "&b^ 在此处放置 生物蛋 ^"
+            "&b^ 在此处放置 生物蛋 ^",
+            "&b^ 在此处放置 文本占位符^"
     );
 
     public static final ItemStack chance = new CustomItemStack(
@@ -383,14 +384,14 @@ public class Icons {
 
     public static final ItemStack build_machine_recipe = new CustomItemStack(
             Material.STRUCTURE_BLOCK,
-            "&b构造",
-            "&b点击以构造机器配方"
+            "&b配置",
+            "&b点击以配置机器配方"
     );
 
     public static final ItemStack build_linked_machine_recipe = new CustomItemStack(
             Material.STRUCTURE_BLOCK,
-            "&b构造",
-            "&b点击以构造强配方机器配方"
+            "&b配置",
+            "&b点击以配置强配方机器配方"
     );
 
     public static final ItemStack energy_net_component_type = new CustomItemStack(
@@ -571,12 +572,12 @@ public class Icons {
 
     public static final ItemStack build_template_machine_recipe = new CustomItemStack(
             Material.STRUCTURE_BLOCK,
-            "&b构造",
-            "&b点击以构造模板机器配方"
+            "&b配置",
+            "&b点击以配置模板机器配方"
     );
 
     public static final ItemStack template_slot = new CustomItemStack(
-            Material.BARRIER,
+            Material.REPEATER,
             "&b模板槽位",
             "&b^ 在此处放置 整数占位符 ^"
     );
@@ -619,7 +620,7 @@ public class Icons {
     public static final ItemStack build_linked_recipe_machine = new CustomItemStack(
             Material.STRUCTURE_BLOCK,
             "&b构造",
-            "&b点击以构造链接配方机器"
+            "&b点击以配置强配方机器"
     );
 
     public static final ItemStack click = new CustomItemStack(
@@ -687,5 +688,47 @@ public class Icons {
             Material.PAPER,
             "&b模板机器配方卡片",
             "&b^ 在此处放置 模板机器配方卡片占位符 ^"
+    );
+
+    public static final ItemStack register_card = new CustomItemStack(
+            Material.PAPER,
+            "&b注册卡",
+            "&b^ 在此处放置 注册卡占位符 ^"
+    );
+
+    public static final ItemStack id_alias = new CustomItemStack(
+            Material.LODESTONE,
+            "&bID别名",
+            "&b^ 在此处放置 文本占位符 ^"
+    );
+
+    public static final ItemStack late_init = new CustomItemStack(
+            Material.SEA_LANTERN,
+            "&b延迟加载",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
+    public static final ItemStack warn = new CustomItemStack(
+            Material.YELLOW_CONCRETE,
+            "&b警告",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
+    public static final ItemStack unfinished = new CustomItemStack(
+            Material.BLACK_CONCRETE,
+            "&b未完成",
+            "&b^ 在此处放置 布尔占位符 ^"
+    );
+
+    public static final ItemStack condition = new CustomItemStack(
+            Material.REDSTONE,
+            "&b条件",
+            "&b↓ 在此处放置 条件占位符 ↓"
+    );
+
+    public static final ItemStack build_register = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b配置",
+            "&b点击以配置注册选项"
     );
 }

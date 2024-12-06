@@ -68,6 +68,9 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
             public void newInstance(@NotNull BlockMenu menu, @NotNull Block b) {
                 // Name button
                 menu.addMenuClickHandler(matrix.getChar("n"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -83,6 +86,9 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
 
                 // Processing Time button
                 menu.addMenuClickHandler(matrix.getChar("t"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -98,6 +104,9 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
 
                 // Choose One button
                 menu.addMenuClickHandler(matrix.getChar("o"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -113,6 +122,9 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
 
                 // For Display button
                 menu.addMenuClickHandler(matrix.getChar("d"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");
@@ -128,6 +140,9 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
 
                 // Hide button
                 menu.addMenuClickHandler(matrix.getChar("h"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                         p.sendMessage("输入内容: ");

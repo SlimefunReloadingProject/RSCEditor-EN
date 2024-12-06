@@ -3,6 +3,7 @@ package com.balugaq.rsceditor.implementation.items;
 import com.balugaq.rsceditor.api.items.SoundTypeItem;
 import com.balugaq.rsceditor.implementation.RSCEditor;
 import com.balugaq.rsceditor.utils.MaterialUtil;
+import com.balugaq.rsceditor.utils.SlimefunItemUtil;
 import com.balugaq.rsceditor.utils.TextUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
@@ -25,7 +26,7 @@ public class SoundTypeItems {
                     sound
             );
 
-            soundTypeItem.register(RSCEditor.getInstance());
+            SlimefunItemUtil.registerItem(soundTypeItem);
         }
     }
 }

@@ -4,6 +4,7 @@ import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.BooleanTypeItem;
 import com.balugaq.rsceditor.api.items.IntegerTypeItem;
 import com.balugaq.rsceditor.api.items.RainbowTypeItem;
+import com.balugaq.rsceditor.api.items.RegisterItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.implementation.items.machines.container.CustomRainbowContainer;
@@ -39,13 +40,14 @@ import java.util.List;
  */
 public class ItemEditor extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
-            .addLine("npiteBrrr") // n = Name, p = Item Group, i = Item, t = Recipe Type, e = Placeable
-            .addLine("NPITEBrrr") // s = Script, y = Energy Capacity
-            .addLine("sydwhBrrr") // d = Radiation, w = Rainbow,
-            .addLine("SYDWHBBBB") // h = Anti wither, o = Soul Bound
-            .addLine("olmvfcaBB") // l = Piglin, v = Hidden
-            .addLine("OLMVFCABG") // f = Drop From, c = Drop Chance, a = Drop Amount
+            .addLine("npiteqrrr")
+            .addLine("NPITEQrrr")
+            .addLine("sydwhBrrr")
+            .addLine("SYDWHBBBB")
+            .addLine("olmvfcaBB")
+            .addLine("OLMVFCABG")
             .addItem("B", ChestMenuUtils.getBackground())
+            .addItem("Q", Icons.register_card)
             .addItem("N", Icons.id)
             .addItem("P", Icons.item_group)
             .addItem("I", Icons.item)
@@ -281,6 +283,8 @@ public class ItemEditor extends AbstractContainer {
                         p.sendMessage("你还没有设置这个物品的物品组");
                         return false;
                     }
+                    ItemGroup itemGroup = p2.getSecondValue();
+                    writer.set("item_group", itemGroup.getKey().getKey());
 
                     Pair<Boolean, RecipeType> p3 = ItemUtil.isRecipeTypeItem(menu, matrix, "t");
                     RecipeType recipeType = RecipeType.NULL;
@@ -396,6 +400,14 @@ public class ItemEditor extends AbstractContainer {
                                 dropAmount = p14.getSecondValue();
                             }
                             writer.set("drop_amount", dropAmount);
+                        }
+                    }
+
+                    Pair<Boolean, ItemStack> p99 = ItemUtil.isItem(menu, matrix, "Q");
+                    if (p99.getFirstValue()) {
+                        ItemStack registerCard = p99.getSecondValue();
+                        if (SlimefunItem.getByItem(registerCard) instanceof RegisterItem ri) {
+                            writer.set("register", ri.getRegister(registerCard));
                         }
                     }
 

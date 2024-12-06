@@ -22,11 +22,13 @@ import com.balugaq.rsceditor.implementation.items.machines.TemplateRecipeMachine
 import com.balugaq.rsceditor.implementation.items.machines.WorkbenchEditor;
 import com.balugaq.rsceditor.implementation.items.machines.builder.LinkedMachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.builder.MachineRecipeBuilder;
+import com.balugaq.rsceditor.implementation.items.machines.builder.RegisterBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.CustomRainbowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.ItemFlowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.MenuContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.SupplyContainer;
+import com.balugaq.rsceditor.utils.SlimefunItemUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import lombok.experimental.UtilityClass;
@@ -45,7 +47,7 @@ public class MachineSetup {
                         )
                 )
         );
-        armorPieceContainer.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(armorPieceContainer);
 
         CustomRainbowContainer customRainbowContainer = new CustomRainbowContainer(
                 new SlimefunItemStack(
@@ -56,7 +58,7 @@ public class MachineSetup {
                         )
                 )
         );
-        customRainbowContainer.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(customRainbowContainer);
 
         SupplyContainer supplyContainer = new SupplyContainer(
                 new SlimefunItemStack(
@@ -67,7 +69,7 @@ public class MachineSetup {
                         )
                 )
         );
-        supplyContainer.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(supplyContainer);
 
         ItemFlowContainer itemFlowContainer = new ItemFlowContainer(
                 new SlimefunItemStack(
@@ -78,7 +80,7 @@ public class MachineSetup {
                         )
                 )
         );
-        itemFlowContainer.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(itemFlowContainer);
 
         MenuContainer menuContainer = new MenuContainer(
                 new SlimefunItemStack(
@@ -89,30 +91,41 @@ public class MachineSetup {
                         )
                 )
         );
-        menuContainer.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(menuContainer);
 
         // builders
         MachineRecipeBuilder machineRecipeBuilder = new MachineRecipeBuilder(
                 new SlimefunItemStack(
                         "RSC_EDITOR_MACHINE_RECIPE_BUILDER",
                         new CustomItemStack(
-                                Material.LOOM,
-                                "&b机器配方构造器"
+                                Material.SMITHING_TABLE,
+                                "&b机器配方配置器"
                         )
                 )
         );
-        machineRecipeBuilder.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(machineRecipeBuilder);
 
         LinkedMachineRecipeBuilder linkedMachineRecipeBuilder = new LinkedMachineRecipeBuilder(
                 new SlimefunItemStack(
                         "RSC_EDITOR_LINKED_MACHINE_RECIPE_BUILDER",
                         new CustomItemStack(
                                 Material.LOOM,
-                                "&b强配方机器配方构造器"
+                                "&b强配方机器配方配置器"
                         )
                 )
         );
-        linkedMachineRecipeBuilder.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(linkedMachineRecipeBuilder);
+
+        RegisterBuilder registerBuilder = new RegisterBuilder(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_REGISTER_BUILDER",
+                        new CustomItemStack(
+                                Material.REDSTONE_LAMP,
+                                "&b注册选项配置器"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(registerBuilder);
 
         // editors
         ItemGroupEditor itemGroupEditor = new ItemGroupEditor(
@@ -124,7 +137,7 @@ public class MachineSetup {
                         )
                 )
         );
-        itemGroupEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(itemGroupEditor);
 
         RecipeTypeEditor recipeTypeEditor = new RecipeTypeEditor(
                 new SlimefunItemStack(
@@ -135,18 +148,18 @@ public class MachineSetup {
                         )
                 )
         );
-        recipeTypeEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(recipeTypeEditor);
 
         GEOResourceEditor geoResourceEditor = new GEOResourceEditor(
                 new SlimefunItemStack(
                         "RSC_EDITOR_GEO_RESOURCE_EDITOR",
                         new CustomItemStack(
-                                Material.SHROOMLIGHT,
+                                Material.GRASS_BLOCK,
                                 "&b自然资源构造器"
                         )
                 )
         );
-        geoResourceEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(geoResourceEditor);
 
         MobDropEditor mobDropEditor = new MobDropEditor(
                 new SlimefunItemStack(
@@ -157,7 +170,7 @@ public class MachineSetup {
                         )
                 )
         );
-        mobDropEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(mobDropEditor);
 
         ItemEditor itemEditor = new ItemEditor(
                 new SlimefunItemStack(
@@ -168,7 +181,7 @@ public class MachineSetup {
                         )
                 )
         );
-        itemEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(itemEditor);
 
         ArmorEditor armorEditor = new ArmorEditor(
                 new SlimefunItemStack(
@@ -179,7 +192,7 @@ public class MachineSetup {
                         )
                 )
         );
-        armorEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(armorEditor);
 
         CapacitorEditor capacitorEditor = new CapacitorEditor(
                 new SlimefunItemStack(
@@ -190,7 +203,7 @@ public class MachineSetup {
                         )
                 )
         );
-        capacitorEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(capacitorEditor);
 
         FoodEditor foodEditor = new FoodEditor(
                 new SlimefunItemStack(
@@ -201,7 +214,7 @@ public class MachineSetup {
                         )
                 )
         );
-        foodEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(foodEditor);
 
         MachineEditor machineEditor = new MachineEditor(
                 new SlimefunItemStack(
@@ -212,7 +225,7 @@ public class MachineSetup {
                         )
                 )
         );
-        machineEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(machineEditor);
 
         GeneratorEditor generatorEditor = new GeneratorEditor(
                 new SlimefunItemStack(
@@ -223,7 +236,7 @@ public class MachineSetup {
                         )
                 )
         );
-        generatorEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(generatorEditor);
 
         SolarGeneratorEditor solarGeneratorEditor = new SolarGeneratorEditor(
                 new SlimefunItemStack(
@@ -234,7 +247,7 @@ public class MachineSetup {
                         )
                 )
         );
-        solarGeneratorEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(solarGeneratorEditor);
 
         MaterialGeneratorEditor materialGeneratorEditor = new MaterialGeneratorEditor(
                 new SlimefunItemStack(
@@ -245,7 +258,7 @@ public class MachineSetup {
                         )
                 )
         );
-        materialGeneratorEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(materialGeneratorEditor);
 
         RecipeMachineEditor recipeMachineEditor = new RecipeMachineEditor(
                 new SlimefunItemStack(
@@ -256,7 +269,7 @@ public class MachineSetup {
                         )
                 )
         );
-        recipeMachineEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(recipeMachineEditor);
 
         SimpleMachineEditor simpleMachineEditor = new SimpleMachineEditor(
                 new SlimefunItemStack(
@@ -267,7 +280,7 @@ public class MachineSetup {
                         )
                 )
         );
-        simpleMachineEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(simpleMachineEditor);
 
         MultiBlockEditor multiBlockEditor = new MultiBlockEditor(
                 new SlimefunItemStack(
@@ -278,7 +291,7 @@ public class MachineSetup {
                         )
                 )
         );
-        multiBlockEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(multiBlockEditor);
 
         TemplateRecipeMachineEditor templateRecipeMachineEditor = new TemplateRecipeMachineEditor(
                 new SlimefunItemStack(
@@ -289,7 +302,7 @@ public class MachineSetup {
                         )
                 )
         );
-        templateRecipeMachineEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(templateRecipeMachineEditor);
 
         LinkedRecipeMachineEditor linkedRecipeMachineEditor = new LinkedRecipeMachineEditor(
                 new SlimefunItemStack(
@@ -300,7 +313,7 @@ public class MachineSetup {
                         )
                 )
         );
-        linkedRecipeMachineEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(linkedRecipeMachineEditor);
 
         WorkbenchEditor workbenchEditor = new WorkbenchEditor(
                 new SlimefunItemStack(
@@ -311,7 +324,7 @@ public class MachineSetup {
                         )
                 )
         );
-        workbenchEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(workbenchEditor);
 
         ResearchEditor researchEditor = new ResearchEditor(
                 new SlimefunItemStack(
@@ -322,6 +335,6 @@ public class MachineSetup {
                         )
                 )
         );
-        researchEditor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(researchEditor);
     }
 }

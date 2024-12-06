@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.implementation.items.machines;
 
 import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.IntegerTypeItem;
+import com.balugaq.rsceditor.api.items.RegisterItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.api.objects.types.GroupType;
@@ -32,13 +33,14 @@ import java.util.List;
  */
 public class ItemGroupEditor extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
-            .addLine("nitepmBBB")
-            .addLine("NITEPMBBB")
+            .addLine("nitepmqBB")
+            .addLine("NITEPMQBB")
             .addLine("ssssssssB")
             .addLine("SSSSSSSSB")
             .addLine("aaaaaaaaB")
             .addLine("AAAAAAAAG")
             .addItem("B", ChestMenuUtils.getBackground())
+            .addItem("Q", Icons.register_card)
             .addItem("N", Icons.id)
             .addItem("I", Icons.item)
             .addItem("T", Icons.group_type)
@@ -201,6 +203,14 @@ public class ItemGroupEditor extends AbstractContainer {
                             if (p7.getFirstValue()) {
                                 writer.set("actions", p7.getSecondValue().toArray());
                             }
+                        }
+                    }
+
+                    Pair<Boolean, ItemStack> p99 = ItemUtil.isItem(menu, matrix, "Q");
+                    if (p99.getFirstValue()) {
+                        ItemStack registerCard = p99.getSecondValue();
+                        if (SlimefunItem.getByItem(registerCard) instanceof RegisterItem ri) {
+                            writer.set("register", ri.getRegister(registerCard));
                         }
                     }
 

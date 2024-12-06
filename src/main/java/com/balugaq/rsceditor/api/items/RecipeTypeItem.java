@@ -9,10 +9,10 @@ import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class RecipeTypeItem extends PlaceholderItem {
-    private final RecipeType recipeType;
+    private final RecipeType type;
 
-    public RecipeTypeItem(@NotNull SlimefunItemStack item, RecipeType recipeType) {
+    public RecipeTypeItem(@NotNull SlimefunItemStack item, RecipeType type) {
         super(RSCEItemGroups.RECIPE_TYPE_GROUP, item);
-        this.recipeType = recipeType;
+        this.type = type;
     }
 }

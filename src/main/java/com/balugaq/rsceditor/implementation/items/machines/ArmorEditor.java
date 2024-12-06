@@ -3,6 +3,7 @@ package com.balugaq.rsceditor.implementation.items.machines;
 import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.ArmorPiece;
 import com.balugaq.rsceditor.api.items.BooleanTypeItem;
+import com.balugaq.rsceditor.api.items.RegisterItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
@@ -24,6 +25,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,11 +35,12 @@ public class ArmorEditor extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
             .addLine("npfoooBBB")
             .addLine("NPFOOOBHB")
-            .addLine("BBBBBBBCB")
-            .addLine("BBBBBBBLB")
+            .addLine("qBBBBBBCB")
+            .addLine("QBBBBBBLB")
             .addLine("BBBBBBBTB")
             .addLine("BBBBBBBBG")
             .addItem("B", ChestMenuUtils.getBackground())
+            .addItem("Q", Icons.register_card)
             .addItem("N", Icons.id)
             .addItem("P", Icons.item_group)
             .addItem("F", Icons.fullset)
@@ -219,6 +222,14 @@ public class ArmorEditor extends AbstractContainer {
                     writer.set("boots.item", bootsPart.getItem());
                     writer.set("boots.recipe_type", bootsPart.getRecipeType());
                     writer.set("boots.potion_effects", bootsPart.getProtections().toArray());
+
+                    Pair<Boolean, ItemStack> p99 = ItemUtil.isItem(menu, matrix, "Q");
+                    if (p99.getFirstValue()) {
+                        ItemStack registerCard = p99.getSecondValue();
+                        if (SlimefunItem.getByItem(registerCard) instanceof RegisterItem ri) {
+                            writer.set("register", ri.getRegister(registerCard));
+                        }
+                    }
 
                     ClipboardUtil.send(p, writer.toString());
 

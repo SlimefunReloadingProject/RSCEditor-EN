@@ -12,6 +12,7 @@ public class KeyUtil {
     public static final NamespacedKey TEMPLATE_MACHINE_RECIPE_KEY = newKey("template_machine_recipe");
     public static final NamespacedKey LINKED_MACHINE_RECIPE_KEY = newKey("linked_machine_recipe");
     public static final NamespacedKey MENU_CONTENTS = newKey("menu_contents");
+    public static final NamespacedKey REGISTER_KEY = newKey("register");
 
     public static @NotNull NamespacedKey newKey(@NotNull String key) {
         return new NamespacedKey(RSCEditor.getInstance(), key);

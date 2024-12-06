@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.implementation.items.machines;
 
 import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.IntegerTypeItem;
+import com.balugaq.rsceditor.api.items.RegisterItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.utils.ClipboardUtil;
@@ -12,6 +13,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
+import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
@@ -31,12 +33,14 @@ import java.util.Random;
 public class ResearchEditor extends AbstractContainer {
     private static final Random random = new Random();
     private static final MenuMatrix matrix = new MenuMatrix()
-            .addLine("kinlcBBBG")
-            .addLine("KINLCMMMM")
+            .addLine("kinlcqBBG")
+            .addLine("KINLCQMMM")
             .addLine("mmmmmmmmm")
             .addLine("mmmmmmmmm")
             .addLine("mmmmmmmmm")
             .addLine("mmmmmmmmm")
+            .addItem("B", ChestMenuUtils.getBackground())
+            .addItem("Q", Icons.register_card)
             .addItem("K", Icons.id)
             .addItem("I", Icons.research_id)
             .addItem("N", Icons.name)
@@ -54,6 +58,7 @@ public class ResearchEditor extends AbstractContainer {
         return new BlockMenuPreset(getId(), getItemName()) {
             @Override
             public void init() {
+                setSize(54);
                 matrix.build(this);
             }
 
@@ -201,6 +206,14 @@ public class ResearchEditor extends AbstractContainer {
                         }
                         String[] sitemArray = sitems.toArray(new String[0]);
                         writer.set("items", sitemArray);
+                    }
+
+                    Pair<Boolean, ItemStack> p99 = ItemUtil.isItem(menu, matrix, "Q");
+                    if (p99.getFirstValue()) {
+                        ItemStack registerCard = p99.getSecondValue();
+                        if (SlimefunItem.getByItem(registerCard) instanceof RegisterItem ri) {
+                            writer.set("register", ri.getRegister(registerCard));
+                        }
                     }
 
                     ClipboardUtil.send(p, writer.toString());

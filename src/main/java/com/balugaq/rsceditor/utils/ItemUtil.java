@@ -166,7 +166,7 @@ public class ItemUtil {
 
     public static @NotNull Pair<Boolean, ItemGroup> isItemGroupItem(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
         if (SlimefunItem.getByItem(menu.getItemInSlot(matrix.getChar(label))) instanceof ItemGroupItem itemGroupItem) {
-            return new Pair<>(true, itemGroupItem.getItemGroup());
+            return new Pair<>(true, itemGroupItem.getType());
         } else {
             return new Pair<>(false, null);
         }
@@ -176,7 +176,7 @@ public class ItemUtil {
         List<ItemGroup> itemGroups = new ArrayList<>();
         for (int slot : matrix.getChars(label)) {
             if (SlimefunItem.getByItem(menu.getItemInSlot(slot)) instanceof ItemGroupItem itemGroupItem) {
-                itemGroups.add(itemGroupItem.getItemGroup());
+                itemGroups.add(itemGroupItem.getType());
             }
         }
 
@@ -213,7 +213,7 @@ public class ItemUtil {
 
     public static @NotNull Pair<Boolean, RecipeType> isRecipeTypeItem(@NotNull BlockMenu menu, @NotNull MenuMatrix matrix, @NotNull String label) {
         if (SlimefunItem.getByItem(menu.getItemInSlot(matrix.getChar(label))) instanceof RecipeTypeItem recipeTypeItem) {
-            return new Pair<>(true, recipeTypeItem.getRecipeType());
+            return new Pair<>(true, recipeTypeItem.getType());
         } else {
             return new Pair<>(false, null);
         }
@@ -223,7 +223,7 @@ public class ItemUtil {
         List<RecipeType> recipeTypes = new ArrayList<>();
         for (int slot : matrix.getChars(label)) {
             if (SlimefunItem.getByItem(menu.getItemInSlot(slot)) instanceof RecipeTypeItem recipeTypeItem) {
-                recipeTypes.add(recipeTypeItem.getRecipeType());
+                recipeTypes.add(recipeTypeItem.getType());
             }
         }
 

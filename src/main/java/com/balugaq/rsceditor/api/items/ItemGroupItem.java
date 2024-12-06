@@ -9,10 +9,10 @@ import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class ItemGroupItem extends PlaceholderItem {
-    private final ItemGroup itemGroup;
+    private final ItemGroup type;
 
-    public ItemGroupItem(@NotNull SlimefunItemStack item, ItemGroup itemGroup) {
+    public ItemGroupItem(@NotNull SlimefunItemStack item, ItemGroup type) {
         super(RSCEItemGroups.ITEM_GROUP_GROUP, item);
-        this.itemGroup = itemGroup;
+        this.type = type;
     }
 }

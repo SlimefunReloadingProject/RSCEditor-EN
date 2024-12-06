@@ -5,3 +5,7 @@ api-version: 1.18
 depend: [ Slimefun, GuizhanLibPlugin, RykenSlimefunCustomizer ]
 authors: [ balugaq ]
 description: An editor for RykenSlimeCustomizer.
+commands:
+  rsceditor:
+    aliases:
+      - rsce

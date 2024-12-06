@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.utils;
 
 import com.balugaq.rsceditor.api.objects.types.LinkedMachineRecipe;
 import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
+import com.balugaq.rsceditor.api.objects.types.Register;
 import com.balugaq.rsceditor.api.objects.types.TemplateMachineRecipe;
 import com.google.common.collect.Multimap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -129,6 +130,35 @@ public class YamlWriter {
     }
 
     @CanIgnoreReturnValue
+    public @NotNull YamlWriter set(String key, Register register) {
+        if (register == null) {
+            return this;
+        }
+
+        String registerKey = getKey(key);
+        String id_alias = register.getIdAlias();
+        if (id_alias != null) {
+            configuration.set(registerKey + ".id_alias", id_alias);
+        }
+
+        boolean late_init = register.isLateInit();
+        configuration.set(registerKey + ".late_init", late_init);
+
+        boolean warn = register.isWarn();
+        configuration.set(registerKey + ".warn", warn);
+
+        boolean unfinished = register.isUnfinished();
+        configuration.set(registerKey + ".unfinished", unfinished);
+
+        List<String> conditions = register.getConditions();
+        if (conditions != null && !conditions.isEmpty()) {
+            configuration.set(registerKey + ".conditions", conditions.toArray(new String[0]));
+        }
+
+        return this;
+    }
+
+    @CanIgnoreReturnValue
     public @NotNull YamlWriter set(String key, @Nullable ItemStack itemStack) {
         if (itemStack == null) {
             return this;
@@ -146,6 +176,8 @@ public class YamlWriter {
                 configuration.set(getKey(key + ".material"), slimefunItem.getId());
                 configuration.set(getKey(key + ".amount"), itemStack.getAmount());
                 return this;
+            } else {
+                configuration.set(getKey(key + ".material_type"), "");
             }
         }
 
@@ -161,6 +193,7 @@ public class YamlWriter {
                     configuration.set(getKey(key + ".material_type"), "skull_hash");
                     configuration.set(getKey(key + ".material"), hash);
                     configuration.set(getKey(key + ".amount"), itemStack.getAmount());
+                    return this;
                 } catch (Throwable ignored) {
                 }
             }

@@ -4,6 +4,7 @@ import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.BooleanTypeItem;
 import com.balugaq.rsceditor.api.items.DoubleTypeItem;
 import com.balugaq.rsceditor.api.items.IntegerTypeItem;
+import com.balugaq.rsceditor.api.items.RegisterItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.utils.ClipboardUtil;
@@ -35,11 +36,12 @@ public class FoodEditor extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
             .addLine("npitsBrrr")
             .addLine("NPITSBrrr")
-            .addLine("uoeaBBrrr")
-            .addLine("UOEABBBBB")
+            .addLine("uoeaqBrrr")
+            .addLine("UOEAQBBBB")
             .addLine("BBBBBBBBB")
             .addLine("BBBBBBBBG")
             .addItem("B", ChestMenuUtils.getBackground())
+            .addItem("Q", Icons.register_card)
             .addItem("N", Icons.id)
             .addItem("P", Icons.item_group)
             .addItem("I", Icons.item)
@@ -238,6 +240,14 @@ public class FoodEditor extends AbstractContainer {
                     Pair<Boolean, Boolean> p8 = ItemUtil.isBoolean(menu, matrix, "a");
                     if (p8.getFirstValue()) {
                         writer.set("always_eatable", p8.getSecondValue());
+                    }
+
+                    Pair<Boolean, ItemStack> p99 = ItemUtil.isItem(menu, matrix, "Q");
+                    if (p99.getFirstValue()) {
+                        ItemStack registerCard = p99.getSecondValue();
+                        if (SlimefunItem.getByItem(registerCard) instanceof RegisterItem ri) {
+                            writer.set("register", ri.getRegister(registerCard));
+                        }
                     }
 
                     ClipboardUtil.send(p, writer.toString());

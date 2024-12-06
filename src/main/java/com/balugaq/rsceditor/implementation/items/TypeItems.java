@@ -11,6 +11,7 @@ import com.balugaq.rsceditor.api.items.MachineRecipeItem;
 import com.balugaq.rsceditor.api.items.ProtectionTypeItem;
 import com.balugaq.rsceditor.api.items.RadioactivityTypeItem;
 import com.balugaq.rsceditor.api.items.RainbowTypeItem;
+import com.balugaq.rsceditor.api.items.RegisterItem;
 import com.balugaq.rsceditor.api.items.SimpleMachineTypeItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.api.objects.types.GroupType;
@@ -19,6 +20,7 @@ import com.balugaq.rsceditor.api.objects.types.RainbowType;
 import com.balugaq.rsceditor.api.objects.types.SimpleMachineType;
 import com.balugaq.rsceditor.implementation.RSCEditor;
 import com.balugaq.rsceditor.utils.MaterialUtil;
+import com.balugaq.rsceditor.utils.SlimefunItemUtil;
 import com.balugaq.rsceditor.utils.TextUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.ProtectionType;
@@ -39,7 +41,7 @@ public class TypeItems {
                         )
                 )
         );
-        booleanTypeItem.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(booleanTypeItem);
 
         IntegerTypeItem integerTypeItem = new IntegerTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_INTEGER_TYPE_ITEM",
@@ -49,7 +51,7 @@ public class TypeItems {
                         )
                 )
         );
-        integerTypeItem.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(integerTypeItem);
 
         DoubleTypeItem doubleTypeItem = new DoubleTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_DOUBLE_TYPE_ITEM",
@@ -59,7 +61,7 @@ public class TypeItems {
                         )
                 )
         );
-        doubleTypeItem.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(doubleTypeItem);
 
         TextTypeItem textTypeItem = new TextTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_TEXT_TYPE_ITEM",
@@ -69,7 +71,7 @@ public class TypeItems {
                         )
                 )
         );
-        textTypeItem.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(textTypeItem);
 
         GroupTypeItem nested = new GroupTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_NESTED",
@@ -81,7 +83,7 @@ public class TypeItems {
                 ),
                 GroupType.NESTED
         );
-        nested.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(nested);
 
         GroupTypeItem normal = new GroupTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_NORMAL",
@@ -93,7 +95,7 @@ public class TypeItems {
                 ),
                 GroupType.NORMAL
         );
-        normal.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(normal);
 
         GroupTypeItem sub = new GroupTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_SUB",
@@ -105,7 +107,7 @@ public class TypeItems {
                 ),
                 GroupType.SUB
         );
-        sub.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(sub);
 
         GroupTypeItem seasonal = new GroupTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_SEASONAL",
@@ -117,7 +119,7 @@ public class TypeItems {
                 ),
                 GroupType.SEASONAL
         );
-        seasonal.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(seasonal);
 
         GroupTypeItem button = new GroupTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_BUTTON",
@@ -129,7 +131,7 @@ public class TypeItems {
                 ),
                 GroupType.BUTTON
         );
-        button.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(button);
 
         GroupTypeItem locked = new GroupTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_LOCKED",
@@ -141,7 +143,7 @@ public class TypeItems {
                 ),
                 GroupType.LOCKED
         );
-        locked.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(locked);
 
         RadioactivityTypeItem low = new RadioactivityTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_LOW",
@@ -153,7 +155,7 @@ public class TypeItems {
                 ),
                 Radioactivity.LOW
         );
-        low.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(low);
 
         RadioactivityTypeItem moderate = new RadioactivityTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_MODERATE",
@@ -165,7 +167,7 @@ public class TypeItems {
                 ),
                 Radioactivity.MODERATE
         );
-        moderate.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(moderate);
 
         RadioactivityTypeItem high = new RadioactivityTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_HIGH",
@@ -177,7 +179,7 @@ public class TypeItems {
                 ),
                 Radioactivity.HIGH
         );
-        high.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(high);
 
         RadioactivityTypeItem veryHigh = new RadioactivityTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_VERY_HIGH",
@@ -189,7 +191,7 @@ public class TypeItems {
                 ),
                 Radioactivity.VERY_HIGH
         );
-        veryHigh.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(veryHigh);
 
         RadioactivityTypeItem veryDeadly = new RadioactivityTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_VERY_DEADLY",
@@ -201,7 +203,7 @@ public class TypeItems {
                 ),
                 Radioactivity.VERY_DEADLY
         );
-        veryDeadly.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(veryDeadly);
 
         RainbowTypeItem wool = new RainbowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_WOOL",
@@ -213,7 +215,7 @@ public class TypeItems {
                 ),
                 RainbowType.WOOL
         );
-        wool.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(wool);
 
         RainbowTypeItem carpet = new RainbowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_CARPET",
@@ -225,7 +227,7 @@ public class TypeItems {
                 ),
                 RainbowType.CARPET
         );
-        carpet.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(carpet);
 
         RainbowTypeItem stained_glass = new RainbowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_STAINED_GLASS",
@@ -237,7 +239,7 @@ public class TypeItems {
                 ),
                 RainbowType.STAINED_GLASS
         );
-        stained_glass.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(stained_glass);
 
         RainbowTypeItem stained_glass_pane = new RainbowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_STAINED_GLASS_PANE",
@@ -249,7 +251,7 @@ public class TypeItems {
                 ),
                 RainbowType.STAINED_GLASS_PANE
         );
-        stained_glass_pane.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(stained_glass_pane);
 
         RainbowTypeItem terracotta = new RainbowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_TERRACOTTA",
@@ -261,7 +263,7 @@ public class TypeItems {
                 ),
                 RainbowType.TERRACOTTA
         );
-        terracotta.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(terracotta);
 
         RainbowTypeItem glazed_terracotta = new RainbowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_GLAZED_TERRACOTTA",
@@ -273,7 +275,7 @@ public class TypeItems {
                 ),
                 RainbowType.GLAZED_TERRACOTTA
         );
-        glazed_terracotta.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(glazed_terracotta);
 
 
         RainbowTypeItem concrete = new RainbowTypeItem(
@@ -286,7 +288,7 @@ public class TypeItems {
                 ),
                 RainbowType.CONCRETE
         );
-        concrete.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(concrete);
 
         RainbowTypeItem shulker_box = new RainbowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_SHULKER_BOX",
@@ -298,7 +300,7 @@ public class TypeItems {
                 ),
                 RainbowType.SHULKER_BOX
         );
-        shulker_box.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(shulker_box);
 
         RainbowTypeItem custom = new RainbowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_CUSTOM",
@@ -310,7 +312,7 @@ public class TypeItems {
                 ),
                 RainbowType.CUSTOM
         );
-        custom.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(custom);
 
         ProtectionTypeItem BEES = new ProtectionTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_PROTECTION_TYPE_ITEM_BEES",
@@ -322,7 +324,7 @@ public class TypeItems {
                 ),
                 ProtectionType.BEES
         );
-        BEES.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(BEES);
 
         ProtectionTypeItem RADIATION = new ProtectionTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_PROTECTION_TYPE_ITEM_RADIATION",
@@ -334,7 +336,7 @@ public class TypeItems {
                 ),
                 ProtectionType.RADIATION
         );
-        RADIATION.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(RADIATION);
 
         ProtectionTypeItem FLYING_INTO_WALL = new ProtectionTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_PROTECTION_TYPE_ITEM_FLYING_INTO_WALL",
@@ -346,7 +348,7 @@ public class TypeItems {
                 ),
                 ProtectionType.FLYING_INTO_WALL
         );
-        FLYING_INTO_WALL.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(FLYING_INTO_WALL);
 
         ItemFlowTypeItem none = new ItemFlowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_NONE",
@@ -358,7 +360,7 @@ public class TypeItems {
                 ),
                 ItemFlowType.NONE
         );
-        none.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(none);
 
         ItemFlowTypeItem insert = new ItemFlowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_INSERT",
@@ -370,7 +372,7 @@ public class TypeItems {
                 ),
                 ItemFlowType.INSERT
         );
-        insert.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(insert);
 
         ItemFlowTypeItem withdraw = new ItemFlowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_WITHDRAW",
@@ -382,7 +384,7 @@ public class TypeItems {
                 ),
                 ItemFlowType.WITHDRAW
         );
-        withdraw.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(withdraw);
 
         ItemFlowTypeItem insert_and_withdraw = new ItemFlowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_INSERT_AND_WITHDRAW",
@@ -394,7 +396,7 @@ public class TypeItems {
                 ),
                 ItemFlowType.INSERT_AND_WITHDRAW
         );
-        insert_and_withdraw.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(insert_and_withdraw);
 
         ItemFlowTypeItem free_output = new ItemFlowTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_FREE_OUTPUT",
@@ -406,7 +408,7 @@ public class TypeItems {
                 ),
                 ItemFlowType.FREE_OUTPUT
         );
-        free_output.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(free_output);
 
         MachineRecipeItem mri = new MachineRecipeItem(
                 new SlimefunItemStack("RSC_EDITOR_MACHINE_RECIPE_ITEM",
@@ -416,7 +418,7 @@ public class TypeItems {
                         )
                 )
         );
-        mri.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(mri);
 
         LinkedMachineRecipeItem lmri = new LinkedMachineRecipeItem(
                 new SlimefunItemStack("RSC_EDITOR_LINKED_MACHINE_RECIPE_ITEM",
@@ -426,7 +428,7 @@ public class TypeItems {
                         )
                 )
         );
-        lmri.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(lmri);
 
         EnergyNetComponentTypeItem capacitor = new EnergyNetComponentTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_CAPACITOR",
@@ -438,7 +440,7 @@ public class TypeItems {
                 ),
                 EnergyNetComponentType.CAPACITOR
         );
-        capacitor.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(capacitor);
 
         EnergyNetComponentTypeItem connector = new EnergyNetComponentTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_CONNECTOR",
@@ -450,7 +452,7 @@ public class TypeItems {
                 ),
                 EnergyNetComponentType.CONNECTOR
         );
-        connector.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(connector);
 
         EnergyNetComponentTypeItem consumer = new EnergyNetComponentTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_CONSUMER",
@@ -462,7 +464,7 @@ public class TypeItems {
                 ),
                 EnergyNetComponentType.CONSUMER
         );
-        consumer.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(consumer);
 
         EnergyNetComponentTypeItem generator = new EnergyNetComponentTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_GENERATOR",
@@ -474,7 +476,7 @@ public class TypeItems {
                 ),
                 EnergyNetComponentType.GENERATOR
         );
-        generator.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(generator);
 
         EnergyNetComponentTypeItem enct_none = new EnergyNetComponentTypeItem(
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_NONE",
@@ -486,7 +488,7 @@ public class TypeItems {
                 ),
                 EnergyNetComponentType.NONE
         );
-        enct_none.register(RSCEditor.getInstance());
+        SlimefunItemUtil.registerItem(enct_none);
 
         for (SimpleMachineType type : SimpleMachineType.values()) {
             SimpleMachineTypeItem smti = new SimpleMachineTypeItem(
@@ -495,12 +497,22 @@ public class TypeItems {
                                     MaterialUtil.getMaterial(type),
                                     "&b简单机器类型占位符",
                                     "&e" + type.name().toUpperCase(),
-                                    TextUtil.getName(type)
+                                    "&e" + TextUtil.getName(type)
                             )
                     ),
                     type
             );
-            smti.register(RSCEditor.getInstance());
+            SlimefunItemUtil.registerItem(smti);
         }
+
+        RegisterItem registerItem = new RegisterItem(
+                new SlimefunItemStack("RSC_EDITOR_REGISTER_ITEM",
+                        new CustomItemStack(
+                                Material.REDSTONE,
+                                "&b注册物品占位符"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(registerItem);
     }
 }

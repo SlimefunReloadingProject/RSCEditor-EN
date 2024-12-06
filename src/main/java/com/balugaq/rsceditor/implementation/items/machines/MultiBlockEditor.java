@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.implementation.items.machines;
 
 import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.items.IntegerTypeItem;
+import com.balugaq.rsceditor.api.items.RegisterItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.api.objects.MenuMatrix;
 import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
@@ -32,13 +33,14 @@ import java.util.List;
  */
 public class MultiBlockEditor extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
-            .addLine("npiwsBrrr")
-            .addLine("NPIWSBrrr")
-            .addLine("mmmmMBrrr")
-            .addLine("mmmmMBBBB")
-            .addLine("mmmmmmMBB")
-            .addLine("mmmmmmMBG")
+            .addLine("npiwsqrrr")
+            .addLine("NPIWSQrrr")
+            .addLine("mmmmmMrrr")
+            .addLine("mmmmmMBBB")
+            .addLine("mmmmmmmMB")
+            .addLine("mmmmmmmMG")
             .addItem("B", ChestMenuUtils.getBackground())
+            .addItem("Q", Icons.register_card)
             .addItem("N", Icons.id)
             .addItem("P", Icons.item_group)
             .addItem("I", Icons.item)
@@ -151,6 +153,14 @@ public class MultiBlockEditor extends AbstractContainer {
                     }
                     Sound sound = p4.getSecondValue();
                     writer.set("sound", sound.name());
+
+                    Pair<Boolean, ItemStack> p99 = ItemUtil.isItem(menu, matrix, "Q");
+                    if (p99.getFirstValue()) {
+                        ItemStack registerCard = p99.getSecondValue();
+                        if (SlimefunItem.getByItem(registerCard) instanceof RegisterItem ri) {
+                            writer.set("register", ri.getRegister(registerCard));
+                        }
+                    }
 
                     ClipboardUtil.send(p, "多方块结构编辑器: ", writer.toString());
 

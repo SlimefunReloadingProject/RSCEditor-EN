@@ -27,7 +27,7 @@ public abstract class AbstractTool extends SlimefunItem {
         );
     }
 
-    public abstract void toolUse(BlockBreakEvent event, ItemStack tool, int fortune, List<ItemStack> drops);
+    public abstract void toolUse(@NotNull BlockBreakEvent event, @NotNull ItemStack tool, int fortune, @NotNull List<ItemStack> drops);
 
-    public abstract void rightClick(PlayerRightClickEvent event);
+    public abstract void rightClick(@NotNull PlayerRightClickEvent event);
 }

@@ -24,8 +24,30 @@ public class MenuCopier extends AbstractTool {
         super(item);
     }
 
+    public static void saveMenu0(@NotNull ItemStack tool, @NotNull BlockMenu menu) {
+        PersistentUtil.set(tool, DataType.ITEM_STACK_ARRAY, KeyUtil.MENU_CONTENTS, menu.getContents().clone());
+    }
+
+    public static void pasteMenu0(@NotNull ItemStack tool, @NotNull BlockMenu menu) {
+        ItemStack[] contents = PersistentUtil.get(tool, DataType.ITEM_STACK_ARRAY, KeyUtil.MENU_CONTENTS);
+        if (contents == null) {
+            return;
+        }
+
+        int size = menu.getPreset().getSize();
+
+        for (int i = 0; i < size; i++) {
+            ItemStack itemStack = contents[i];
+            if (itemStack == null) {
+                menu.replaceExistingItem(i, null);
+            } else {
+                menu.replaceExistingItem(i, itemStack.clone());
+            }
+        }
+    }
+
     @Override
-    public void toolUse(BlockBreakEvent event, ItemStack tool, int fortune, List<ItemStack> drops) {
+    public void toolUse(@NotNull BlockBreakEvent event, @NotNull ItemStack tool, int fortune, @NotNull List<ItemStack> drops) {
     }
 
     @Override
@@ -55,8 +77,7 @@ public class MenuCopier extends AbstractTool {
                     player.sendMessage("§c该方块的菜单内容为空，无法复制。");
                     return;
                 }
-                ItemStack[] clone = contents.clone();
-                PersistentUtil.set(tool, DataType.ITEM_STACK_ARRAY, KeyUtil.MENU_CONTENTS, clone);
+                saveMenu0(tool, menu);
                 player.sendMessage("§a成功复制菜单内容。");
             }
         } else {
@@ -75,11 +96,7 @@ public class MenuCopier extends AbstractTool {
                     return;
                 }
 
-                int size = menu.getPreset().getSize();
-
-                for (int i = 0; i < size; i++) {
-                    menu.replaceExistingItem(i, contents[i]);
-                }
+                pasteMenu0(event.getItem(), menu);
 
                 player.sendMessage("§a成功粘贴菜单内容。");
             } else {

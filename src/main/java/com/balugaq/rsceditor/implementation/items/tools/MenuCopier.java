@@ -6,6 +6,7 @@ import com.balugaq.rsceditor.utils.PersistentUtil;
 import com.jeff_media.morepersistentdatatypes.DataType;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.Location;
@@ -14,11 +15,14 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("deprecation")
 public class MenuCopier extends AbstractTool {
     public MenuCopier(@NotNull SlimefunItemStack item) {
         super(item);
@@ -26,6 +30,19 @@ public class MenuCopier extends AbstractTool {
 
     public static void saveMenu0(@NotNull ItemStack tool, @NotNull BlockMenu menu) {
         PersistentUtil.set(tool, DataType.ITEM_STACK_ARRAY, KeyUtil.MENU_CONTENTS, menu.getContents().clone());
+        ItemMeta meta = tool.getItemMeta();
+        SlimefunItem slimefunItem = SlimefunItem.getByItem(tool);
+        if (!(slimefunItem instanceof MenuCopier mc)) {
+            return;
+        }
+        List<String> lore = new ArrayList<>(mc.getItem().getLore());
+
+        Location location = menu.getLocation();
+        lore.add("&a已保存: " + menu.getPreset().getTitle());
+        lore.add("&a位置: " + location.getWorld().getName() + ";" + location.getBlockX() + ":" + location.getBlockY() + ":" + location.getBlockZ());
+        lore.add("&a粘液ID: " + menu.getPreset().getID());
+        meta.setLore(lore);
+        tool.setItemMeta(meta);
     }
 
     public static void pasteMenu0(@NotNull ItemStack tool, @NotNull BlockMenu menu) {

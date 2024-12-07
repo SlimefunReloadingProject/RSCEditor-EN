@@ -1,6 +1,5 @@
 package com.balugaq.rsceditor.implementation.items;
 
-import com.balugaq.rsceditor.implementation.RSCEditor;
 import com.balugaq.rsceditor.implementation.items.machines.ArmorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.CapacitorEditor;
 import com.balugaq.rsceditor.implementation.items.machines.FoodEditor;
@@ -25,6 +24,12 @@ import com.balugaq.rsceditor.implementation.items.machines.builder.MachineRecipe
 import com.balugaq.rsceditor.implementation.items.machines.builder.RegisterBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.CustomRainbowContainer;
+import com.balugaq.rsceditor.implementation.items.machines.container.EmptyContainer1x9;
+import com.balugaq.rsceditor.implementation.items.machines.container.EmptyContainer2x9;
+import com.balugaq.rsceditor.implementation.items.machines.container.EmptyContainer3x9;
+import com.balugaq.rsceditor.implementation.items.machines.container.EmptyContainer4x9;
+import com.balugaq.rsceditor.implementation.items.machines.container.EmptyContainer5x9;
+import com.balugaq.rsceditor.implementation.items.machines.container.EmptyContainer6x9;
 import com.balugaq.rsceditor.implementation.items.machines.container.ItemFlowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.MenuContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.SupplyContainer;
@@ -38,6 +43,72 @@ import org.bukkit.Material;
 public class MachineSetup {
     public static void register() {
         // containers
+        EmptyContainer1x9 emptyContainer1x9 = new EmptyContainer1x9(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_EMPTY_CONTAINER_1x9",
+                        new CustomItemStack(
+                                Material.RED_STAINED_GLASS,
+                                "&b空容器1x9"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(emptyContainer1x9);
+
+        EmptyContainer2x9 emptyContainer2x9 = new EmptyContainer2x9(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_EMPTY_CONTAINER_2x9",
+                        new CustomItemStack(
+                                Material.BLUE_STAINED_GLASS,
+                                "&b空容器2x9"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(emptyContainer2x9);
+
+        EmptyContainer3x9 emptyContainer3x9 = new EmptyContainer3x9(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_EMPTY_CONTAINER_3x9",
+                        new CustomItemStack(
+                                Material.YELLOW_STAINED_GLASS,
+                                "&b空容器3x9"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(emptyContainer3x9);
+
+        EmptyContainer4x9 emptyContainer4x9 = new EmptyContainer4x9(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_EMPTY_CONTAINER_4x9",
+                        new CustomItemStack(
+                                Material.PINK_STAINED_GLASS,
+                                "&b空容器4x9"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(emptyContainer4x9);
+
+        EmptyContainer5x9 emptyContainer5x9 = new EmptyContainer5x9(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_EMPTY_CONTAINER_5x9",
+                        new CustomItemStack(
+                                Material.GREEN_STAINED_GLASS,
+                                "&b空容器5x9"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(emptyContainer5x9);
+
+        EmptyContainer6x9 emptyContainer6x9 = new EmptyContainer6x9(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_EMPTY_CONTAINER_6x9",
+                        new CustomItemStack(
+                                Material.LIME_STAINED_GLASS,
+                                "&b空容器6x9"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(emptyContainer6x9);
+
         ArmorPieceContainer armorPieceContainer = new ArmorPieceContainer(
                 new SlimefunItemStack(
                         "RSC_EDITOR_ARMOR_PIECE_CONTAINER",

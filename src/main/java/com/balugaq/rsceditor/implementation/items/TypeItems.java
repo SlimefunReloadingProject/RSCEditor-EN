@@ -18,7 +18,6 @@ import com.balugaq.rsceditor.api.objects.types.GroupType;
 import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
 import com.balugaq.rsceditor.api.objects.types.RainbowType;
 import com.balugaq.rsceditor.api.objects.types.SimpleMachineType;
-import com.balugaq.rsceditor.implementation.RSCEditor;
 import com.balugaq.rsceditor.utils.MaterialUtil;
 import com.balugaq.rsceditor.utils.SlimefunItemUtil;
 import com.balugaq.rsceditor.utils.TextUtil;

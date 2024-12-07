@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class IntegerTypeItem extends BaseTypeItem<Integer> {
     public IntegerTypeItem(@NotNull SlimefunItemStack item) {
         super(item, PlaceHolderType.INTEGER_PLACEHOLDER);

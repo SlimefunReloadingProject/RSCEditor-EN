@@ -1,15 +1,12 @@
 package com.balugaq.rsceditor.api.items;
 
 import com.balugaq.rsceditor.api.base.PlaceholderItem;
-import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
 import com.balugaq.rsceditor.api.objects.types.Register;
 import com.balugaq.rsceditor.implementation.groups.RSCEItemGroups;
 import com.balugaq.rsceditor.utils.KeyUtil;
 import com.balugaq.rsceditor.utils.PersistentUtil;
-import com.balugaq.rsceditor.utils.datatypes.PersistentMachineRecipeType;
 import com.balugaq.rsceditor.utils.datatypes.PersistentRegisterType;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
-import net.guizhanss.guizhanlib.minecraft.helper.inventory.ItemStackHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class RegisterItem extends PlaceholderItem {
     public RegisterItem(@NotNull SlimefunItemStack item) {
         super(RSCEItemGroups.TYPE_GROUP, item);

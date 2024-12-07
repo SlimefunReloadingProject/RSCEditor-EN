@@ -1,6 +1,5 @@
 package com.balugaq.rsceditor.implementation.items;
 
-import com.balugaq.rsceditor.implementation.RSCEditor;
 import com.balugaq.rsceditor.implementation.items.tools.MenuCopier;
 import com.balugaq.rsceditor.utils.SlimefunItemUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;

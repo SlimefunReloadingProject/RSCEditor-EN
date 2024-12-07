@@ -4,13 +4,10 @@ import com.balugaq.rsceditor.api.objects.types.LinkedMachineRecipe;
 import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
 import com.balugaq.rsceditor.api.objects.types.Register;
 import com.balugaq.rsceditor.api.objects.types.TemplateMachineRecipe;
-import com.google.common.collect.Multimap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import lombok.Getter;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -23,6 +20,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 @Getter
 public class YamlWriter {
     private String root;
@@ -52,12 +50,12 @@ public class YamlWriter {
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
         String inputKey = recipeKey + ".input";
         for (int i = 0; i < recipe.getInputs().length; i++) {
-            set(inputKey + "." + i, recipe.getInputs()[i]);
+            set(inputKey + "." + i, recipe.getInputs()[i], false);
         }
 
         String outputKey = recipeKey + ".output";
         for (int i = 0; i < recipe.getOutputs().length; i++) {
-            set(outputKey + "." + i, recipe.getOutputs()[i]);
+            set(outputKey + "." + i, recipe.getOutputs()[i], false);
         }
 
         configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());
@@ -73,12 +71,12 @@ public class YamlWriter {
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
         String inputKey = recipeKey + ".input";
         for (int i = 0; i < recipe.getInputs().length; i++) {
-            set(inputKey + "." + i, recipe.getInputs()[i]);
+            set(inputKey + "." + i, recipe.getInputs()[i], false);
         }
 
         String outputKey = recipeKey + ".output";
         for (int i = 0; i < recipe.getOutputs().length; i++) {
-            set(outputKey + "." + i, recipe.getOutputs()[i]);
+            set(outputKey + "." + i, recipe.getOutputs()[i], false);
         }
 
         configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());
@@ -93,13 +91,14 @@ public class YamlWriter {
         String recipeKey = getKey(key + "." + recipe.getName());
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
         String inputKey = recipeKey + ".input";
+        String outputKey = recipeKey + ".output";
         int i = 0;
         for (Integer slot : recipe.getLinkedInputs().keySet()) {
             ItemStack itemStack = recipe.getLinkedInputs().get(slot);
             if (itemStack == null || itemStack.getType() == Material.AIR) {
                 continue;
             }
-            set(inputKey + "." + i, itemStack.clone());
+            set(inputKey + "." + i, itemStack.clone(), false);
             configuration.set(inputKey + "." + i + ".slot", slot);
             i++;
         }
@@ -110,8 +109,8 @@ public class YamlWriter {
             if (itemStack == null || itemStack.getType() == Material.AIR) {
                 continue;
             }
-            set(recipeKey + ".output." + i, itemStack.clone());
-            configuration.set(recipeKey + ".output." + i + ".slot", slot);
+            set(outputKey + "." + i, itemStack.clone(), false);
+            configuration.set(outputKey + "." + i + ".slot", slot);
             i++;
         }
 
@@ -119,7 +118,7 @@ public class YamlWriter {
             if (itemStack == null || itemStack.getType() == Material.AIR) {
                 continue;
             }
-            set(recipeKey + ".output." + i, itemStack.clone());
+            set(outputKey + "." + i, itemStack.clone(), false);
         }
 
         configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());
@@ -130,7 +129,7 @@ public class YamlWriter {
     }
 
     @CanIgnoreReturnValue
-    public @NotNull YamlWriter set(String key, Register register) {
+    public @NotNull YamlWriter set(@NotNull String key, @Nullable Register register) {
         if (register == null) {
             return this;
         }
@@ -160,6 +159,11 @@ public class YamlWriter {
 
     @CanIgnoreReturnValue
     public @NotNull YamlWriter set(String key, @Nullable ItemStack itemStack) {
+        return set(key, itemStack, true);
+    }
+
+    @CanIgnoreReturnValue
+    public @NotNull YamlWriter set(String key, @Nullable ItemStack itemStack, boolean model) {
         if (itemStack == null) {
             return this;
         }
@@ -169,21 +173,39 @@ public class YamlWriter {
             return this;
         }
 
+        ItemMeta itemMeta = itemStack.getItemMeta();
         SlimefunItem slimefunItem = SlimefunItem.getByItem(itemStack);
+        if (model) {
+            if (itemMeta.hasCustomModelData()) {
+                int modelData = itemMeta.getCustomModelData();
+                configuration.set(getKey(key + ".modelId"), modelData);
+            }
+
+            if (itemMeta.hasLore()) {
+                List<String> lore = itemMeta.getLore();
+                if (lore != null && !lore.isEmpty()) {
+                    configuration.set(getKey(key + ".lore"), lore.toArray(new String[0]));
+                }
+            }
+
+            if (itemMeta.hasDisplayName()) {
+                configuration.set(getKey(key + ".name"), itemMeta.getDisplayName());
+            }
+        }
+
+        configuration.set(getKey(key + ".amount"), itemStack.getAmount());
+
         if (slimefunItem != null) {
             if (!slimefunItem.getId().equals("LOGITECH_SAMPLE_HEAD")) {
                 configuration.set(getKey(key + ".material_type"), "slimefun");
                 configuration.set(getKey(key + ".material"), slimefunItem.getId());
                 configuration.set(getKey(key + ".amount"), itemStack.getAmount());
                 return this;
-            } else {
-                configuration.set(getKey(key + ".material_type"), "");
             }
         }
 
-        if (itemStack.getType() == Material.PLAYER_HEAD) {
-            ItemMeta meta = itemStack.getItemMeta();
-            if (meta instanceof SkullMeta skullMeta) {
+        if (itemStack.getType() == Material.PLAYER_HEAD || itemStack.getType() == Material.PLAYER_WALL_HEAD) {
+            if (itemMeta instanceof SkullMeta skullMeta) {
                 try {
                     URL url = skullMeta.getOwnerProfile().getTextures().getSkin();
                     String path = url.getPath();
@@ -192,47 +214,16 @@ public class YamlWriter {
 
                     configuration.set(getKey(key + ".material_type"), "skull_hash");
                     configuration.set(getKey(key + ".material"), hash);
-                    configuration.set(getKey(key + ".amount"), itemStack.getAmount());
-                    return this;
                 } catch (Throwable ignored) {
+
                 }
+            } else {
+                configuration.set(getKey(key + ".material_type"), "mc");
+                configuration.set(getKey(key + ".material"), itemStack.getType().name());
             }
-        }
-
-        ItemMeta meta = itemStack.getItemMeta();
-        Multimap<Attribute, AttributeModifier> modifier = meta.getAttributeModifiers();
-        // unsupported args
-        if (
-                meta.isUnbreakable()
-                        || !meta.getPersistentDataContainer().isEmpty()
-                        || meta.hasEnchants()
-                        || !meta.getItemFlags().isEmpty()
-                        || (modifier != null && !modifier.isEmpty())
-        ) {
-            configuration.set(getKey(key + ".material_type"), "saveditem");
-            configuration.set(getKey(key + ".material"), "unsupported_saveditem");
-            configuration.set(getKey(key + ".amount"), itemStack.getAmount());
-            return this;
-        }
-
-        configuration.set(getKey(key + ".material_type"), "mc");
-        configuration.set(getKey(key + ".material"), itemStack.getType().name());
-        configuration.set(getKey(key + ".amount"), itemStack.getAmount());
-
-        if (meta.hasCustomModelData()) {
-            int modelData = meta.getCustomModelData();
-            configuration.set(getKey(key + ".modelId"), modelData);
-        }
-
-        if (meta.hasLore()) {
-            List<String> lore = meta.getLore();
-            if (lore != null && !lore.isEmpty()) {
-                configuration.set(getKey(key + ".lore"), lore.toArray(new String[0]));
-            }
-        }
-
-        if (meta.hasDisplayName()) {
-            configuration.set(getKey(key + ".name"), meta.getDisplayName());
+        } else {
+            configuration.set(getKey(key + ".material_type"), "mc");
+            configuration.set(getKey(key + ".material"), itemStack.getType().name());
         }
 
         return this;

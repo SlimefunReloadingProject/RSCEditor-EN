@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("deprecation")
 @Getter
 public class MenuMatrix {
     private final List<String> labels = new ArrayList<>();

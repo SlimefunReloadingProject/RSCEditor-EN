@@ -41,6 +41,7 @@ import java.util.Map;
 /**
  * @noinspection DataFlowIssue
  */
+@SuppressWarnings("deprecation")
 public class MaterialGeneratorEditor extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
             .addLine("npitkBrrr")

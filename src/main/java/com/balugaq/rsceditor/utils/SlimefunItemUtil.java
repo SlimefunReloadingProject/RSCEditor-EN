@@ -5,19 +5,23 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactive;
-import io.github.thebusybiscuit.slimefun4.core.attributes.RandomMobDrop;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@UtilityClass
 public class SlimefunItemUtil {
     private static final List<SlimefunItem> registeredItems = new ArrayList<>();
+
     @CanIgnoreReturnValue
-    public static SlimefunItem registerItem(SlimefunItem item) {
+    public static @NotNull SlimefunItem registerItem(@NotNull SlimefunItem item) {
         item.register(RSCEditor.getInstance());
         return item;
     }
+
     public static void unregisterItem(SlimefunItem item) {
         if (item instanceof Radioactive) {
             Slimefun.getRegistry().getRadioactiveItems().remove(item);

@@ -11,6 +11,7 @@ public class Register {
     private final boolean warn;
     private final boolean unfinished;
     private final List<String> conditions;
+
     public Register(String id_alias, boolean lateInit, boolean warn, boolean unfinished, List<String> conditions) {
         this.idAlias = id_alias;
         this.lateInit = lateInit;

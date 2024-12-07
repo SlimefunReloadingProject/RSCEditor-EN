@@ -12,14 +12,16 @@ import com.balugaq.rsceditor.implementation.items.ToolSetup;
 import com.balugaq.rsceditor.implementation.items.TypeItems;
 import com.balugaq.rsceditor.utils.SlimefunItemUtil;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import lombok.Getter;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 public class RSCEditor extends JavaPlugin implements SlimefunAddon {
-    @Getter
     private static RSCEditor instance;
+
+    public static RSCEditor getInstance() {
+        return instance;
+    }
 
     @Override
     public void onLoad() {

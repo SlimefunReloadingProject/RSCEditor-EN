@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class TextTypeItem extends BaseTypeItem<String> {
     public TextTypeItem(@NotNull SlimefunItemStack item) {
         super(item, PlaceHolderType.TEXT_PLACEHOLDER);

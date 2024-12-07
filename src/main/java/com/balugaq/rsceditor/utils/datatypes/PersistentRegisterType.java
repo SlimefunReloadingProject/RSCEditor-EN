@@ -1,11 +1,9 @@
 package com.balugaq.rsceditor.utils.datatypes;
 
-import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
 import com.balugaq.rsceditor.api.objects.types.Register;
 import com.balugaq.rsceditor.utils.KeyUtil;
 import com.jeff_media.morepersistentdatatypes.DataType;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -21,6 +19,7 @@ public class PersistentRegisterType implements PersistentDataType<PersistentData
     private static final NamespacedKey WARN = KeyUtil.newKey("warn");
     private static final NamespacedKey UNFINISHED = KeyUtil.newKey("unfinished");
     private static final NamespacedKey CONDITIONS = KeyUtil.newKey("conditions");
+
     @Override
     @Nonnull
     public Class<PersistentDataContainer> getPrimitiveType() {

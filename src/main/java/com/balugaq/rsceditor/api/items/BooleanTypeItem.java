@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class BooleanTypeItem extends BaseTypeItem<Boolean> {
     public BooleanTypeItem(@NotNull SlimefunItemStack item) {
         super(item, PlaceHolderType.BOOLEAN_PLACEHOLDER);
@@ -56,6 +57,6 @@ public class BooleanTypeItem extends BaseTypeItem<Boolean> {
         }
 
         Boolean data = itemMeta.getPersistentDataContainer().get(CONTENT_KEY, DataType.BOOLEAN);
-        return data == null ? false : data;
+        return data != null && data;
     }
 }

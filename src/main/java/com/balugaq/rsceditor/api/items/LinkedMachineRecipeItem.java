@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("deprecation")
 public class LinkedMachineRecipeItem extends PlaceholderItem {
     public LinkedMachineRecipeItem(@NotNull SlimefunItemStack item) {
         super(RSCEItemGroups.TYPE_GROUP, item);

@@ -37,7 +37,7 @@ public class MenuCopier extends AbstractTool {
         if (player.isSneaking()) {
             if (optional.isPresent()) {
                 ItemStack tool = event.getItem();
-                if (tool == null || tool.getType() == Material.AIR) {
+                if (tool.getType() == Material.AIR) {
                     player.sendMessage("§c你必须持有工具才能使用该功能。");
                     return;
                 }

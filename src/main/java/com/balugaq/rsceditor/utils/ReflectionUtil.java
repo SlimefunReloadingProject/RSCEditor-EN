@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 /**
  * @author Final_ROOT
  */
+@SuppressWarnings("unchecked")
 @UtilityClass
 public class ReflectionUtil {
 

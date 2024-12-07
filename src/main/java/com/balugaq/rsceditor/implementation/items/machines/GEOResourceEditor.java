@@ -38,6 +38,7 @@ import java.util.Map;
 /**
  * @noinspection DataFlowIssue
  */
+@SuppressWarnings("deprecation")
 public class GEOResourceEditor extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
             .addLine("npirdomBB")
@@ -255,7 +256,7 @@ public class GEOResourceEditor extends AbstractContainer {
                     if (slimefunItem instanceof SupplyContainer container) {
                         BlockMenu blockMenu = StorageCacheUtils.getMenu(containLocation);
                         Map<World.Environment, Map<Biome, Integer>> supply = container.getSupply(blockMenu);
-                        if (supply == null || supply.isEmpty()) {
+                        if (supply.isEmpty()) {
                             p.sendMessage("你没有设置GEO供应容器");
                             return false;
                         }

@@ -42,6 +42,7 @@ import java.util.Map;
 /**
  * @noinspection DataFlowIssue
  */
+@SuppressWarnings("deprecation")
 public class LinkedRecipeMachineEditor extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
             .addLine("npithurrr")

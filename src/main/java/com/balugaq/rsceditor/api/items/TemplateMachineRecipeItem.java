@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class TemplateMachineRecipeItem extends PlaceholderItem {
     public TemplateMachineRecipeItem(@NotNull SlimefunItemStack item) {
         super(RSCEItemGroups.TYPE_GROUP, item);

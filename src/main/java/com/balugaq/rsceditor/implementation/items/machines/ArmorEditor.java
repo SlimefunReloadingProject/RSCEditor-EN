@@ -28,6 +28,8 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * @noinspection DataFlowIssue
  */
@@ -149,6 +151,9 @@ public class ArmorEditor extends AbstractContainer {
                     writer.set("helmet.id", helmetPart.getId());
                     writer.set("helmet.item", helmetPart.getItem());
                     writer.set("helmet.recipe_type", helmetPart.getRecipeType());
+                    for (int j = 1; j <= 9; j++) {
+                        writer.set("recipe." + j, helmetPart.getRecipe()[j - 1], false);
+                    }
                     writer.set("helmet.potion_effects", helmetPart.getProtections().toArray());
 
                     // chestplate
@@ -173,6 +178,9 @@ public class ArmorEditor extends AbstractContainer {
                     writer.set("chestplate.id", chestplatePart.getId());
                     writer.set("chestplate.item", chestplatePart.getItem());
                     writer.set("chestplate.recipe_type", chestplatePart.getRecipeType());
+                    for (int j = 1; j <= 9; j++) {
+                        writer.set("recipe." + j, chestplatePart.getRecipe()[j - 1], false);
+                    }
                     writer.set("chestplate.potion_effects", chestplatePart.getProtections().toArray());
 
                     // leggings
@@ -197,6 +205,9 @@ public class ArmorEditor extends AbstractContainer {
                     writer.set("leggings.id", leggingsPart.getId());
                     writer.set("leggings.item", leggingsPart.getItem());
                     writer.set("leggings.recipe_type", leggingsPart.getRecipeType());
+                    for (int j = 1; j <= 9; j++) {
+                        writer.set("recipe." + j, leggingsPart.getRecipe()[j - 1], false);
+                    }
                     writer.set("leggings.potion_effects", leggingsPart.getProtections().toArray());
 
                     // boots
@@ -221,6 +232,9 @@ public class ArmorEditor extends AbstractContainer {
                     writer.set("boots.id", bootsPart.getId());
                     writer.set("boots.item", bootsPart.getItem());
                     writer.set("boots.recipe_type", bootsPart.getRecipeType());
+                    for (int j = 1; j <= 9; j++) {
+                        writer.set("recipe." + j, bootsPart.getRecipe()[j - 1], false);
+                    }
                     writer.set("boots.potion_effects", bootsPart.getProtections().toArray());
 
                     Pair<Boolean, ItemStack> p99 = ItemUtil.isItem(menu, matrix, "Q");

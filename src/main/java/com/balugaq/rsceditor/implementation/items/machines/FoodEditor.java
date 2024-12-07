@@ -209,7 +209,7 @@ public class FoodEditor extends AbstractContainer {
                     // recipe
                     Pair<Boolean, List<ItemStack>> recipes = ItemUtil.isItems(menu, matrix, "r");
                     for (int j = 1; j <= 9; j++) {
-                        writer.set("recipe." + j, recipes.getSecondValue().get(j - 1));
+                        writer.set("recipe." + j, recipes.getSecondValue().get(j - 1), false);
                     }
 
                     // script

@@ -128,7 +128,7 @@ public class MultiBlockEditor extends AbstractContainer {
 
                     Pair<Boolean, List<ItemStack>> recipes = ItemUtil.isItems(menu, matrix, "r");
                     for (int j = 1; j <= 9; j++) {
-                        writer.set("recipe." + j, recipes.getSecondValue().get(j - 1));
+                        writer.set("recipe." + j, recipes.getSecondValue().get(j - 1), false);
                     }
 
                     Pair<Boolean, List<MachineRecipe>> p6 = ItemUtil.isMachineRecipes(menu, matrix, "m");

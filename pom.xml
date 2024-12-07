@@ -6,7 +6,7 @@
 
     <groupId>com.balugaq</groupId>
     <artifactId>RSCEditor</artifactId>
-    <version>20</version>
+    <version>21</version>
     <packaging>jar</packaging>
 
     <name>RSCEditor</name>

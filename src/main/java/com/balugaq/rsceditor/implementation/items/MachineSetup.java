@@ -22,6 +22,7 @@ import com.balugaq.rsceditor.implementation.items.machines.WorkbenchEditor;
 import com.balugaq.rsceditor.implementation.items.machines.builder.LinkedMachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.builder.MachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.builder.RegisterBuilder;
+import com.balugaq.rsceditor.implementation.items.machines.builder.TemplateMachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.CustomRainbowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.EmptyContainer1x9;
@@ -45,7 +46,7 @@ public class MachineSetup {
         // containers
         EmptyContainer1x9 emptyContainer1x9 = new EmptyContainer1x9(
                 new SlimefunItemStack(
-                        "RSC_EDITOR_EMPTY_CONTAINER_1x9",
+                        "RSC_EDITOR_EMPTY_CONTAINER_1X9",
                         new CustomItemStack(
                                 Material.RED_STAINED_GLASS,
                                 "&b空容器1x9"
@@ -56,7 +57,7 @@ public class MachineSetup {
 
         EmptyContainer2x9 emptyContainer2x9 = new EmptyContainer2x9(
                 new SlimefunItemStack(
-                        "RSC_EDITOR_EMPTY_CONTAINER_2x9",
+                        "RSC_EDITOR_EMPTY_CONTAINER_2X9",
                         new CustomItemStack(
                                 Material.BLUE_STAINED_GLASS,
                                 "&b空容器2x9"
@@ -67,7 +68,7 @@ public class MachineSetup {
 
         EmptyContainer3x9 emptyContainer3x9 = new EmptyContainer3x9(
                 new SlimefunItemStack(
-                        "RSC_EDITOR_EMPTY_CONTAINER_3x9",
+                        "RSC_EDITOR_EMPTY_CONTAINER_3X9",
                         new CustomItemStack(
                                 Material.YELLOW_STAINED_GLASS,
                                 "&b空容器3x9"
@@ -78,7 +79,7 @@ public class MachineSetup {
 
         EmptyContainer4x9 emptyContainer4x9 = new EmptyContainer4x9(
                 new SlimefunItemStack(
-                        "RSC_EDITOR_EMPTY_CONTAINER_4x9",
+                        "RSC_EDITOR_EMPTY_CONTAINER_4X9",
                         new CustomItemStack(
                                 Material.PINK_STAINED_GLASS,
                                 "&b空容器4x9"
@@ -89,7 +90,7 @@ public class MachineSetup {
 
         EmptyContainer5x9 emptyContainer5x9 = new EmptyContainer5x9(
                 new SlimefunItemStack(
-                        "RSC_EDITOR_EMPTY_CONTAINER_5x9",
+                        "RSC_EDITOR_EMPTY_CONTAINER_5X9",
                         new CustomItemStack(
                                 Material.GREEN_STAINED_GLASS,
                                 "&b空容器5x9"
@@ -100,7 +101,7 @@ public class MachineSetup {
 
         EmptyContainer6x9 emptyContainer6x9 = new EmptyContainer6x9(
                 new SlimefunItemStack(
-                        "RSC_EDITOR_EMPTY_CONTAINER_6x9",
+                        "RSC_EDITOR_EMPTY_CONTAINER_6X9",
                         new CustomItemStack(
                                 Material.LIME_STAINED_GLASS,
                                 "&b空容器6x9"
@@ -175,6 +176,17 @@ public class MachineSetup {
                 )
         );
         SlimefunItemUtil.registerItem(machineRecipeBuilder);
+
+        TemplateMachineRecipeBuilder templateMachineRecipeBuilder = new TemplateMachineRecipeBuilder(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_TEMPLATE_MACHINE_RECIPE_BUILDER",
+                        new CustomItemStack(
+                                Material.JUKEBOX,
+                                "&b模板配方机器配方配置器"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(templateMachineRecipeBuilder);
 
         LinkedMachineRecipeBuilder linkedMachineRecipeBuilder = new LinkedMachineRecipeBuilder(
                 new SlimefunItemStack(

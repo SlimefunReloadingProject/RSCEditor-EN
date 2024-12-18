@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.implementation;
 
 
 import com.balugaq.rsceditor.core.command.RSCECommands;
+import com.balugaq.rsceditor.core.managers.ConfigManager;
 import com.balugaq.rsceditor.implementation.groups.GroupSetup;
 import com.balugaq.rsceditor.implementation.items.BiomeItems;
 import com.balugaq.rsceditor.implementation.items.ItemGroupItems;
@@ -12,11 +13,20 @@ import com.balugaq.rsceditor.implementation.items.ToolSetup;
 import com.balugaq.rsceditor.implementation.items.TypeItems;
 import com.balugaq.rsceditor.utils.SlimefunItemUtil;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import lombok.Getter;
+import net.guizhanss.guizhanlibplugin.bstats.bukkit.Metrics;
+import net.guizhanss.guizhanlibplugin.bstats.charts.SimplePie;
+import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+@Getter
 public class RSCEditor extends JavaPlugin implements SlimefunAddon {
+    private String username;
+    private String repo;
+    private String branch;
+    private ConfigManager configManager;
     private static RSCEditor instance;
 
     public static RSCEditor getInstance() {
@@ -30,6 +40,11 @@ public class RSCEditor extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public void onEnable() {
+        this.configManager = new ConfigManager(this);
+        this.username = "balugaq";
+        this.repo = "RSCEditor";
+        this.branch = "master";
+
         GroupSetup.register();
 
         TypeItems.register();
@@ -39,6 +54,13 @@ public class RSCEditor extends JavaPlugin implements SlimefunAddon {
         BiomeItems.register();
         SoundTypeItems.register();
         ToolSetup.register();
+
+        loadMetrics();
+
+        if (getServer().getPluginManager().isPluginEnabled("GuizhanLibPlugin")) {
+            getLogger().info("正在尝试自动更新...");
+            tryUpdate();
+        }
 
         PluginCommand command = this.getCommand("rsceditor");
         if (command != null) {
@@ -70,5 +92,29 @@ public class RSCEditor extends JavaPlugin implements SlimefunAddon {
     @Override
     public String getBugTrackerURL() {
         return "https://github.com/balugaq/RSCEditor/issues";
+    }
+    private void loadMetrics() {
+        try {
+            Metrics metrics = new Metrics(this, 49593);
+            boolean enableAutoUpdate = getConfigManager().isAutoUpdate();
+            boolean enableDebug = getConfigManager().isDebug();
+            String autoUpdates = String.valueOf(enableAutoUpdate);
+            String debug = String.valueOf(enableDebug);
+            metrics.addCustomChart(new SimplePie("auto_updates", () -> autoUpdates));
+            metrics.addCustomChart(new SimplePie("debug", () -> debug));
+        } catch (NoClassDefFoundError | NullPointerException | UnsupportedClassVersionError e) {
+            getLogger().info("Metrics 加载失败: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void tryUpdate() {
+        try {
+            if (configManager.isAutoUpdate() && getDescription().getVersion().startsWith("Build")) {
+                GuizhanUpdater.start(this, getFile(), username, repo, branch);
+            }
+        } catch (NoClassDefFoundError | NullPointerException | UnsupportedClassVersionError e) {
+            getLogger().info("自动更新失败: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

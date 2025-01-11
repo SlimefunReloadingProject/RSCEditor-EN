@@ -44,7 +44,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
             .addItem("P", Icons.item_group)
             .addItem("I", Icons.item)
             .addItem("T", Icons.recipe_type)
-            .addItem("C", Icons.energy_capacity)
+            .addItem("C", Icons.capacity)
             .addItem("D", Icons.day_energy)
             .addItem("H", Icons.night_energy)
             .addItem("V", Icons.light_level)

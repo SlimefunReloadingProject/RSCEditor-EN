@@ -57,7 +57,7 @@ public class GeneratorEditor extends AbstractContainer {
             .addItem("I", Icons.item)
             .addItem("T", Icons.recipe_type)
             .addItem("S", Icons.script)
-            .addItem("C", Icons.energy_capacity)
+            .addItem("C", Icons.capacity)
             .addItem("O", Icons.production)
             .addItem("L", Icons.title)
             .addItem("A", Icons.progress_bar_slot)
@@ -302,7 +302,7 @@ public class GeneratorEditor extends AbstractContainer {
                             return false;
                         }
 
-                        YamlWriter menuWriter = mc.getAsYamlWriter(menu, input, output, id, title, progress_bar_slot);
+                        YamlWriter menuWriter = mc.getAsYamlWriter(menuBlockMenu, input, output, id, title, progress_bar_slot);
                         ClipboardUtil.send(p, "菜单编辑器: ", menuWriter.toString());
                         p.sendMessage(ChatColor.YELLOW + "==============================");
                     }

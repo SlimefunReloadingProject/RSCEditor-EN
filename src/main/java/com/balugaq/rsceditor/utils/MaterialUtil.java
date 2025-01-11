@@ -11,6 +11,11 @@ import org.bukkit.Sound;
 import org.bukkit.block.Biome;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Well, this is an utility class for getting the appropriate material for a given machine type... Right?...
+ *
+ * @author balugaq
+ */
 @UtilityClass
 public class MaterialUtil {
     public static @NotNull Material getMaterial(@NotNull SimpleMachineType type) {

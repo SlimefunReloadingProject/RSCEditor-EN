@@ -44,7 +44,7 @@ public class CapacitorEditor extends AbstractContainer {
             .addItem("P", Icons.item_group)
             .addItem("I", Icons.item)
             .addItem("T", Icons.recipe_type)
-            .addItem("Y", Icons.energy_capacity)
+            .addItem("Y", Icons.capacity)
             .addItem("G", Icons.build_capacitor);
 
     public CapacitorEditor(@NotNull SlimefunItemStack item) {

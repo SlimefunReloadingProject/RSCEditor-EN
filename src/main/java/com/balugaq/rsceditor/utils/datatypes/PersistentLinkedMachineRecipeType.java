@@ -1,6 +1,7 @@
 package com.balugaq.rsceditor.utils.datatypes;
 
 import com.balugaq.rsceditor.api.objects.types.LinkedMachineRecipe;
+import com.balugaq.rsceditor.utils.Debug;
 import com.balugaq.rsceditor.utils.KeyUtil;
 import com.jeff_media.morepersistentdatatypes.DataType;
 import org.bukkit.Material;
@@ -65,7 +66,7 @@ public class PersistentLinkedMachineRecipeType implements PersistentDataType<Per
         index = 0;
         for (Map.Entry<Integer, ItemStack> entry : outputs.entrySet()) {
             outputArray[index] = new ItemStack(Material.BARRIER, entry.getKey());
-            outputArray[index] = entry.getValue();
+            outputArray[index + 1] = entry.getValue();
             index += 2;
         }
         container.set(LINKED_OUTPUTS, DataType.ITEM_STACK_ARRAY, outputArray);

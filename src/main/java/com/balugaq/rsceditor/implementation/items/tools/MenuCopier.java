@@ -9,6 +9,7 @@ import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -38,9 +39,9 @@ public class MenuCopier extends AbstractTool {
         List<String> lore = new ArrayList<>(mc.getItem().getLore());
 
         Location location = menu.getLocation();
-        lore.add("&a已保存: " + menu.getPreset().getTitle());
-        lore.add("&a位置: " + location.getWorld().getName() + ";" + location.getBlockX() + ":" + location.getBlockY() + ":" + location.getBlockZ());
-        lore.add("&a粘液ID: " + menu.getPreset().getID());
+        lore.add(compile("&a已保存: " + menu.getPreset().getTitle()));
+        lore.add(compile("&a位置: " + location.getWorld().getName() + ";" + location.getBlockX() + ":" + location.getBlockY() + ":" + location.getBlockZ()));
+        lore.add(compile("&a粘液ID: " + menu.getPreset().getID()));
         meta.setLore(lore);
         tool.setItemMeta(meta);
     }
@@ -121,5 +122,9 @@ public class MenuCopier extends AbstractTool {
                 return;
             }
         }
+    }
+
+    public static String compile(String str) {
+        return ChatColor.translateAlternateColorCodes('&', str);
     }
 }

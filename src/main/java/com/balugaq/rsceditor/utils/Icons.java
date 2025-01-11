@@ -153,7 +153,7 @@ public class Icons {
             Material.SCULK_SENSOR,
             "&b脚本",
             "&b^ 在此处放置 文本占位符 ^",
-            "&c可选参数",
+            "&e可选参数",
             "&d默认值: [无设置]"
     );
 
@@ -163,6 +163,13 @@ public class Icons {
             "&b^ 在此处放置 整数占位符 ^",
             "&e可选参数",
             "&d默认值: [无设置]"
+    );
+
+    public static final ItemStack capacity = new CustomItemStack(
+            Material.SOUL_TORCH,
+            "&b电容量",
+            "&b^ 在此处放置 整数占位符 ^",
+            "&c必须参数"
     );
 
     public static final ItemStack radiation = new CustomItemStack(
@@ -778,7 +785,7 @@ public class Icons {
             Material.PAPER,
             "&b注册卡",
             "&b^ 在此处放置 注册卡占位符 ^",
-            "&c必需参数"
+            "&e可选参数"
     );
 
     public static final ItemStack id_alias = new CustomItemStack(
@@ -825,5 +832,16 @@ public class Icons {
             Material.STRUCTURE_BLOCK,
             "&b配置",
             "&b点击以配置注册选项"
+    );
+
+    public static final ItemStack build_multi_block_recipe = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b配置",
+            "&b点击以配置多方块配方"
+    );
+
+    public static final ItemStack white_background = new CustomItemStack(
+            Material.WHITE_STAINED_GLASS_PANE,
+            "&a"
     );
 }

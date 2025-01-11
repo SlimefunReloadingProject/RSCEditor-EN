@@ -8,27 +8,38 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import lombok.Getter;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.file.YamlRepresenter;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.yaml.snakeyaml.DumperOptions;
 
 import java.io.File;
 import java.net.URL;
 import java.util.List;
+import java.util.Random;
 
 @SuppressWarnings("deprecation")
 @Getter
 public class YamlWriter {
+    private static final Random random = new Random();
     private String root;
     private File file;
-    private FileConfiguration configuration;
+    private YamlConfiguration configuration;
 
     public YamlWriter() {
         configuration = new YamlConfiguration();
+        try {
+            ((DumperOptions) ReflectionUtil.getValue(configuration, "yamlDumperOptions")).setDefaultFlowStyle(DumperOptions.FlowStyle.FLOW);
+        } catch (Throwable ignored) {
+        }
+        try {
+            ((YamlRepresenter) ReflectionUtil.getValue(configuration, "representer")).setDefaultFlowStyle(DumperOptions.FlowStyle.FLOW);
+        } catch (Throwable ignored) {
+        }
     }
 
     @CanIgnoreReturnValue
@@ -46,14 +57,19 @@ public class YamlWriter {
 
     @CanIgnoreReturnValue
     public @NotNull YamlWriter set(String key, @NotNull MachineRecipe recipe) {
-        String recipeKey = getKey(key + "." + recipe.getName());
+        String recipeKey = getKey(key) + "." + recipe.getName();
+        String callback = "";
+        if (configuration.contains(recipeKey)) {
+            callback = "_" + random.nextInt(1000000);
+        }
+        recipeKey += callback;
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
-        String inputKey = recipeKey + ".input";
+        String inputKey = key + callback + "." + recipe.getName() + ".input";
         for (int i = 0; i < recipe.getInputs().length; i++) {
             set(inputKey + "." + i, recipe.getInputs()[i], false);
         }
 
-        String outputKey = recipeKey + ".output";
+        String outputKey = key + callback+ "." + recipe.getName() + ".output";
         for (int i = 0; i < recipe.getOutputs().length; i++) {
             set(outputKey + "." + i, recipe.getOutputs()[i], false);
         }
@@ -67,14 +83,19 @@ public class YamlWriter {
 
     @CanIgnoreReturnValue
     public @NotNull YamlWriter set(String key, @NotNull TemplateMachineRecipe recipe) {
-        String recipeKey = getKey(key + "." + recipe.getId() + "." + recipe.getName());
+        String recipeKey = getKey(key) + "." + recipe.getId() + "." + recipe.getName();
+        String callback = "";
+        if (configuration.contains(recipeKey)) {
+            callback = "_" + random.nextInt(1000000);
+        }
+        recipeKey += callback;
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
-        String inputKey = recipeKey + ".input";
+        String inputKey = key + callback + "." + recipe.getId() + "." + recipe.getName() + ".input";
         for (int i = 0; i < recipe.getInputs().length; i++) {
             set(inputKey + "." + i, recipe.getInputs()[i], false);
         }
 
-        String outputKey = recipeKey + ".output";
+        String outputKey = key + callback + "." + recipe.getId() + "." + recipe.getName() + ".output";
         for (int i = 0; i < recipe.getOutputs().length; i++) {
             set(outputKey + "." + i, recipe.getOutputs()[i], false);
         }
@@ -88,10 +109,15 @@ public class YamlWriter {
 
     @CanIgnoreReturnValue
     public @NotNull YamlWriter set(String key, @NotNull LinkedMachineRecipe recipe) {
-        String recipeKey = getKey(key + "." + recipe.getName());
+        String recipeKey = getKey(key) + "." + recipe.getName();
+        String callback = "";
+        if (configuration.contains(recipeKey)) {
+            callback = "_" + random.nextInt(1000000);
+        }
+        recipeKey += callback;
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
-        String inputKey = recipeKey + ".input";
-        String outputKey = recipeKey + ".output";
+        String inputKey = key + callback + "." + recipe.getName() + ".input";
+        String outputKey = key + callback + "." + recipe.getName() + ".output";
         int i = 0;
         for (Integer slot : recipe.getLinkedInputs().keySet()) {
             ItemStack itemStack = recipe.getLinkedInputs().get(slot);
@@ -99,7 +125,7 @@ public class YamlWriter {
                 continue;
             }
             set(inputKey + "." + i, itemStack.clone(), false);
-            configuration.set(inputKey + "." + i + ".slot", slot);
+            configuration.set(getKey(inputKey) + "." + i + ".slot", slot);
             i++;
         }
 
@@ -110,7 +136,7 @@ public class YamlWriter {
                 continue;
             }
             set(outputKey + "." + i, itemStack.clone(), false);
-            configuration.set(outputKey + "." + i + ".slot", slot);
+            configuration.set(getKey(outputKey) + "." + i + ".slot", slot);
             i++;
         }
 

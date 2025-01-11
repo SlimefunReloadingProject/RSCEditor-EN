@@ -2,18 +2,23 @@ package com.balugaq.rsceditor.implementation.items.machines.container;
 
 import com.balugaq.rsceditor.api.base.AbstractContainer;
 import com.balugaq.rsceditor.api.objects.MenuMatrix;
+import com.balugaq.rsceditor.utils.Debug;
 import com.balugaq.rsceditor.utils.YamlWriter;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MenuContainer extends AbstractContainer {
@@ -70,6 +75,17 @@ public class MenuContainer extends AbstractContainer {
         }
         YamlWriter writer = new YamlWriter();
         Map<Integer, ItemStack> content = getMenuContent(menu);
+        List<Integer> input_slot_list = new ArrayList<>();
+        for (int i : input_slots) {
+            input_slot_list.add(i);
+        }
+        List<Integer> output_slot_list = new ArrayList<>();
+        for (int i : output_slots) {
+            output_slot_list.add(i);
+        }
+
+        Debug.log("input_slots: " + Arrays.toString(input_slots));
+        Debug.log("output_slots: " + Arrays.toString(output_slots));
 
         writer.setRoot(id);
         writer.set("title", title);
@@ -78,13 +94,15 @@ public class MenuContainer extends AbstractContainer {
         ItemStack cached_item = null;
         for (int i = 0; i < progress_bar_slot; i++) {
             ItemStack itemStack = content.get(i);
-            if (SlimefunUtils.isItemSimilar(cached_item, itemStack, true, true, true, true)) {
+            if (!input_slot_list.contains(i) && !output_slot_list.contains(i) && SlimefunUtils.isItemSimilar(cached_item, itemStack, true, true, true, true)) {
                 cached_item = itemStack;
             } else {
                 if (cached_item != null) {
                     writer.set("slots." + cached_slot + "-" + i, cached_item.clone());
                 } else {
-                    writer.set("slots." + i, itemStack.clone());
+                    if (itemStack != null && itemStack.getType() != Material.AIR) {
+                        writer.set("slots." + i, itemStack.clone());
+                    }
                 }
                 cached_slot = i + 1;
                 cached_item = null;
@@ -98,20 +116,23 @@ public class MenuContainer extends AbstractContainer {
         ItemStack progress_bar = content.get(progress_bar_slot);
         if (progress_bar != null) {
             writer.set("slots." + progress_bar_slot, progress_bar.clone());
-            writer.set("slots." + progress_bar_slot + ".progressbar", progress_bar.clone());
+            writer.set("slots." + progress_bar_slot + ".progressbar", true);
         }
 
         cached_slot = progress_bar_slot + 1;
         cached_item = null;
         for (int i = progress_bar_slot + 1; i < 54; i++) {
             ItemStack itemStack = content.get(i);
-            if (SlimefunUtils.isItemSimilar(cached_item, itemStack, true)) {
+            if (!input_slot_list.contains(i) && !output_slot_list.contains(i) && SlimefunUtils.isItemSimilar(cached_item, itemStack, true, true, true, true)) {
                 cached_item = itemStack;
             } else {
+                Debug.log("i: " + i);
                 if (cached_item != null) {
                     writer.set("slots." + cached_slot + "-" + i, cached_item.clone());
                 } else {
-                    writer.set("slots." + i, itemStack.clone());
+                    if (itemStack != null && itemStack.getType() != Material.AIR) {
+                        writer.set("slots." + i, itemStack.clone());
+                    }
                 }
                 cached_slot = i + 1;
                 cached_item = null;

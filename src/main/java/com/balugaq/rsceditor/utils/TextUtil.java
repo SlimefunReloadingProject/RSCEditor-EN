@@ -43,9 +43,17 @@ public class TextUtil {
         };
     }
 
+    private static boolean langHelperInit = true;
     public static @NotNull String getName(@NotNull Biome biome) {
         String key = biome.translationKey();
-        String name = LanguageHelper.getLangOrNull(key);
+        String name = null;
+        if (langHelperInit) {
+            try {
+                name = LanguageHelper.getLangOrNull(key);
+            } catch (Throwable ignored) {
+                langHelperInit = false;
+            }
+        }
         if (name == null) {
             return biome.name();
         }

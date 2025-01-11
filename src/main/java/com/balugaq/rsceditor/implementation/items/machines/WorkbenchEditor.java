@@ -58,7 +58,7 @@ public class WorkbenchEditor extends AbstractContainer {
             .addItem("I", Icons.item)
             .addItem("T", Icons.recipe_type)
             .addItem("H", Icons.hide_all_recipes)
-            .addItem("C", Icons.energy_capacity)
+            .addItem("C", Icons.capacity)
             .addItem("E", Icons.energy_per_craft)
             .addItem("L", Icons.title)
             .addItem("S", Icons.script)
@@ -359,7 +359,7 @@ public class WorkbenchEditor extends AbstractContainer {
                             return false;
                         }
 
-                        YamlWriter menuWriter = mc.getAsYamlWriter(menu, input, output, id, title, progress_bar_slot);
+                        YamlWriter menuWriter = mc.getAsYamlWriter(menuBlockMenu, input, output, id, title, progress_bar_slot);
                         ClipboardUtil.send(p, "菜单编辑器: ", menuWriter.toString());
                         p.sendMessage(ChatColor.YELLOW + "==============================");
                     }

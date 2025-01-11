@@ -57,7 +57,7 @@ public class MaterialGeneratorEditor extends AbstractContainer {
             .addItem("I", Icons.item)
             .addItem("T", Icons.recipe_type)
             .addItem("K", Icons.tick_rate)
-            .addItem("C", Icons.energy_capacity)
+            .addItem("C", Icons.capacity)
             .addItem("E", Icons.per)
             .addItem("L", Icons.title)
             .addItem("U", Icons.status)

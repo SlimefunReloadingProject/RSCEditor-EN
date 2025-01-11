@@ -13,6 +13,7 @@ import com.balugaq.rsceditor.api.items.RadioactivityTypeItem;
 import com.balugaq.rsceditor.api.items.RainbowTypeItem;
 import com.balugaq.rsceditor.api.items.RegisterItem;
 import com.balugaq.rsceditor.api.items.SimpleMachineTypeItem;
+import com.balugaq.rsceditor.api.items.TemplateMachineRecipeItem;
 import com.balugaq.rsceditor.api.items.TextTypeItem;
 import com.balugaq.rsceditor.api.objects.types.GroupType;
 import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
@@ -418,6 +419,16 @@ public class TypeItems {
                 )
         );
         SlimefunItemUtil.registerItem(mri);
+
+        TemplateMachineRecipeItem tmri = new TemplateMachineRecipeItem(
+                new SlimefunItemStack("RSC_EDITOR_TEMPLATE_MACHINE_RECIPE_ITEM",
+                        new CustomItemStack(
+                                Material.KNOWLEDGE_BOOK,
+                                "&b模板机器配方占位符"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(tmri);
 
         LinkedMachineRecipeItem lmri = new LinkedMachineRecipeItem(
                 new SlimefunItemStack("RSC_EDITOR_LINKED_MACHINE_RECIPE_ITEM",

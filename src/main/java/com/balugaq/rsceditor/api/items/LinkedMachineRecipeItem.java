@@ -25,11 +25,11 @@ public class LinkedMachineRecipeItem extends PlaceholderItem {
     }
 
     public @Nullable LinkedMachineRecipe getLinkedRecipe(ItemStack itemStack) {
-        return PersistentUtil.get(itemStack, PersistentLinkedMachineRecipeType.TYPE, KeyUtil.MACHINE_RECIPE_KEY);
+        return PersistentUtil.get(itemStack, PersistentLinkedMachineRecipeType.TYPE, KeyUtil.LINKED_MACHINE_RECIPE_KEY);
     }
 
     public void setRecipe(@NotNull ItemStack itemStack, @NotNull LinkedMachineRecipe recipe) {
-        PersistentUtil.set(itemStack, PersistentLinkedMachineRecipeType.TYPE, KeyUtil.MACHINE_RECIPE_KEY, recipe);
+        PersistentUtil.set(itemStack, PersistentLinkedMachineRecipeType.TYPE, KeyUtil.LINKED_MACHINE_RECIPE_KEY, recipe);
 
         List<String> lore = new ArrayList<>();
         lore.add("&b强配方机器配方数据");

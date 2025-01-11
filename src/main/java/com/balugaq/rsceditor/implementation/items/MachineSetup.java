@@ -21,6 +21,7 @@ import com.balugaq.rsceditor.implementation.items.machines.TemplateRecipeMachine
 import com.balugaq.rsceditor.implementation.items.machines.WorkbenchEditor;
 import com.balugaq.rsceditor.implementation.items.machines.builder.LinkedMachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.builder.MachineRecipeBuilder;
+import com.balugaq.rsceditor.implementation.items.machines.builder.MultiBlockRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.builder.RegisterBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.builder.TemplateMachineRecipeBuilder;
 import com.balugaq.rsceditor.implementation.items.machines.container.ArmorPieceContainer;
@@ -209,6 +210,17 @@ public class MachineSetup {
                 )
         );
         SlimefunItemUtil.registerItem(registerBuilder);
+
+        MultiBlockRecipeBuilder multiBlockRecipeBuilder = new MultiBlockRecipeBuilder(
+                new SlimefunItemStack(
+                        "RSC_EDITOR_MULTI_BLOCK_RECIPE_BUILDER",
+                        new CustomItemStack(
+                                Material.ANVIL,
+                                "&b多方块配方配置器"
+                        )
+                )
+        );
+        SlimefunItemUtil.registerItem(multiBlockRecipeBuilder);
 
         // editors
         ItemGroupEditor itemGroupEditor = new ItemGroupEditor(

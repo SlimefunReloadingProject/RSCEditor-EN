@@ -11,6 +11,7 @@ import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
 import com.balugaq.rsceditor.implementation.items.machines.container.ItemFlowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.MenuContainer;
 import com.balugaq.rsceditor.utils.ClipboardUtil;
+import com.balugaq.rsceditor.utils.Debug;
 import com.balugaq.rsceditor.utils.Icons;
 import com.balugaq.rsceditor.utils.ItemUtil;
 import com.balugaq.rsceditor.utils.YamlWriter;
@@ -44,12 +45,12 @@ import java.util.Map;
 
 public class MultiBlockRecipeBuilder extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
-            .addLine("GBIIIIIII")
-            .addLine("BBIIIIIII")
             .addLine("IIIIIIIII")
             .addLine("IIIIIIIII")
             .addLine("IIIIIIIII")
             .addLine("IIIIIIIII")
+            .addLine("IIIIIIIBB")
+            .addLine("IIIIIIIBG")
             .addItem("G", Icons.build_multi_block_recipe)
             .addItem("B", Icons.white_background);
 
@@ -121,8 +122,10 @@ public class MultiBlockRecipeBuilder extends AbstractContainer {
                                 continue;
                             }
 
+                            // Slimefun 物品
+
                             String id = slimefunItem.getId();
-                            ItemStack item = slimefunItem.getItem();
+                            ItemStack item = slimefunItem.getRecipeOutput();
                             ItemStack[] recipe = slimefunItem.getRecipe();
                             if (recipe == null) {
                                 continue;
@@ -133,18 +136,18 @@ public class MultiBlockRecipeBuilder extends AbstractContainer {
                                 if (input == null || input.getType() == Material.AIR) {
                                     continue;
                                 }
-                                writer.set(id.toLowerCase() + ".input." + k, input.clone(), false);
+                                writer.set(id.toLowerCase() + ".input." + (k + 1), input.clone(), false);
                             }
 
                             writer.set(id.toLowerCase() + ".output", item.clone(), false);
                         }
                     } else {
-                        p.sendMessage("&c你还没有放置物品");
+                        p.sendMessage("§c你还没有放置物品");
                         return false;
                     }
 
                     ClipboardUtil.send(p, writer.toString());
-                    p.sendMessage("&a已编辑完毕");
+                    p.sendMessage("§a已编辑完毕");
 
                     return false;
                 });

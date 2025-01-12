@@ -3,6 +3,7 @@ package com.balugaq.rsceditor.api.objects.types;
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
 import java.util.Map;
 
 @Getter
@@ -25,5 +26,18 @@ public class LinkedMachineRecipe {
         this.linkedInputs = linkedInputs;
         this.linkedOutputs = linkedOutputs;
         this.freeOutputs = freeOutputs;
+    }
+
+    public int hashCode() {
+        int hash = 31;
+        hash = 31 * hash + (name == null? 0 : name.hashCode());
+        hash = 31 * hash + (chooseOne ? 1 : 0);
+        hash = 31 * hash + (forDisplay ? 1 : 0);
+        hash = 31 * hash + (hide      ? 1 : 0);
+        hash = 31 * hash + processingTime;
+        hash = 31 * hash + (linkedInputs == null ? 0 : linkedInputs.hashCode());
+        hash = 31 * hash + (linkedOutputs == null ? 0 : linkedOutputs.hashCode());
+        hash = 31 * hash + (freeOutputs == null ? 0 : Arrays.hashCode(freeOutputs));
+        return hash;
     }
 }

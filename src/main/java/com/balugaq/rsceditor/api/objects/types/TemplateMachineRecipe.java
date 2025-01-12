@@ -5,6 +5,8 @@ import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 @Getter
 public class TemplateMachineRecipe {
     private final String id;
@@ -29,5 +31,18 @@ public class TemplateMachineRecipe {
         this.processingTime = processingTime;
         this.inputs = inputs;
         this.outputs = outputs;
+    }
+
+    public int hashCode() {
+        int hash = 31;
+        hash = 31 * hash + (id != null ? id.hashCode() : 0);
+        hash = 31 * hash + (name != null ? name.hashCode() : 0);
+        hash = 31 * hash + (chooseOne ? 1 : 0);
+        hash = 31 * hash + (forDisplay ? 1 : 0);
+        hash = 31 * hash + (hide ? 1 : 0);
+        hash = 31 * hash + processingTime;
+        hash = 31 * hash + (inputs != null ? Arrays.hashCode(inputs) : 0);
+        hash = 31 * hash + (outputs != null ? Arrays.hashCode(outputs) : 0);
+        return hash;
     }
 }

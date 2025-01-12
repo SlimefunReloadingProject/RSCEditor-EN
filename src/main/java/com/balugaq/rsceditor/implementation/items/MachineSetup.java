@@ -215,7 +215,7 @@ public class MachineSetup {
                 new SlimefunItemStack(
                         "RSC_EDITOR_MULTI_BLOCK_RECIPE_BUILDER",
                         new CustomItemStack(
-                                Material.ANVIL,
+                                Material.LECTERN,
                                 "&b多方块配方配置器"
                         )
                 )

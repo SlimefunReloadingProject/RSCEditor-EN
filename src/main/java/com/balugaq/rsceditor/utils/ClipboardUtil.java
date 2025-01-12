@@ -24,7 +24,7 @@ public class ClipboardUtil {
         TextComponent msg = new TextComponent(display);
         msg.setUnderlined(true);
         msg.setItalic(true);
-        msg.setColor(ChatColor.GRAY);
+        msg.setColor(ChatColor.LIGHT_PURPLE);
         msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hover)));
         msg.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, text));
         player.spigot().sendMessage(msg);

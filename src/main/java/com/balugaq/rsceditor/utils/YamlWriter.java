@@ -59,19 +59,22 @@ public class YamlWriter {
     public @NotNull YamlWriter set(String key, @NotNull MachineRecipe recipe) {
         String recipeKey = getKey(key) + "." + recipe.getName();
         String callback = "";
+        // Avoid duplicate keys
         if (configuration.contains(recipeKey)) {
-            callback = "_" + random.nextInt(1000000);
+            callback = "_" + Math.abs(random.nextInt(Integer.MAX_VALUE));
+            Debug.log("&cDuplicate key: " + recipeKey);
+            Debug.log("&c  Callback: " + recipeKey + callback);
         }
         recipeKey += callback;
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
-        String inputKey = key + callback + "." + recipe.getName() + ".input";
+        String inputKey = key + "." + recipe.getName() + callback + ".input";
         for (int i = 0; i < recipe.getInputs().length; i++) {
-            set(inputKey + "." + i, recipe.getInputs()[i], false);
+            set(inputKey + "." + (i + 1), recipe.getInputs()[i], false);
         }
 
-        String outputKey = key + callback+ "." + recipe.getName() + ".output";
+        String outputKey = key + "." + recipe.getName() + callback + ".output";
         for (int i = 0; i < recipe.getOutputs().length; i++) {
-            set(outputKey + "." + i, recipe.getOutputs()[i], false);
+            set(outputKey + "." + (i + 1), recipe.getOutputs()[i], false);
         }
 
         configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());
@@ -85,19 +88,22 @@ public class YamlWriter {
     public @NotNull YamlWriter set(String key, @NotNull TemplateMachineRecipe recipe) {
         String recipeKey = getKey(key) + "." + recipe.getId() + "." + recipe.getName();
         String callback = "";
+        // Avoid duplicate keys
         if (configuration.contains(recipeKey)) {
-            callback = "_" + random.nextInt(1000000);
+            callback = "_" + Math.abs(random.nextInt(Integer.MAX_VALUE));
+            Debug.log("&cDuplicate key: " + recipeKey);
+            Debug.log("&c  Callback: " + recipeKey + callback);
         }
         recipeKey += callback;
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
-        String inputKey = key + callback + "." + recipe.getId() + "." + recipe.getName() + ".input";
+        String inputKey = key + "." + recipe.getId() + "." + recipe.getName() + callback + ".input";
         for (int i = 0; i < recipe.getInputs().length; i++) {
-            set(inputKey + "." + i, recipe.getInputs()[i], false);
+            set(inputKey + "." + (i + 1), recipe.getInputs()[i], false);
         }
 
-        String outputKey = key + callback + "." + recipe.getId() + "." + recipe.getName() + ".output";
+        String outputKey = key + "." + recipe.getId() + "." + recipe.getName() + callback + ".output";
         for (int i = 0; i < recipe.getOutputs().length; i++) {
-            set(outputKey + "." + i, recipe.getOutputs()[i], false);
+            set(outputKey + "." + (i + 1), recipe.getOutputs()[i], false);
         }
 
         configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());
@@ -111,14 +117,17 @@ public class YamlWriter {
     public @NotNull YamlWriter set(String key, @NotNull LinkedMachineRecipe recipe) {
         String recipeKey = getKey(key) + "." + recipe.getName();
         String callback = "";
+        // Avoid duplicate keys
         if (configuration.contains(recipeKey)) {
-            callback = "_" + random.nextInt(1000000);
+            callback = "_" + Math.abs(random.nextInt(Integer.MAX_VALUE));
+            Debug.log("&cDuplicate key: " + recipeKey);
+            Debug.log("&c  Callback: " + recipeKey + callback);
         }
         recipeKey += callback;
         configuration.set(recipeKey + ".seconds", recipe.getProcessingTime());
-        String inputKey = key + callback + "." + recipe.getName() + ".input";
-        String outputKey = key + callback + "." + recipe.getName() + ".output";
-        int i = 0;
+        String inputKey = key + "." + recipe.getName() + callback + ".input";
+        String outputKey = key + "." + recipe.getName() + callback + ".output";
+        int i = 1;
         for (Integer slot : recipe.getLinkedInputs().keySet()) {
             ItemStack itemStack = recipe.getLinkedInputs().get(slot);
             if (itemStack == null || itemStack.getType() == Material.AIR) {
@@ -129,7 +138,7 @@ public class YamlWriter {
             i++;
         }
 
-        i = 0;
+        i = 1;
         for (Integer slot : recipe.getLinkedOutputs().keySet()) {
             ItemStack itemStack = recipe.getLinkedOutputs().get(slot);
             if (itemStack == null || itemStack.getType() == Material.AIR) {
@@ -140,11 +149,12 @@ public class YamlWriter {
             i++;
         }
 
-        for (ItemStack itemStack : recipe.getFreeOutputs()) {
+        for (int k = 0; k < recipe.getFreeOutputs().length; k++) {
+            ItemStack itemStack = recipe.getFreeOutputs()[k];
             if (itemStack == null || itemStack.getType() == Material.AIR) {
                 continue;
             }
-            set(outputKey + "." + i, itemStack.clone(), false);
+            set(outputKey + "." + (k + 1), itemStack.clone(), false);
         }
 
         configuration.set(recipeKey + ".chooseOne", recipe.isChooseOne());
@@ -167,7 +177,7 @@ public class YamlWriter {
         }
 
         boolean late_init = register.isLateInit();
-        configuration.set(registerKey + ".late_init", late_init);
+        configuration.set(registerKey + ".lateInit", late_init);
 
         boolean warn = register.isWarn();
         configuration.set(registerKey + ".warn", warn);
@@ -219,8 +229,6 @@ public class YamlWriter {
             }
         }
 
-        configuration.set(getKey(key + ".amount"), itemStack.getAmount());
-
         if (slimefunItem != null) {
             if (!slimefunItem.getId().equals("LOGITECH_SAMPLE_HEAD")) {
                 configuration.set(getKey(key + ".material_type"), "slimefun");
@@ -229,6 +237,8 @@ public class YamlWriter {
                 return this;
             }
         }
+
+        configuration.set(getKey(key + ".amount"), itemStack.getAmount());
 
         if (itemStack.getType() == Material.PLAYER_HEAD || itemStack.getType() == Material.PLAYER_WALL_HEAD) {
             if (itemMeta instanceof SkullMeta skullMeta) {
@@ -241,7 +251,6 @@ public class YamlWriter {
                     configuration.set(getKey(key + ".material_type"), "skull_hash");
                     configuration.set(getKey(key + ".material"), hash);
                 } catch (Throwable ignored) {
-
                 }
             } else {
                 configuration.set(getKey(key + ".material_type"), "mc");

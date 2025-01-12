@@ -18,8 +18,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MenuContainer extends AbstractContainer {
     private static final MenuMatrix matrix = new MenuMatrix()
@@ -90,57 +92,45 @@ public class MenuContainer extends AbstractContainer {
         writer.setRoot(id);
         writer.set("title", title);
 
-        int cached_slot = 0;
-        ItemStack cached_item = null;
-        for (int i = 0; i < progress_bar_slot; i++) {
-            ItemStack itemStack = content.get(i);
-            if (!input_slot_list.contains(i) && !output_slot_list.contains(i) && SlimefunUtils.isItemSimilar(cached_item, itemStack, true, true, true, true)) {
-                cached_item = itemStack;
-            } else {
-                if (cached_item != null) {
-                    writer.set("slots." + cached_slot + "-" + i, cached_item.clone());
-                } else {
-                    if (itemStack != null && itemStack.getType() != Material.AIR) {
-                        writer.set("slots." + i, itemStack.clone());
-                    }
-                }
-                cached_slot = i + 1;
-                cached_item = null;
+        if (progress_bar_slot >= 0 && progress_bar_slot <= 53) {
+            ItemStack itemStack = content.get(progress_bar_slot);
+            if (itemStack != null && itemStack.getType() != Material.AIR) {
+                writer.set("slots." + progress_bar_slot, itemStack.clone());
+                writer.set("slots." + progress_bar_slot + ".progressbar", true);
             }
         }
 
-        if (cached_item != null) {
-            writer.set("slots." + cached_slot + "-" + (progress_bar_slot - 1), cached_item.clone());
-        }
-
-        ItemStack progress_bar = content.get(progress_bar_slot);
-        if (progress_bar != null) {
-            writer.set("slots." + progress_bar_slot, progress_bar.clone());
-            writer.set("slots." + progress_bar_slot + ".progressbar", true);
-        }
-
-        cached_slot = progress_bar_slot + 1;
-        cached_item = null;
-        for (int i = progress_bar_slot + 1; i < 54; i++) {
-            ItemStack itemStack = content.get(i);
-            if (!input_slot_list.contains(i) && !output_slot_list.contains(i) && SlimefunUtils.isItemSimilar(cached_item, itemStack, true, true, true, true)) {
-                cached_item = itemStack;
-            } else {
-                Debug.log("i: " + i);
-                if (cached_item != null) {
-                    writer.set("slots." + cached_slot + "-" + i, cached_item.clone());
-                } else {
-                    if (itemStack != null && itemStack.getType() != Material.AIR) {
-                        writer.set("slots." + i, itemStack.clone());
-                    }
-                }
-                cached_slot = i + 1;
-                cached_item = null;
+        Set<Integer> keys = new HashSet<>(content.keySet());
+        for (int i : keys) {
+            if (input_slot_list.contains(i) || output_slot_list.contains(i) || i == progress_bar_slot) {
+                content.remove(i);
             }
         }
 
-        if (cached_item != null) {
-            writer.set("slots." + cached_slot + "-" + 53, cached_item.clone());
+        for (int i = 0; i < 54; i++) {
+            ItemStack item = content.get(i);
+            if (item == null || item.getType() == Material.AIR) {
+                continue;
+            }
+
+            int last_index = i;
+            boolean found = false;
+            ItemStack next_item = content.get(i + 1);
+            while (next_item != null && SlimefunUtils.isItemSimilar(item, next_item, true, true, true, true)) {
+                if (input_slot_list.contains(i) || output_slot_list.contains(i) || i == progress_bar_slot) {
+                    found = true;
+                    break;
+                }
+                i++;
+                next_item = content.get(i + 1);
+                found = true;
+            }
+
+            if (found) {
+                writer.set("slots." + last_index + "-" + i, item.clone());
+            } else {
+                writer.set("slots." + last_index, item.clone());
+            }
         }
 
         return writer;

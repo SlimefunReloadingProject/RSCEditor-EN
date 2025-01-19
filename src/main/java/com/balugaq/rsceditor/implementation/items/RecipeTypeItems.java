@@ -31,7 +31,7 @@ public class RecipeTypeItems {
             }
             RecipeTypeItem recipeTypeItem = new RecipeTypeItem(
                     new SlimefunItemStack(
-                            "RSC_EDITOR_RECIPE_TYPE_" + type.getKey().getKey().toUpperCase(),
+                            "RSC_EDITOR_RECIPE_TYPE_" + type.getKey().getNamespace().toUpperCase() + "_" + type.getKey().getKey().toUpperCase(),
                             item
                     ),
                     type

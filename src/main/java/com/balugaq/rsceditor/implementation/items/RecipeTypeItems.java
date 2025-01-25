@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.implementation.items;
 
 import com.balugaq.rsceditor.api.items.RecipeTypeItem;
 import com.balugaq.rsceditor.utils.SlimefunItemUtil;
+import io.github.thebusybiscuit.slimefun4.api.exceptions.IdConflictException;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
@@ -36,7 +37,10 @@ public class RecipeTypeItems {
                     ),
                     type
             );
-            SlimefunItemUtil.registerItem(recipeTypeItem);
+            try {
+                SlimefunItemUtil.registerItem(recipeTypeItem);
+            } catch (IdConflictException ignored) {
+            }
         }
     }
 }

@@ -39,9 +39,9 @@ public class MenuCopier extends AbstractTool {
         List<String> lore = new ArrayList<>(mc.getItem().getLore());
 
         Location location = menu.getLocation();
-        lore.add(compile("&a已保存: " + menu.getPreset().getTitle()));
-        lore.add(compile("&a位置: " + location.getWorld().getName() + ";" + location.getBlockX() + ":" + location.getBlockY() + ":" + location.getBlockZ()));
-        lore.add(compile("&a粘液ID: " + menu.getPreset().getID()));
+        lore.add(compile("&aSaved: " + menu.getPreset().getTitle()));
+        lore.add(compile("&aLocation: " + location.getWorld().getName() + ";" + location.getBlockX() + ":" + location.getBlockY() + ":" + location.getBlockZ()));
+        lore.add(compile("&aSlimefun Item ID: " + menu.getPreset().getID()));
         meta.setLore(lore);
         tool.setItemMeta(meta);
     }
@@ -82,7 +82,7 @@ public class MenuCopier extends AbstractTool {
             if (optional.isPresent()) {
                 ItemStack tool = event.getItem();
                 if (tool.getType() == Material.AIR) {
-                    player.sendMessage("§c你必须持有工具才能使用该功能。");
+                    player.sendMessage("§cYou must hold a tool in your hand to copy or paste a menu.");
                     return;
                 }
 
@@ -90,22 +90,22 @@ public class MenuCopier extends AbstractTool {
                 Location location = block.getLocation();
                 BlockMenu menu = StorageCacheUtils.getMenu(location);
                 if (menu == null) {
-                    player.sendMessage("§c该方块没有菜单，无法复制。");
+                    player.sendMessage("§cThere is no menu on this block.");
                     return;
                 }
 
                 ItemStack[] contents = menu.getContents();
                 if (contents == null) {
-                    player.sendMessage("§c该方块的菜单内容为空，无法复制。");
+                    player.sendMessage("§cThe menu is the block is empty.");
                     return;
                 }
                 saveMenu0(tool, menu);
-                player.sendMessage("§a成功复制菜单内容。");
+                player.sendMessage("§aCopied menu contents successfully.");
             }
         } else {
             ItemStack[] contents = PersistentUtil.get(event.getItem(), DataType.ITEM_STACK_ARRAY, KeyUtil.MENU_CONTENTS);
             if (contents == null) {
-                player.sendMessage("§c你还没有复制任何菜单内容，无法粘贴。");
+                player.sendMessage("§cYou have not copied a menu yet.");
                 return;
             }
 
@@ -114,16 +114,15 @@ public class MenuCopier extends AbstractTool {
                 Location location = block.getLocation();
                 BlockMenu menu = StorageCacheUtils.getMenu(location);
                 if (menu == null) {
-                    player.sendMessage("§c该方块没有菜单，无法粘贴。");
+                    player.sendMessage("§cThere is no menu on this block, cannot paste.");
                     return;
                 }
 
                 pasteMenu0(event.getItem(), menu);
 
-                player.sendMessage("§a成功粘贴菜单内容。");
+                player.sendMessage("§aPasted menu contents successfully.");
             } else {
-                player.sendMessage("§c你必须对粘液机器右键才能粘贴菜单内容。");
-                return;
+                player.sendMessage("§cYou must right-click on a block to paste the menu contents.");
             }
         }
     }

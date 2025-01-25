@@ -14,9 +14,8 @@ import com.balugaq.rsceditor.implementation.items.ToolSetup;
 import com.balugaq.rsceditor.implementation.items.TypeItems;
 import com.balugaq.rsceditor.utils.SlimefunItemUtil;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.BlobBuildUpdater;
 import lombok.Getter;
-import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
-import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -55,10 +54,8 @@ public class RSCEditor extends JavaPlugin implements SlimefunAddon {
         SoundTypeItems.register();
         ToolSetup.register();
 
-        if (getServer().getPluginManager().isPluginEnabled("GuizhanLibPlugin")) {
-            getLogger().info("正在尝试自动更新...");
-            tryUpdate();
-        }
+        getLogger().info("Trying to start updater...");
+        //tryUpdate();
 
         PluginCommand command = this.getCommand("rsceditor");
         if (command != null) {
@@ -98,10 +95,11 @@ public class RSCEditor extends JavaPlugin implements SlimefunAddon {
     public void tryUpdate() {
         try {
             if (configManager.isAutoUpdate() && getDescription().getVersion().startsWith("Build")) {
-                GuizhanUpdater.start(this, getFile(), username, repo, branch);
+                BlobBuildUpdater u = new BlobBuildUpdater(this, this.getFile(), "SlimefunReloadingProject/RSCEditor-EN");
+                u.start();
             }
         } catch (NoClassDefFoundError | NullPointerException | UnsupportedClassVersionError e) {
-            getLogger().info("自动更新失败: " + e.getMessage());
+            getLogger().info("Failed to auto update: " + e.getMessage());
             e.printStackTrace();
         }
     }

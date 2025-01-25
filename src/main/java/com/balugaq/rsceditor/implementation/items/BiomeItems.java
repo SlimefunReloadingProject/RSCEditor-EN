@@ -18,7 +18,7 @@ public class BiomeItems {
                             "RSC_EDITOR_BIOME_" + biome.name().toUpperCase(),
                             new CustomItemStack(
                                     MaterialUtil.getMaterial(biome),
-                                    "&6群系占位符: " + "&b" + TextUtil.getName(biome),
+                                    "&6Biome Placeholder: " + "&b" + TextUtil.getName(biome),
                                     "&b" + biome.name().toUpperCase()
                             )
                     ),

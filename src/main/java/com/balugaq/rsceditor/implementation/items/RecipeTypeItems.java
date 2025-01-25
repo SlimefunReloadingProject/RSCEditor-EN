@@ -12,7 +12,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 @UtilityClass
@@ -20,9 +19,7 @@ public class RecipeTypeItems {
     public static void register() {
         Set<RecipeType> recipeTypes = new HashSet<>();
         Slimefun.getRegistry().getAllSlimefunItems().forEach(item -> recipeTypes.add(item.getRecipeType()));
-        Iterator<RecipeType> iterator = recipeTypes.iterator();
-        while (iterator.hasNext()) {
-            RecipeType type = iterator.next();
+        for (RecipeType type : recipeTypes) {
             ItemStack item = type.toItem();
             if (item == null) {
                 item = new CustomItemStack(

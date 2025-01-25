@@ -82,7 +82,7 @@ public abstract class AbstractContainer extends AContainer {
                         Player player = blockBreakEvent.getPlayer();
                         World world = player.getWorld();
                         world.dropItemNaturally(location, copier);
-                        player.sendMessage(ChatColor.GREEN + "机器菜单已保存到菜单复制器中。");
+                        player.sendMessage(ChatColor.GREEN + "Machine menu have been saved to the menu copier.");
                     }
                 }
             }

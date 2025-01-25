@@ -13,10 +13,10 @@ public class ToolSetup {
                 new SlimefunItemStack(
                         "RSC_EDITOR_TOOL_MENU_COPIER",
                         Material.LIME_DYE,
-                        "&a菜单复制器",
+                        "&aMenu Copier",
                         "",
-                        "&a对粘液机器 右键 以粘贴菜单。",
-                        "&a对粘液机器 Shift+右键 以复制菜单。"
+                        "&aRigth click on a machine to paste the menu.",
+                        "&aShift + Right-click to copy the menu."
                 )
         );
         SlimefunItemUtil.registerItem(menuCopier);

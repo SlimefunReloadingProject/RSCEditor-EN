@@ -15,9 +15,7 @@ import java.util.Iterator;
 @UtilityClass
 public class ItemGroupItems {
     public static void register() {
-        Iterator<ItemGroup> iterator = Slimefun.getRegistry().getAllItemGroups().iterator();
-        while (iterator.hasNext()) {
-            ItemGroup itemGroup = iterator.next();
+        for (ItemGroup itemGroup : Slimefun.getRegistry().getAllItemGroups()) {
             ItemStack item = (ItemStack) ReflectionUtil.getValue(itemGroup, "item");
             if (item != null) {
                 ItemGroupItem itemGroupItem = new ItemGroupItem(

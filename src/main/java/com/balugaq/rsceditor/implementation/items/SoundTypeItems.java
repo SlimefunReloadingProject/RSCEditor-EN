@@ -18,7 +18,7 @@ public class SoundTypeItems {
                             "RSC_EDITOR_SOUND_TYPE_" + sound.name().toUpperCase(),
                             new CustomItemStack(
                                     MaterialUtil.getMaterial(sound),
-                                    "&6音效占位符: " + "&b" + TextUtil.getName(sound),
+                                    "&6Sound Placeholder: " + "&b" + TextUtil.getName(sound),
                                     "&b" + sound.name().toUpperCase()
                             )
                     ),

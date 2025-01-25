@@ -37,7 +37,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_BOOLEAN_TYPE_ITEM",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b布尔占位符"
+                                "&bBoolean Placeholder"
                         )
                 )
         );
@@ -47,7 +47,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_INTEGER_TYPE_ITEM",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b整数占位符"
+                                "&bInteger Placeholder"
                         )
                 )
         );
@@ -57,7 +57,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_DOUBLE_TYPE_ITEM",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b浮点数占位符"
+                                "&bDouble Placeholder"
                         )
                 )
         );
@@ -67,7 +67,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_TEXT_TYPE_ITEM",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b文字占位符"
+                                "&bText Placeholder"
                         )
                 )
         );
@@ -77,8 +77,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_NESTED",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b物品组类型占位符",
-                                "&e父物品组"
+                                "&bGroup Type Placeholder",
+                                "&eParent Group"
                         )
                 ),
                 GroupType.NESTED
@@ -89,8 +89,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_NORMAL",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b物品组类型占位符",
-                                "&e正常物品组"
+                                "&bGroup Type Placeholder",
+                                "&eNormal Group"
                         )
                 ),
                 GroupType.NORMAL
@@ -101,8 +101,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_SUB",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b物品组类型占位符",
-                                "&e子物品组"
+                                "&bGroup Type Placeholder",
+                                "&eSub Group"
                         )
                 ),
                 GroupType.SUB
@@ -113,8 +113,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_SEASONAL",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b物品组类型占位符",
-                                "&e季节性物品组"
+                                "&bGroup Type Placeholder",
+                                "&eSeasonal Group"
                         )
                 ),
                 GroupType.SEASONAL
@@ -125,8 +125,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_BUTTON",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b物品组类型占位符",
-                                "&e链接物品组"
+                                "&bGroup Type Placeholder",
+                                "&eBrowser Link Button"
                         )
                 ),
                 GroupType.BUTTON
@@ -137,8 +137,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_GROUP_TYPE_ITEM_LOCKED",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b物品组类型占位符",
-                                "&e锁定物品组"
+                                "&bGroup Type Placeholder",
+                                "&eLocked Group"
                         )
                 ),
                 GroupType.LOCKED
@@ -149,7 +149,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_LOW",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b辐射占位符",
+                                "&bRadioactivity Placeholder",
                                 Radioactivity.LOW.getLore()
                         )
                 ),
@@ -161,7 +161,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_MODERATE",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b辐射占位符",
+                                "&bRadioactivity Placeholder",
                                 Radioactivity.MODERATE.getLore()
                         )
                 ),
@@ -173,7 +173,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_HIGH",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b辐射占位符",
+                                "&bRadioactivity Placeholder",
                                 Radioactivity.HIGH.getLore()
                         )
                 ),
@@ -185,7 +185,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_VERY_HIGH",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b辐射占位符",
+                                "&bRadioactivity Placeholder",
                                 Radioactivity.VERY_HIGH.getLore()
                         )
                 ),
@@ -197,7 +197,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RADIOACTIVITY_TYPE_ITEM_VERY_DEADLY",
                         new CustomItemStack(
                                 Material.PAPER,
-                                "&b辐射占位符",
+                                "&bRadioactivity Placeholder",
                                 Radioactivity.VERY_DEADLY.getLore()
                         )
                 ),
@@ -209,8 +209,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_WOOL",
                         new CustomItemStack(
                                 Material.WHITE_WOOL,
-                                "&b彩虹类型占位符",
-                                "&e羊毛"
+                                "&bRainbow Type Placeholder",
+                                "&eWools"
                         )
                 ),
                 RainbowType.WOOL
@@ -221,8 +221,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_CARPET",
                         new CustomItemStack(
                                 Material.WHITE_CARPET,
-                                "&b彩虹类型占位符",
-                                "&e地毯"
+                                "&bRainbow Type Placeholder",
+                                "&eCarpets"
                         )
                 ),
                 RainbowType.CARPET
@@ -233,8 +233,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_STAINED_GLASS",
                         new CustomItemStack(
                                 Material.WHITE_STAINED_GLASS,
-                                "&b彩虹类型占位符",
-                                "&e玻璃"
+                                "&bRainbow Type Placeholder",
+                                "&eGlass Blocks"
                         )
                 ),
                 RainbowType.STAINED_GLASS
@@ -245,8 +245,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_STAINED_GLASS_PANE",
                         new CustomItemStack(
                                 Material.WHITE_STAINED_GLASS_PANE,
-                                "&b彩虹类型占位符",
-                                "&e玻璃板"
+                                "&bRainbow Type Placeholder",
+                                "&eGlass Panels"
                         )
                 ),
                 RainbowType.STAINED_GLASS_PANE
@@ -257,8 +257,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_TERRACOTTA",
                         new CustomItemStack(
                                 Material.TERRACOTTA,
-                                "&b彩虹类型占位符",
-                                "&e陶瓦"
+                                "&bRainbow Type Placeholder",
+                                "&eTerracotta"
                         )
                 ),
                 RainbowType.TERRACOTTA
@@ -269,8 +269,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_GLAZED_TERRACOTTA",
                         new CustomItemStack(
                                 Material.WHITE_GLAZED_TERRACOTTA,
-                                "&b彩虹类型占位符",
-                                "&e带釉陶瓦"
+                                "&bRainbow Type Placeholder",
+                                "&eGlazed Terracotta"
                         )
                 ),
                 RainbowType.GLAZED_TERRACOTTA
@@ -282,8 +282,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_CONCRETE",
                         new CustomItemStack(
                                 Material.WHITE_CONCRETE,
-                                "&b彩虹类型占位符",
-                                "&e混凝土"
+                                "&bRainbow Type Placeholder",
+                                "&eConcrete"
                         )
                 ),
                 RainbowType.CONCRETE
@@ -294,8 +294,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_SHULKER_BOX",
                         new CustomItemStack(
                                 Material.WHITE_SHULKER_BOX,
-                                "&b彩虹类型占位符",
-                                "&e潜影盒"
+                                "&bRainbow Type Placeholder",
+                                "&eShulker Boxes"
                         )
                 ),
                 RainbowType.SHULKER_BOX
@@ -306,8 +306,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_RAINBOW_TYPE_ITEM_CUSTOM",
                         new CustomItemStack(
                                 Material.WHITE_BANNER,
-                                "&b彩虹类型占位符",
-                                "&e自定义"
+                                "&bRainbow Type Placeholder",
+                                "&eCustom"
                         )
                 ),
                 RainbowType.CUSTOM
@@ -318,8 +318,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_PROTECTION_TYPE_ITEM_BEES",
                         new CustomItemStack(
                                 Material.BEEHIVE,
-                                "&b保护类型占位符",
-                                "&e蜜蜂毒针保护"
+                                "&bProtection Type Placeholder",
+                                "&eBee Protection"
                         )
                 ),
                 ProtectionType.BEES
@@ -330,8 +330,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_PROTECTION_TYPE_ITEM_RADIATION",
                         new CustomItemStack(
                                 Material.LAVA_BUCKET,
-                                "&b保护类型占位符",
-                                "&e抗辐射"
+                                "&bProtection Type Placeholder",
+                                "&eRadiation Protection"
                         )
                 ),
                 ProtectionType.RADIATION
@@ -342,8 +342,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_PROTECTION_TYPE_ITEM_FLYING_INTO_WALL",
                         new CustomItemStack(
                                 Material.FEATHER,
-                                "&b保护类型占位符",
-                                "&e鞘翅动能免疫"
+                                "&bProtection Type Placeholder",
+                                "&eFlying into Wall Protection"
                         )
                 ),
                 ProtectionType.FLYING_INTO_WALL
@@ -354,8 +354,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_NONE",
                         new CustomItemStack(
                                 Material.GRAY_STAINED_GLASS_PANE,
-                                "&b物品流向占位符",
-                                "&e无"
+                                "&bItem Flow Type Placeholder",
+                                "&eNone"
                         )
                 ),
                 ItemFlowType.NONE
@@ -366,8 +366,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_INSERT",
                         new CustomItemStack(
                                 Material.BLUE_STAINED_GLASS_PANE,
-                                "&b物品流向占位符",
-                                "&e输入槽"
+                                "&bItem Flow Type Placeholder",
+                                "&eInput Slots"
                         )
                 ),
                 ItemFlowType.INSERT
@@ -378,8 +378,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_WITHDRAW",
                         new CustomItemStack(
                                 Material.ORANGE_STAINED_GLASS_PANE,
-                                "&b物品流向占位符",
-                                "&e输出槽"
+                                "&bItem Flow Type Placeholder",
+                                "&eOutput Slots"
                         )
                 ),
                 ItemFlowType.WITHDRAW
@@ -390,8 +390,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_INSERT_AND_WITHDRAW",
                         new CustomItemStack(
                                 Material.PURPLE_STAINED_GLASS_PANE,
-                                "&b物品流向占位符",
-                                "&e输入且输出"
+                                "&bItem Flow Type Placeholder",
+                                "&eInput and Output Slots"
                         )
                 ),
                 ItemFlowType.INSERT_AND_WITHDRAW
@@ -402,8 +402,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ITEM_FLOW_TYPE_ITEM_FREE_OUTPUT",
                         new CustomItemStack(
                                 Material.GREEN_STAINED_GLASS_PANE,
-                                "&b物品流向占位符",
-                                "&e自由输出"
+                                "&bItem Flow Type Placeholder",
+                                "&eFreely Output"
                         )
                 ),
                 ItemFlowType.FREE_OUTPUT
@@ -414,7 +414,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_MACHINE_RECIPE_ITEM",
                         new CustomItemStack(
                                 Material.KNOWLEDGE_BOOK,
-                                "&b机器配方占位符"
+                                "&bMachine Recipe Placeholder"
                         )
                 )
         );
@@ -424,7 +424,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_TEMPLATE_MACHINE_RECIPE_ITEM",
                         new CustomItemStack(
                                 Material.KNOWLEDGE_BOOK,
-                                "&b模板机器配方占位符"
+                                "&bTemplate Machine Recipe Placeholder"
                         )
                 )
         );
@@ -434,7 +434,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_LINKED_MACHINE_RECIPE_ITEM",
                         new CustomItemStack(
                                 Material.KNOWLEDGE_BOOK,
-                                "&b链接机器配方占位符"
+                                "&bLinked Machine Recipe Placeholder"
                         )
                 )
         );
@@ -444,8 +444,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_CAPACITOR",
                         new CustomItemStack(
                                 Material.IRON_INGOT,
-                                "&b能源组件类型占位符",
-                                "&e电容"
+                                "&bEnergy Component Type Placeholder",
+                                "&eCapacitor"
                         )
                 ),
                 EnergyNetComponentType.CAPACITOR
@@ -456,8 +456,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_CONNECTOR",
                         new CustomItemStack(
                                 Material.OBSIDIAN,
-                                "&b能源组件类型占位符",
-                                "&e连接器"
+                                "&bEnergy Component Type Placeholder",
+                                "&eConnector"
                         )
                 ),
                 EnergyNetComponentType.CONNECTOR
@@ -468,8 +468,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_CONSUMER",
                         new CustomItemStack(
                                 Material.REDSTONE,
-                                "&b能源组件类型占位符",
-                                "&e用电器"
+                                "&bEnergy Component Type Placeholder",
+                                "&eConsumer"
                         )
                 ),
                 EnergyNetComponentType.CONSUMER
@@ -480,8 +480,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_GENERATOR",
                         new CustomItemStack(
                                 Material.DIAMOND,
-                                "&b能源组件类型占位符",
-                                "&e发电机"
+                                "&bEnergy Component Type Placeholder",
+                                "&eGenerator"
                         )
                 ),
                 EnergyNetComponentType.GENERATOR
@@ -492,8 +492,8 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_ENERGY_NET_COMPONENT_TYPE_ITEM_NONE",
                         new CustomItemStack(
                                 Material.GRAY_STAINED_GLASS_PANE,
-                                "&b能源组件类型占位符",
-                                "&e无"
+                                "&bEnergy Component Type Placeholder",
+                                "&eNone"
                         )
                 ),
                 EnergyNetComponentType.NONE
@@ -505,7 +505,7 @@ public class TypeItems {
                     new SlimefunItemStack("RSC_EDITOR_SIMPLE_MACHINE_TYPE_ITEM_" + type.name().toUpperCase(),
                             new CustomItemStack(
                                     MaterialUtil.getMaterial(type),
-                                    "&b简单机器类型占位符",
+                                    "&bSimple Machine Type Placeholder",
                                     "&e" + type.name().toUpperCase(),
                                     "&e" + TextUtil.getName(type)
                             )
@@ -519,7 +519,7 @@ public class TypeItems {
                 new SlimefunItemStack("RSC_EDITOR_REGISTER_ITEM",
                         new CustomItemStack(
                                 Material.REDSTONE,
-                                "&b注册物品占位符"
+                                "&bItem Registration Placeholder"
                         )
                 )
         );

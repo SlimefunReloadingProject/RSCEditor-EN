@@ -206,6 +206,24 @@ public class ItemEditor extends AbstractContainer {
                     return true;
                 });
 
+                // Man made button
+                menu.addMenuClickHandler(matrix.getChar("m"), (p, s, i, a) -> {
+                    if (a.isShiftClicked()) {
+                        return true;
+                    }
+                    if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
+                        p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                        p.sendMessage("输入内容: ");
+                        ChatUtils.awaitInput(p, bool -> {
+                            typeItem.setContent(i, bool);
+                            menu.open(p);
+                        });
+                        return false;
+                    }
+
+                    return true;
+                });
+
                 // Hidden button
                 menu.addMenuClickHandler(matrix.getChar("v"), (p, s, i, a) -> {
                     if (a.isShiftClicked()) {
@@ -340,7 +358,7 @@ public class ItemEditor extends AbstractContainer {
                     // rainbow custom
                     ItemStack p9 = menu.getItemInSlot(matrix.getChar("w"));
                     if (SlimefunItem.getByItem(p9) instanceof RainbowTypeItem typeItem) {
-                        writer.set("rainbow", typeItem.getRainbowType());
+                        writer.set("rainbow", typeItem.getRainbowType().name());
                         if (typeItem.isCustom()) {
                             Location containerLocation = b.getRelative(BlockFace.DOWN).getLocation();
                             SlimefunItem slimefunItem = StorageCacheUtils.getSfItem(containerLocation);
@@ -374,6 +392,12 @@ public class ItemEditor extends AbstractContainer {
                     }
                     if (piglinChance > 0) {
                         writer.set("piglin_chance", piglinChance);
+                    }
+
+                    // man made
+                    Pair<Boolean, Boolean> p15 = ItemUtil.isBoolean(menu, matrix, "m");
+                    if (p15.getFirstValue()) {
+                        writer.set("vanilla", p15.getSecondValue());
                     }
 
                     // hidden

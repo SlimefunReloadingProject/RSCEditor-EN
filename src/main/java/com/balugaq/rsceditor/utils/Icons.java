@@ -844,4 +844,22 @@ public class Icons {
             Material.WHITE_STAINED_GLASS_PANE,
             "&a"
     );
+
+    public static final ItemStack build_meta = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b配置",
+            "&b点击以配置 ItemMeta"
+    );
+
+    public static final ItemStack merge_meta = new CustomItemStack(
+            Material.STRUCTURE_BLOCK,
+            "&b配置",
+            "&b点击以合并 ItemMeta"
+    );
+
+    public static final ItemStack enchantment = new CustomItemStack(
+            Material.ENCHANTED_BOOK,
+            "&b附魔",
+            "&b< 在此处放置 附魔"
+    );
 }

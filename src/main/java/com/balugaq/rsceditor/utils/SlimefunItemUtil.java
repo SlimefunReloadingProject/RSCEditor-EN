@@ -2,15 +2,21 @@ package com.balugaq.rsceditor.utils;
 
 import com.balugaq.rsceditor.implementation.RSCEditor;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactive;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @UtilityClass
 public class SlimefunItemUtil {
@@ -52,5 +58,25 @@ public class SlimefunItemUtil {
                 unregisterItem(item);
             }
         }
+    }
+
+    public static void unregisterItemGroups(@NotNull SlimefunAddon addon) {
+        Set<ItemGroup> itemGroups = new HashSet<>();
+        for (ItemGroup itemGroup : Slimefun.getRegistry().getAllItemGroups()) {
+            if (Objects.equals(itemGroup.getAddon(), addon)) {
+                itemGroups.add(itemGroup);
+            }
+        }
+        for (ItemGroup itemGroup : itemGroups) {
+            unregisterItemGroup(itemGroup);
+        }
+    }
+
+    public static void unregisterItemGroup(@Nullable ItemGroup itemGroup) {
+        if (itemGroup == null) {
+            return;
+        }
+
+        Slimefun.getRegistry().getAllItemGroups().remove(itemGroup);
     }
 }

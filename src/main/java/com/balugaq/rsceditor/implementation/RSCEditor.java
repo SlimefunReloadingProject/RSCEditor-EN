@@ -2,6 +2,7 @@ package com.balugaq.rsceditor.implementation;
 
 
 import com.balugaq.rsceditor.core.command.RSCECommands;
+import com.balugaq.rsceditor.core.listeners.ItemEditListener;
 import com.balugaq.rsceditor.core.managers.ConfigManager;
 import com.balugaq.rsceditor.implementation.groups.GroupSetup;
 import com.balugaq.rsceditor.implementation.items.BiomeItems;
@@ -17,6 +18,7 @@ import lombok.Getter;
 import net.guizhanss.guizhanlibplugin.bstats.bukkit.Metrics;
 import net.guizhanss.guizhanlibplugin.bstats.charts.SimplePie;
 import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
+import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -67,17 +69,20 @@ public class RSCEditor extends JavaPlugin implements SlimefunAddon {
             getLogger().warning("Failed to register command 'rsceditor'.");
         }
 
+        Bukkit.getPluginManager().registerEvents(new ItemEditListener(), this);
+
         getLogger().info("RSCEditor has been enabled.");
     }
 
     public void reload() {
-        SlimefunItemUtil.unregisterAllItems();
         onDisable();
         onEnable();
     }
 
     @Override
     public void onDisable() {
+        SlimefunItemUtil.unregisterAllItems();
+        SlimefunItemUtil.unregisterItemGroups(this);
         getLogger().info("RSCEditor has been disabled.");
     }
 
@@ -101,5 +106,9 @@ public class RSCEditor extends JavaPlugin implements SlimefunAddon {
             getLogger().info("自动更新失败: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public boolean isDebug() {
+        return configManager.isDebug();
     }
 }

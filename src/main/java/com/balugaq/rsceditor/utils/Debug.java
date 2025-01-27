@@ -5,7 +5,9 @@ import org.bukkit.ChatColor;
 
 public class Debug {
     public static void log(String message) {
-        RSCEditor.getInstance().getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+        if (RSCEditor.getInstance().getConfigManager().isDebug()) {
+            RSCEditor.getInstance().getServer().getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&e[RSCEditor] &r" + message));
+        }
     }
 
     public static void log(Object object) {

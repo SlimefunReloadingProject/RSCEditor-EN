@@ -30,10 +30,10 @@ public class LinkedMachineRecipe {
 
     public int hashCode() {
         int hash = 31;
-        hash = 31 * hash + (name == null? 0 : name.hashCode());
+        hash = 31 * hash + (name == null ? 0 : name.hashCode());
         hash = 31 * hash + (chooseOne ? 1 : 0);
         hash = 31 * hash + (forDisplay ? 1 : 0);
-        hash = 31 * hash + (hide      ? 1 : 0);
+        hash = 31 * hash + (hide ? 1 : 0);
         hash = 31 * hash + processingTime;
         hash = 31 * hash + (linkedInputs == null ? 0 : linkedInputs.hashCode());
         hash = 31 * hash + (linkedOutputs == null ? 0 : linkedOutputs.hashCode());

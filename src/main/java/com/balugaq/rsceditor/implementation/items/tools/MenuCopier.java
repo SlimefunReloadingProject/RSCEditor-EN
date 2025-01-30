@@ -64,6 +64,10 @@ public class MenuCopier extends AbstractTool {
         }
     }
 
+    public static String compile(String str) {
+        return ChatColor.translateAlternateColorCodes('&', str);
+    }
+
     @Override
     public void toolUse(@NotNull BlockBreakEvent event, @NotNull ItemStack tool, int fortune, @NotNull List<ItemStack> drops) {
     }
@@ -122,9 +126,5 @@ public class MenuCopier extends AbstractTool {
                 return;
             }
         }
-    }
-
-    public static String compile(String str) {
-        return ChatColor.translateAlternateColorCodes('&', str);
     }
 }

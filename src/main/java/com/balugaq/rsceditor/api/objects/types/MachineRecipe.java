@@ -27,10 +27,10 @@ public class MachineRecipe {
 
     public int hashCode() {
         int hash = 17;
-        hash = 31 * hash + (name == null? 0 : name.hashCode());
-        hash = 31 * hash + (chooseOne  ? 1 : 0);
+        hash = 31 * hash + (name == null ? 0 : name.hashCode());
+        hash = 31 * hash + (chooseOne ? 1 : 0);
         hash = 31 * hash + (forDisplay ? 1 : 0);
-        hash = 31 * hash + (hide       ? 1 : 0);
+        hash = 31 * hash + (hide ? 1 : 0);
         hash = 31 * hash + processingTime;
         hash = 31 * hash + (inputs == null ? 0 : Arrays.hashCode(inputs));
         hash = 31 * hash + (outputs == null ? 0 : Arrays.hashCode(outputs));

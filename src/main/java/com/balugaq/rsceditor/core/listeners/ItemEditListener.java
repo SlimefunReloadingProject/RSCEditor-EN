@@ -40,9 +40,6 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("deprecation")
 public class ItemEditListener implements Listener {
-    private final Set<Player> editingPlayers = new HashSet<>();
-    private final Map<Player, Integer> selectingLines = new HashMap<>();
-    private static final Set<PersistentDataType<?, ?>> types = new HashSet<>(Arrays.asList(PersistentDataType.STRING, PersistentDataType.DOUBLE, PersistentDataType.INTEGER, PersistentDataType.BYTE, PersistentDataType.BOOLEAN, PersistentDataType.BYTE_ARRAY, PersistentDataType.FLOAT, PersistentDataType.INTEGER_ARRAY, PersistentDataType.LONG, PersistentDataType.LONG_ARRAY, PersistentDataType.SHORT, PersistentDataType.TAG_CONTAINER, PersistentDataType.TAG_CONTAINER_ARRAY));
     public static final Pattern materialPattern = Pattern.compile("m\\((.+)\\)");
     public static final Pattern hungerPattern = Pattern.compile("h\\([-+]?[0-9]*\\\\.?[0-9]+([eE][-+]?[0-9]+)?\\)");
     public static final Pattern machinePattern = Pattern.compile("ma\\((BASIC|AVERAGE|MEDIUM|GOOD|ADVANCED|END_GAME),\\s*(CAPACITOR|GENERATOR|MACHINE)\\)");
@@ -54,488 +51,12 @@ public class ItemEditListener implements Listener {
     public static final Pattern rangePattern = Pattern.compile("r\\((\\d+)\\)");
     public static final Pattern usesLeftPattern = Pattern.compile("ul\\((\\d+)\\)");
     public static final Pattern speedPattern = Pattern.compile("s\\([-+]?[0-9]*\\\\.?[0-9]+([eE][-+]?[0-9]+)?\\)");
-    @EventHandler(priority = EventPriority.LOW)
-    public void onEditing(PlayerChatEvent event) {
-        Debug.log("editing");
-        String message = event.getMessage();
-        Player player = event.getPlayer();
-        if (!player.isOp()) {
-            return;
-        }
-        if ("rhelp".equals(message)) {
-            player.sendMessage(compile("&2=========ItemEditor Help========="));
-            player.sendMessage(compile("&brhelp - Show this help message."));
-            player.sendMessage(compile("&bdone - Exit the editor."));
-            player.sendMessage(compile("&bl - Enter edit mode"));
-            player.sendMessage(compile("&2=====ItemEditor Name Commands====="));
-            player.sendMessage(compile("&bn [content] - Set the display name of the item to the specified content."));
-            player.sendMessage(compile("&bp [content] - Preview the specified content."));
-            player.sendMessage(compile("&2=====ItemEditor Lore Commands====="));
-            player.sendMessage(compile("&eScroll to select lore lines!"));
-            player.sendMessage(compile("&bdd - Delete the selected line."));
-            player.sendMessage(compile("&baa [content] - Add a new line at the end of the lore with the specified content."));
-            player.sendMessage(compile("&bii [content] - Insert a new line at the selected line with the specified content."));
-            player.sendMessage(compile("&bmm [content] - Modify the selected line with the specified content."));
-            player.sendMessage(compile("&2=====ItemEditor Rebase Commands====="));
-            player.sendMessage(compile("&bcc [slot] - Rebase whole current item to the specified slot."));
-            player.sendMessage(compile("&2=====ItemEditor Other Commands====="));
-            player.sendMessage(compile("&bt<- - Rebase the current item's type to the next slot."));
-            player.sendMessage(compile("&b->t - Rebase the current item's type to the previous slot."));
-            player.sendMessage(compile("&btt [hashcode|base64|url|material] - Set the current item's type to the specified type. Allows head textures."));
-            player.sendMessage(compile("&b%q[content] - Input content and avoid conflicts with commands."));
-            player.sendMessage(compile("&bamt [int] - Set the amount of the current item to the specified value."));
-            player.sendMessage(compile("&2==========Placeholders=========="));
-            player.sendMessage(compile("&b%ctu = LoreBuilder.CROUCH_TO_USE"));
-            player.sendMessage(compile("&b%hsr = LoreBuilder.HAZMAT_SUIT_REQUIRED"));
-            player.sendMessage(compile("&b%rai = LoreBuilder.RAINBOW"));
-            player.sendMessage(compile("&b%rcto = LoreBuilder.RIGHT_CLICK_TO_OPEN"));
-            player.sendMessage(compile("&b%rctu = LoreBuilder.RIGHT_CLICK_TO_USE"));
-            player.sendMessage(compile("&b%0 = original lore line"));
-            player.sendMessage(compile("&b%p = your name"));
-            player.sendMessage(compile("&2======Function Placeholders======"));
-            player.sendMessage(compile("&bm(String) = LoreBuilder.material(String)"));
-            player.sendMessage(compile("&bh(double) = LoreBuilder.hunger(double)"));
-            player.sendMessage(compile("&bs(float) = LoreBuilder.speed(float)"));
-            player.sendMessage(compile("&bma(MachineTier, MachineType) = LoreBuilder.machine(MachineTier, MachineType)"));
-            player.sendMessage(compile("&bra(Radioactivity) = LoreBuilder.radioactive(Radioactivity)"));
-            player.sendMessage(compile("&bpb(int) = LoreBuilder.powerBuffer(int)"));
-            player.sendMessage(compile("&bpps(int) = LoreBuilder.powerPerSecond(int)"));
-            player.sendMessage(compile("&bppc(int, int) = LoreBuilder.powerCharged(int, int)"));
-            player.sendMessage(compile("&bp(int, String) = LoreBuilder.power(int, String)"));
-            player.sendMessage(compile("&br(int) = LoreBuilder.range(int)"));
-            player.sendMessage(compile("&bul(int) = LoreBuilder.usesLeft(int)"));
-            player.sendMessage(compile("&2=========ItemEditor Help========="));
-            event.setCancelled(true);
-            return;
-        }
-        else if ("l".equals(message)) {
-            editingPlayers.add(player);
-            clearScreen(player);
-            ItemStack itemStack = player.getInventory().getItemInMainHand();
-            if (itemStack.getType() == Material.AIR) {
-                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold an item in your main hand."));
-                return;
-            }
-            sendLore(player, itemStack.getItemMeta().getLore(), 0);
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onSelecting(PlayerChatEvent event) {
-        Debug.log("selecting");
-        String message = event.getMessage();
-        Player player = event.getPlayer();
-        if (!player.isOp()) {
-            return;
-        }
-        if (editingPlayers.contains(player)) {
-            if ("done".equals(message)) {
-                Debug.log("trigger done editing");
-                doneEditing(player);
-                event.setCancelled(true);
-                return;
-            }
-            ItemStack itemStack = player.getInventory().getItemInMainHand();
-            if (itemStack == null || itemStack.getType() == Material.AIR) {
-                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold an item in your main hand."));
-                event.setCancelled(true);
-                return;
-            }
-            // commands
-            if ("dd".equals(message)) {
-                Debug.log("trigger delete line");
-                removeLine(player, getSelectingLine(player));
-                clearScreen(player);
-                sendLore(player, itemStack.getItemMeta().getLore(), getSelectingLine(player));
-                event.setCancelled(true);
-            }
-            else if (message.startsWith("aa ")) {
-                Debug.log("trigger add line");
-                String value = message.substring(3);
-                addLine(player, getSelectingLine(player), "&f" + value);
-                clearScreen(player);
-                sendLore(player, itemStack.getItemMeta().getLore(), getSelectingLine(player));
-                event.setCancelled(true);
-            }
-            else if (message.startsWith("ii ")) {
-                Debug.log("trigger insert line");
-                String value = message.substring(3);
-                insertLine(player, getSelectingLine(player), "&f" + value);
-                clearScreen(player);
-                sendLore(player, itemStack.getItemMeta().getLore(), getSelectingLine(player));
-                event.setCancelled(true);
-            }
-            else if (message.startsWith("mm ")) {
-                Debug.log("trigger modify line");
-                String value = message.substring(3);
-                modifyLine(player, getSelectingLine(player), "&f" + value);
-                clearScreen(player);
-                sendLore(player, itemStack.getItemMeta().getLore(), getSelectingLine(player));
-                event.setCancelled(true);
-            }
-            else if (message.startsWith("p ")) {
-                String value = message.substring(2);
-                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &ePreview: " + compile(value)));
-                event.setCancelled(true);
-            }
-            else if (message.startsWith("n ")) {
-                String value = message.substring(2);
-                if (itemStack.getType() == Material.AIR) {
-                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold an item in your main hand."));
-                    event.setCancelled(true);
-                    return;
-                }
-                ItemMeta meta = itemStack.getItemMeta();
-                meta.setDisplayName(compile("&f" + value));
-                itemStack.setItemMeta(meta);
-                player.updateInventory();
-                event.setCancelled(true);
-            }
-            else if ("t<-".equals(message)) {
-                int nextSlot;
-                int slot = player.getInventory().getHeldItemSlot();
-                if (slot >= 8) {
-                    nextSlot = 0;
-                } else {
-                    nextSlot = slot + 1;
-                }
-                ItemStack anotherItemStack = player.getInventory().getItem(nextSlot);
-                if (anotherItemStack == null || anotherItemStack.getType() == Material.AIR) {
-                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to contain an item in next slot."));
-                    event.setCancelled(true);
-                    return;
-                }
-                itemStack.setType(anotherItemStack.getType());
-                setSkullTexture(itemStack, anotherItemStack);
-                player.getInventory().setItemInMainHand(anotherItemStack);
-                event.setCancelled(true);
-            }
-            else if ("->t".equals(message)) {
-                int previousSlot;
-                int slot = player.getInventory().getHeldItemSlot();
-                if (slot <= 0) {
-                    previousSlot = 8;
-                } else {
-                    previousSlot = slot - 1;
-                }
-                ItemStack anotherItemStack = player.getInventory().getItem(previousSlot);
-                if (anotherItemStack == null || anotherItemStack.getType() == Material.AIR) {
-                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to contain an item in previous slot."));
-                    event.setCancelled(true);
-                    return;
-                }
-                itemStack.setType(anotherItemStack.getType());
-                setSkullTexture(itemStack, anotherItemStack);
-                player.getInventory().setItemInMainHand(anotherItemStack);
-                event.setCancelled(true);
-            }
-            else if (message.startsWith("cc ")) {
-                String value = message.substring(3);
-                try {
-                    int slot = Integer.parseInt(value);
-                    if (slot < 0 || slot > 8) {
-                        player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cInvalid slot number."));
-                        event.setCancelled(true);
-                        return;
-                    }
-                    ItemStack anotherItemStack = player.getInventory().getItem(slot);
-                    if (anotherItemStack == null || anotherItemStack.getType() == Material.AIR) {
-                        player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to contain an item in the specified slot."));
-                        event.setCancelled(true);
-                        return;
-                    }
-                    player.getInventory().setItemInMainHand(itemStack);
-                    player.updateInventory();
-                    event.setCancelled(true);
-                } catch (NumberFormatException e) {
-                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cInvalid slot number."));
-                    event.setCancelled(true);
-                    return;
-                }
-            }
-            else if (message.startsWith("%q")) {
-                String value = message.substring(2);
-                event.setMessage(value);
-            }
-            else if (message.startsWith("amt ")) {
-                String value = message.substring(4);
-                try {
-                    int amount = Integer.parseInt(value);
-                    itemStack.setAmount(amount);
-                    player.updateInventory();
-                    event.setCancelled(true);
-                } catch (NumberFormatException e) {
-                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cInvalid amount."));
-                    event.setCancelled(true);
-                    return;
-                }
-            }
-            else if (message.startsWith("tt ")) {
-                String value = message.substring(3).toLowerCase();
-                if (isHashcodeLike(value)) {
-                    PlayerSkin skin = PlayerSkin.fromHashCode(value);
-                    ItemStack head = PlayerHead.getItemStack(skin);
-                    setSkullTexture(itemStack, head);
-                    player.getInventory().setItemInMainHand(head);
-                } else if (isBase64Like(value)) {
-                    PlayerSkin skin = PlayerSkin.fromBase64(value);
-                    ItemStack head = PlayerHead.getItemStack(skin);
-                    setSkullTexture(itemStack, head);
-                    player.getInventory().setItemInMainHand(head);
-                } else if (isURLLike(value)) {
-                    PlayerSkin skin = PlayerSkin.fromURL(value);
-                    ItemStack head = PlayerHead.getItemStack(skin);
-                    setSkullTexture(itemStack, head);
-                    player.getInventory().setItemInMainHand(head);
-                } else {
-                    Material material = Material.getMaterial(value.toUpperCase());
-                    if (material == null || !material.isItem()) {
-                        player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cInvalid texture value."));
-                        event.setCancelled(true);
-                        return;
-                    } else {
-                        itemStack.setType(material);
-                    }
-                }
-                event.setCancelled(true);
-            }
-            // intentionally
-            else if ("rhelp".equals(message)) {
-            }
-            else if ("l".equals(message)) {
-            }
-            else {
-                player.sendMessage(compile("&c[RSCEditor] ItemEditor: type \"rhelp\" for information."));
-                event.setCancelled(true);
-            }
-        }
-    }
-
-    public boolean isHashcodeLike(String value) {
-        return value.matches("^[a-fA-F0-9]{32,}$");
-    }
-
-    public boolean isBase64Like(String value) {
-        return value.length() > 32 && value.matches("^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$");
-    }
-
-    public boolean isURLLike(String value) {
-        return value.matches("^https?://(?:[-\\w]+\\.)?[-\\w]+(?:\\.[a-zA-Z]{2,5}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(?::\\d{1,5})?(/[-\\w./]*)*(\\?[-\\w.&=]*)?(#[-\\w]*)?$");
-    }
-
-    public void setSkullTexture(ItemStack itemStack, ItemStack head) {
-        head.setAmount(itemStack.getAmount());
-        ItemMeta meta = itemStack.getItemMeta();
-        ItemMeta headMeta = head.getItemMeta();
-        if (meta.hasDisplayName()) {
-            headMeta.setDisplayName(meta.getDisplayName());
-        }
-
-        if (meta.hasLore()) {
-            headMeta.setLore(meta.getLore());
-        }
-        var pdc = meta.getPersistentDataContainer();
-
-        Map<NamespacedKey, Pair<PersistentDataType<Object, Object>, Object>> data = new HashMap<>();
-
-        for (NamespacedKey key : pdc.getKeys()) {
-            for (PersistentDataType<?, ?> atype : types) {
-                @SuppressWarnings("unchecked") PersistentDataType<Object, Object> type = (PersistentDataType<Object, Object>) atype;
-                try {
-                    Object value = pdc.get(key, type);
-                    if (value != null) {
-                        data.put(key, new Pair<>(type, value));
-                    }
-                } catch (Exception ignored) {
-                }
-            }
-        }
-
-        data.remove(Slimefun.getItemDataService().getKey());
-
-        for (NamespacedKey key : data.keySet()) {
-            headMeta.getPersistentDataContainer().set(key, data.get(key).getFirstValue(), data.get(key).getSecondValue());
-        }
-
-        headMeta.addItemFlags(meta.getItemFlags().toArray(new ItemFlag[0]));
-        if (meta.hasEnchants()) {
-            for (Map.Entry<Enchantment, Integer> entry : meta.getEnchants().entrySet()) {
-                headMeta.addEnchant(entry.getKey(), entry.getValue(), true);
-            }
-        }
-        if (meta.hasAttributeModifiers()) {
-            headMeta.setAttributeModifiers(meta.getAttributeModifiers());
-        }
-        if (meta.hasCustomModelData()) {
-            headMeta.setCustomModelData(meta.getCustomModelData());
-        }
-        headMeta.setUnbreakable(meta.isUnbreakable());
-        headMeta.setPlaceableKeys(meta.getPlaceableKeys());
-        headMeta.setDestroyableKeys(meta.getDestroyableKeys());
-        head.setItemMeta(headMeta);
-    }
-
-    public void modifyLine(Player player, int line, String value) {
-        Debug.log("modify line " + line + ": " + value);
-        ItemStack itemStack = player.getInventory().getItemInMainHand();
-        List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
-        if (line < lore.size()) {
-            String oldLine = lore.get(line);
-            lore.set(line, compile(placeholder(value, player, oldLine)));
-            ItemMeta meta = itemStack.getItemMeta();
-            meta.setLore(lore);
-            itemStack.setItemMeta(meta);
-            player.updateInventory();
-        }
-    }
-
-    public void addLine(Player player, int line, String value) {
-        Debug.log("add line: " + value);
-        ItemStack itemStack = player.getInventory().getItemInMainHand();
-        List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
-        if (line < lore.size()) {
-            String current = lore.get(line);
-            lore.add(compile(placeholder(value, player, current)));
-        } else {
-            lore.add(compile(value));
-        }
-        ItemMeta meta = itemStack.getItemMeta();
-        meta.setLore(lore);
-        itemStack.setItemMeta(meta);
-        player.updateInventory();
-    }
-
-    public void insertLine(Player player, int line, String value) {
-        Debug.log("insert line " + line + ": " + value);
-        ItemStack itemStack = player.getInventory().getItemInMainHand();
-        List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
-        if (line < lore.size()) {
-            String current = lore.get(line);
-            lore.add(line, compile(placeholder(value, player, current)));
-            ItemMeta meta = itemStack.getItemMeta();
-            meta.setLore(lore);
-            itemStack.setItemMeta(meta);
-            player.updateInventory();
-        }
-    }
-    @EventHandler
-    public void onLineSelect(PlayerItemHeldEvent event) {
-        Debug.log("line select");
-        Player player = event.getPlayer();
-        if (editingPlayers.contains(player)) {
-            ItemStack itemStack = player.getInventory().getItem(event.getPreviousSlot());
-            if (itemStack == null || itemStack.getType() == Material.AIR) {
-                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold an item in your main hand."));
-                return;
-            }
-            List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
-            int newSlot = event.getNewSlot();
-            int previousSlot = event.getPreviousSlot();
-            Debug.log("new slot: " + newSlot + ", previous slot: " + previousSlot);
-            if (newSlot >= 5 && previousSlot == 0) { // scroll left
-                Debug.log("scroll left type 1");
-                setSelectingLine(player, getSelectingLine(player) - 1, lore.size());
-            }
-            else if (newSlot < 5 && previousSlot == 8) { // scroll right
-                Debug.log("scroll right type 2");
-                setSelectingLine(player, getSelectingLine(player) + 1, lore.size());
-            }
-            else if (newSlot > previousSlot) { // scroll right
-                Debug.log("scroll right type 3");
-                setSelectingLine(player, getSelectingLine(player) + 1, lore.size());
-            }
-            else if (newSlot < previousSlot) { // scroll left
-                Debug.log("scroll left type 4");
-                setSelectingLine(player, getSelectingLine(player) - 1, lore.size());
-            }
-            if (itemStack != null && itemStack.getType() != Material.AIR) {
-                clearScreen(player);
-                sendLore(player, lore, getSelectingLine(player));
-                event.setCancelled(true);
-            }
-        }
-    }
-
-    public void removeLine(Player player, int line) {
-        Debug.log("remove line " + line);
-        ItemStack itemStack = player.getInventory().getItemInMainHand();
-        List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
-        if (line < lore.size()) {
-            lore.remove(line);
-            ItemMeta meta = itemStack.getItemMeta();
-            meta.setLore(lore);
-            itemStack.setItemMeta(meta);
-            player.updateInventory();
-        }
-    }
-
-    public int getSelectingLine(Player player) {
-        if (!selectingLines.containsKey(player)) {
-            selectingLines.put(player, 0);
-            return 0;
-        }
-
-        return selectingLines.get(player);
-    }
-
-    public void setSelectingLine(Player player, int line, int loreSize) {
-        if (line < 0) {
-            line = 0;
-        }
-        if (line > loreSize - 1) {
-            line = loreSize - 1;
-        }
-        selectingLines.put(player, line);
-    }
-
-    public void clearScreen(Player player) {
-        for (int i = 0; i < 20; i++) {
-            player.sendMessage("");
-        }
-    }
-
-    public void sendLore(Player player, List<String> lore, int selectingLine) {
-        Debug.log("send lore");
-        List<String> showLines = new ArrayList<>();
-        List<String> lines;
-        if (lore == null) {
-            lines = new ArrayList<>();
-        } else {
-            lines = lore;
-        }
-        // Show as: " &7|&r    [content]"
-        // selecting line show as: "&a>&r    [content]"
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i);
-            if (i == selectingLine) {
-                showLines.add(compile(" &a>&r    " + line));
-            } else {
-                showLines.add(compile(" &7|&r    " + line));
-            }
-        }
-        player.sendMessage(compile("&2=======Edit lore======="));
-        for (String line : showLines) {
-            player.sendMessage(compile(line));
-        }
-        player.sendMessage(compile("&2=======Edit lore======="));
-    }
+    private static final Set<PersistentDataType<?, ?>> types = new HashSet<>(Arrays.asList(PersistentDataType.STRING, PersistentDataType.DOUBLE, PersistentDataType.INTEGER, PersistentDataType.BYTE, PersistentDataType.BOOLEAN, PersistentDataType.BYTE_ARRAY, PersistentDataType.FLOAT, PersistentDataType.INTEGER_ARRAY, PersistentDataType.LONG, PersistentDataType.LONG_ARRAY, PersistentDataType.SHORT, PersistentDataType.TAG_CONTAINER, PersistentDataType.TAG_CONTAINER_ARRAY));
+    private final Set<Player> editingPlayers = new HashSet<>();
+    private final Map<Player, Integer> selectingLines = new HashMap<>();
 
     public static String compile(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
-    }
-
-    public void doneEditing(Player player) {
-        Debug.log("done editing");
-        editingPlayers.remove(player);
-        selectingLines.remove(player);
-    }
-
-    @EventHandler
-    public void onQuit(PlayerQuitEvent event) {
-        Debug.log("quit");
-        Player player = event.getPlayer();
-        doneEditing(player);
     }
 
     @Nonnull
@@ -681,5 +202,469 @@ public class ItemEditListener implements Listener {
         });
 
         return newMessage;
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    public void onEditing(PlayerChatEvent event) {
+        Debug.log("editing");
+        String message = event.getMessage();
+        Player player = event.getPlayer();
+        if (!player.isOp()) {
+            return;
+        }
+        if ("rhelp".equals(message)) {
+            player.sendMessage(compile("&2=========ItemEditor Help========="));
+            player.sendMessage(compile("&brhelp - Show this help message."));
+            player.sendMessage(compile("&bdone - Exit the editor."));
+            player.sendMessage(compile("&bl - Enter edit mode"));
+            player.sendMessage(compile("&2=====ItemEditor Name Commands====="));
+            player.sendMessage(compile("&bn [content] - Set the display name of the item to the specified content."));
+            player.sendMessage(compile("&bp [content] - Preview the specified content."));
+            player.sendMessage(compile("&2=====ItemEditor Lore Commands====="));
+            player.sendMessage(compile("&eScroll to select lore lines!"));
+            player.sendMessage(compile("&bdd - Delete the selected line."));
+            player.sendMessage(compile("&baa [content] - Add a new line at the end of the lore with the specified content."));
+            player.sendMessage(compile("&bii [content] - Insert a new line at the selected line with the specified content."));
+            player.sendMessage(compile("&bmm [content] - Modify the selected line with the specified content."));
+            player.sendMessage(compile("&2=====ItemEditor Rebase Commands====="));
+            player.sendMessage(compile("&bcc [slot] - Rebase whole current item to the specified slot."));
+            player.sendMessage(compile("&2=====ItemEditor Other Commands====="));
+            player.sendMessage(compile("&bt<- - Rebase the current item's type to the next slot."));
+            player.sendMessage(compile("&b->t - Rebase the current item's type to the previous slot."));
+            player.sendMessage(compile("&btt [hashcode|base64|url|material] - Set the current item's type to the specified type. Allows head textures."));
+            player.sendMessage(compile("&b%q[content] - Input content and avoid conflicts with commands."));
+            player.sendMessage(compile("&bamt [int] - Set the amount of the current item to the specified value."));
+            player.sendMessage(compile("&2==========Placeholders=========="));
+            player.sendMessage(compile("&b%ctu = LoreBuilder.CROUCH_TO_USE"));
+            player.sendMessage(compile("&b%hsr = LoreBuilder.HAZMAT_SUIT_REQUIRED"));
+            player.sendMessage(compile("&b%rai = LoreBuilder.RAINBOW"));
+            player.sendMessage(compile("&b%rcto = LoreBuilder.RIGHT_CLICK_TO_OPEN"));
+            player.sendMessage(compile("&b%rctu = LoreBuilder.RIGHT_CLICK_TO_USE"));
+            player.sendMessage(compile("&b%0 = original lore line"));
+            player.sendMessage(compile("&b%p = your name"));
+            player.sendMessage(compile("&2======Function Placeholders======"));
+            player.sendMessage(compile("&bm(String) = LoreBuilder.material(String)"));
+            player.sendMessage(compile("&bh(double) = LoreBuilder.hunger(double)"));
+            player.sendMessage(compile("&bs(float) = LoreBuilder.speed(float)"));
+            player.sendMessage(compile("&bma(MachineTier, MachineType) = LoreBuilder.machine(MachineTier, MachineType)"));
+            player.sendMessage(compile("&bra(Radioactivity) = LoreBuilder.radioactive(Radioactivity)"));
+            player.sendMessage(compile("&bpb(int) = LoreBuilder.powerBuffer(int)"));
+            player.sendMessage(compile("&bpps(int) = LoreBuilder.powerPerSecond(int)"));
+            player.sendMessage(compile("&bppc(int, int) = LoreBuilder.powerCharged(int, int)"));
+            player.sendMessage(compile("&bp(int, String) = LoreBuilder.power(int, String)"));
+            player.sendMessage(compile("&br(int) = LoreBuilder.range(int)"));
+            player.sendMessage(compile("&bul(int) = LoreBuilder.usesLeft(int)"));
+            player.sendMessage(compile("&2=========ItemEditor Help========="));
+            event.setCancelled(true);
+            return;
+        } else if ("l".equals(message)) {
+            editingPlayers.add(player);
+            clearScreen(player);
+            ItemStack itemStack = player.getInventory().getItemInMainHand();
+            if (itemStack.getType() == Material.AIR) {
+                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold an item in your main hand."));
+                return;
+            }
+            sendLore(player, itemStack.getItemMeta().getLore(), 0);
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onSelecting(PlayerChatEvent event) {
+        Debug.log("selecting");
+        String message = event.getMessage();
+        Player player = event.getPlayer();
+        if (!player.isOp()) {
+            return;
+        }
+        if (editingPlayers.contains(player)) {
+            if ("done".equals(message)) {
+                Debug.log("trigger done editing");
+                doneEditing(player);
+                event.setCancelled(true);
+                return;
+            }
+            ItemStack itemStack = player.getInventory().getItemInMainHand();
+            if (itemStack == null || itemStack.getType() == Material.AIR) {
+                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold an item in your main hand."));
+                event.setCancelled(true);
+                return;
+            }
+            // commands
+            if ("dd".equals(message)) {
+                Debug.log("trigger delete line");
+                removeLine(player, getSelectingLine(player));
+                clearScreen(player);
+                sendLore(player, itemStack.getItemMeta().getLore(), getSelectingLine(player));
+                event.setCancelled(true);
+            } else if (message.startsWith("aa ")) {
+                Debug.log("trigger add line");
+                String value = message.substring(3);
+                addLine(player, getSelectingLine(player), "&f" + value);
+                clearScreen(player);
+                sendLore(player, itemStack.getItemMeta().getLore(), getSelectingLine(player));
+                event.setCancelled(true);
+            } else if (message.startsWith("ii ")) {
+                Debug.log("trigger insert line");
+                String value = message.substring(3);
+                insertLine(player, getSelectingLine(player), "&f" + value);
+                clearScreen(player);
+                sendLore(player, itemStack.getItemMeta().getLore(), getSelectingLine(player));
+                event.setCancelled(true);
+            } else if (message.startsWith("mm ")) {
+                Debug.log("trigger modify line");
+                String value = message.substring(3);
+                modifyLine(player, getSelectingLine(player), "&f" + value);
+                clearScreen(player);
+                sendLore(player, itemStack.getItemMeta().getLore(), getSelectingLine(player));
+                event.setCancelled(true);
+            } else if (message.startsWith("p ")) {
+                String value = message.substring(2);
+                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &ePreview: " + compile(value)));
+                event.setCancelled(true);
+            } else if (message.startsWith("n ")) {
+                String value = message.substring(2);
+                if (itemStack.getType() == Material.AIR) {
+                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold an item in your main hand."));
+                    event.setCancelled(true);
+                    return;
+                }
+                ItemMeta meta = itemStack.getItemMeta();
+                meta.setDisplayName(compile("&f" + value));
+                itemStack.setItemMeta(meta);
+                player.updateInventory();
+                event.setCancelled(true);
+            } else if ("t<-".equals(message)) {
+                int nextSlot;
+                int slot = player.getInventory().getHeldItemSlot();
+                if (slot >= 8) {
+                    nextSlot = 0;
+                } else {
+                    nextSlot = slot + 1;
+                }
+                ItemStack anotherItemStack = player.getInventory().getItem(nextSlot);
+                if (anotherItemStack == null || anotherItemStack.getType() == Material.AIR) {
+                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to contain an item in next slot."));
+                    event.setCancelled(true);
+                    return;
+                }
+                itemStack.setType(anotherItemStack.getType());
+                setSkullTexture(itemStack, anotherItemStack);
+                player.getInventory().setItemInMainHand(anotherItemStack);
+                event.setCancelled(true);
+            } else if ("->t".equals(message)) {
+                int previousSlot;
+                int slot = player.getInventory().getHeldItemSlot();
+                if (slot <= 0) {
+                    previousSlot = 8;
+                } else {
+                    previousSlot = slot - 1;
+                }
+                ItemStack anotherItemStack = player.getInventory().getItem(previousSlot);
+                if (anotherItemStack == null || anotherItemStack.getType() == Material.AIR) {
+                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to contain an item in previous slot."));
+                    event.setCancelled(true);
+                    return;
+                }
+                itemStack.setType(anotherItemStack.getType());
+                setSkullTexture(itemStack, anotherItemStack);
+                player.getInventory().setItemInMainHand(anotherItemStack);
+                event.setCancelled(true);
+            } else if (message.startsWith("cc ")) {
+                String value = message.substring(3);
+                try {
+                    int slot = Integer.parseInt(value);
+                    if (slot < 0 || slot > 8) {
+                        player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cInvalid slot number."));
+                        event.setCancelled(true);
+                        return;
+                    }
+                    ItemStack anotherItemStack = player.getInventory().getItem(slot);
+                    if (anotherItemStack == null || anotherItemStack.getType() == Material.AIR) {
+                        player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to contain an item in the specified slot."));
+                        event.setCancelled(true);
+                        return;
+                    }
+                    player.getInventory().setItemInMainHand(itemStack);
+                    player.updateInventory();
+                    event.setCancelled(true);
+                } catch (NumberFormatException e) {
+                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cInvalid slot number."));
+                    event.setCancelled(true);
+                    return;
+                }
+            } else if (message.startsWith("%q")) {
+                String value = message.substring(2);
+                event.setMessage(value);
+            } else if (message.startsWith("amt ")) {
+                String value = message.substring(4);
+                try {
+                    int amount = Integer.parseInt(value);
+                    itemStack.setAmount(amount);
+                    player.updateInventory();
+                    event.setCancelled(true);
+                } catch (NumberFormatException e) {
+                    player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cInvalid amount."));
+                    event.setCancelled(true);
+                    return;
+                }
+            } else if (message.startsWith("tt ")) {
+                String value = message.substring(3).toLowerCase();
+                if (isHashcodeLike(value)) {
+                    PlayerSkin skin = PlayerSkin.fromHashCode(value);
+                    ItemStack head = PlayerHead.getItemStack(skin);
+                    setSkullTexture(itemStack, head);
+                    player.getInventory().setItemInMainHand(head);
+                } else if (isBase64Like(value)) {
+                    PlayerSkin skin = PlayerSkin.fromBase64(value);
+                    ItemStack head = PlayerHead.getItemStack(skin);
+                    setSkullTexture(itemStack, head);
+                    player.getInventory().setItemInMainHand(head);
+                } else if (isURLLike(value)) {
+                    PlayerSkin skin = PlayerSkin.fromURL(value);
+                    ItemStack head = PlayerHead.getItemStack(skin);
+                    setSkullTexture(itemStack, head);
+                    player.getInventory().setItemInMainHand(head);
+                } else {
+                    Material material = Material.getMaterial(value.toUpperCase());
+                    if (material == null || !material.isItem()) {
+                        player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cInvalid texture value."));
+                        event.setCancelled(true);
+                        return;
+                    } else {
+                        itemStack.setType(material);
+                    }
+                }
+                event.setCancelled(true);
+            }
+            // intentionally
+            else if ("rhelp".equals(message)) {
+            } else if ("l".equals(message)) {
+            } else {
+                player.sendMessage(compile("&c[RSCEditor] ItemEditor: type \"rhelp\" for information."));
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    public boolean isHashcodeLike(String value) {
+        return value.matches("^[a-fA-F0-9]{32,}$");
+    }
+
+    public boolean isBase64Like(String value) {
+        return value.length() > 32 && value.matches("^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$");
+    }
+
+    public boolean isURLLike(String value) {
+        return value.matches("^https?://(?:[-\\w]+\\.)?[-\\w]+(?:\\.[a-zA-Z]{2,5}|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(?::\\d{1,5})?(/[-\\w./]*)*(\\?[-\\w.&=]*)?(#[-\\w]*)?$");
+    }
+
+    public void setSkullTexture(ItemStack itemStack, ItemStack head) {
+        head.setAmount(itemStack.getAmount());
+        ItemMeta meta = itemStack.getItemMeta();
+        ItemMeta headMeta = head.getItemMeta();
+        if (meta.hasDisplayName()) {
+            headMeta.setDisplayName(meta.getDisplayName());
+        }
+
+        if (meta.hasLore()) {
+            headMeta.setLore(meta.getLore());
+        }
+        var pdc = meta.getPersistentDataContainer();
+
+        Map<NamespacedKey, Pair<PersistentDataType<Object, Object>, Object>> data = new HashMap<>();
+
+        for (NamespacedKey key : pdc.getKeys()) {
+            for (PersistentDataType<?, ?> atype : types) {
+                @SuppressWarnings("unchecked") PersistentDataType<Object, Object> type = (PersistentDataType<Object, Object>) atype;
+                try {
+                    Object value = pdc.get(key, type);
+                    if (value != null) {
+                        data.put(key, new Pair<>(type, value));
+                    }
+                } catch (Exception ignored) {
+                }
+            }
+        }
+
+        data.remove(Slimefun.getItemDataService().getKey());
+
+        for (NamespacedKey key : data.keySet()) {
+            headMeta.getPersistentDataContainer().set(key, data.get(key).getFirstValue(), data.get(key).getSecondValue());
+        }
+
+        headMeta.addItemFlags(meta.getItemFlags().toArray(new ItemFlag[0]));
+        if (meta.hasEnchants()) {
+            for (Map.Entry<Enchantment, Integer> entry : meta.getEnchants().entrySet()) {
+                headMeta.addEnchant(entry.getKey(), entry.getValue(), true);
+            }
+        }
+        if (meta.hasAttributeModifiers()) {
+            headMeta.setAttributeModifiers(meta.getAttributeModifiers());
+        }
+        if (meta.hasCustomModelData()) {
+            headMeta.setCustomModelData(meta.getCustomModelData());
+        }
+        headMeta.setUnbreakable(meta.isUnbreakable());
+        headMeta.setPlaceableKeys(meta.getPlaceableKeys());
+        headMeta.setDestroyableKeys(meta.getDestroyableKeys());
+        head.setItemMeta(headMeta);
+    }
+
+    public void modifyLine(Player player, int line, String value) {
+        Debug.log("modify line " + line + ": " + value);
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
+        if (line < lore.size()) {
+            String oldLine = lore.get(line);
+            lore.set(line, compile(placeholder(value, player, oldLine)));
+            ItemMeta meta = itemStack.getItemMeta();
+            meta.setLore(lore);
+            itemStack.setItemMeta(meta);
+            player.updateInventory();
+        }
+    }
+
+    public void addLine(Player player, int line, String value) {
+        Debug.log("add line: " + value);
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
+        if (line < lore.size()) {
+            String current = lore.get(line);
+            lore.add(compile(placeholder(value, player, current)));
+        } else {
+            lore.add(compile(value));
+        }
+        ItemMeta meta = itemStack.getItemMeta();
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+        player.updateInventory();
+    }
+
+    public void insertLine(Player player, int line, String value) {
+        Debug.log("insert line " + line + ": " + value);
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
+        if (line < lore.size()) {
+            String current = lore.get(line);
+            lore.add(line, compile(placeholder(value, player, current)));
+            ItemMeta meta = itemStack.getItemMeta();
+            meta.setLore(lore);
+            itemStack.setItemMeta(meta);
+            player.updateInventory();
+        }
+    }
+
+    @EventHandler
+    public void onLineSelect(PlayerItemHeldEvent event) {
+        Debug.log("line select");
+        Player player = event.getPlayer();
+        if (editingPlayers.contains(player)) {
+            ItemStack itemStack = player.getInventory().getItem(event.getPreviousSlot());
+            if (itemStack == null || itemStack.getType() == Material.AIR) {
+                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold an item in your main hand."));
+                return;
+            }
+            List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
+            int newSlot = event.getNewSlot();
+            int previousSlot = event.getPreviousSlot();
+            Debug.log("new slot: " + newSlot + ", previous slot: " + previousSlot);
+            if (newSlot >= 5 && previousSlot == 0) { // scroll left
+                Debug.log("scroll left type 1");
+                setSelectingLine(player, getSelectingLine(player) - 1, lore.size());
+            } else if (newSlot < 5 && previousSlot == 8) { // scroll right
+                Debug.log("scroll right type 2");
+                setSelectingLine(player, getSelectingLine(player) + 1, lore.size());
+            } else if (newSlot > previousSlot) { // scroll right
+                Debug.log("scroll right type 3");
+                setSelectingLine(player, getSelectingLine(player) + 1, lore.size());
+            } else if (newSlot < previousSlot) { // scroll left
+                Debug.log("scroll left type 4");
+                setSelectingLine(player, getSelectingLine(player) - 1, lore.size());
+            }
+            if (itemStack != null && itemStack.getType() != Material.AIR) {
+                clearScreen(player);
+                sendLore(player, lore, getSelectingLine(player));
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    public void removeLine(Player player, int line) {
+        Debug.log("remove line " + line);
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
+        if (line < lore.size()) {
+            lore.remove(line);
+            ItemMeta meta = itemStack.getItemMeta();
+            meta.setLore(lore);
+            itemStack.setItemMeta(meta);
+            player.updateInventory();
+        }
+    }
+
+    public int getSelectingLine(Player player) {
+        if (!selectingLines.containsKey(player)) {
+            selectingLines.put(player, 0);
+            return 0;
+        }
+
+        return selectingLines.get(player);
+    }
+
+    public void setSelectingLine(Player player, int line, int loreSize) {
+        if (line < 0) {
+            line = 0;
+        }
+        if (line > loreSize - 1) {
+            line = loreSize - 1;
+        }
+        selectingLines.put(player, line);
+    }
+
+    public void clearScreen(Player player) {
+        for (int i = 0; i < 20; i++) {
+            player.sendMessage("");
+        }
+    }
+
+    public void sendLore(Player player, List<String> lore, int selectingLine) {
+        Debug.log("send lore");
+        List<String> showLines = new ArrayList<>();
+        List<String> lines;
+        if (lore == null) {
+            lines = new ArrayList<>();
+        } else {
+            lines = lore;
+        }
+        // Show as: " &7|&r    [content]"
+        // selecting line show as: "&a>&r    [content]"
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
+            if (i == selectingLine) {
+                showLines.add(compile(" &a>&r    " + line));
+            } else {
+                showLines.add(compile(" &7|&r    " + line));
+            }
+        }
+        player.sendMessage(compile("&2=======Edit lore======="));
+        for (String line : showLines) {
+            player.sendMessage(compile(line));
+        }
+        player.sendMessage(compile("&2=======Edit lore======="));
+    }
+
+    public void doneEditing(Player player) {
+        Debug.log("done editing");
+        editingPlayers.remove(player);
+        selectingLines.remove(player);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        Debug.log("quit");
+        Player player = event.getPlayer();
+        doneEditing(player);
     }
 }

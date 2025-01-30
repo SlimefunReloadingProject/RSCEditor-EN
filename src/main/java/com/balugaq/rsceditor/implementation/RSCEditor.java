@@ -15,8 +15,6 @@ import com.balugaq.rsceditor.implementation.items.TypeItems;
 import com.balugaq.rsceditor.utils.SlimefunItemUtil;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import lombok.Getter;
-import net.guizhanss.guizhanlibplugin.bstats.bukkit.Metrics;
-import net.guizhanss.guizhanlibplugin.bstats.charts.SimplePie;
 import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
@@ -25,11 +23,11 @@ import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class RSCEditor extends JavaPlugin implements SlimefunAddon {
+    private static RSCEditor instance;
     private String username;
     private String repo;
     private String branch;
     private ConfigManager configManager;
-    private static RSCEditor instance;
 
     public static RSCEditor getInstance() {
         return instance;

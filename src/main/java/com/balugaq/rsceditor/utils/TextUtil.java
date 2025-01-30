@@ -12,6 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 @UtilityClass
 public class TextUtil {
+    private static boolean langHelperInit = true;
+
     public static @NotNull String getName(@NotNull SimpleMachineType type) {
         return switch (type) {
             case ELECTRIC_CRUCIBLE -> "电动坩埚";
@@ -43,7 +45,6 @@ public class TextUtil {
         };
     }
 
-    private static boolean langHelperInit = true;
     public static @NotNull String getName(@NotNull Biome biome) {
         String key = biome.translationKey();
         String name = null;

@@ -41,16 +41,16 @@ import java.util.regex.Pattern;
 @SuppressWarnings("deprecation")
 public class ItemEditListener implements Listener {
     public static final Pattern materialPattern = Pattern.compile("m\\((.+)\\)");
-    public static final Pattern hungerPattern = Pattern.compile("h\\([-+]?[0-9]*\\\\.?[0-9]+([eE][-+]?[0-9]+)?\\)");
+    public static final Pattern hungerPattern = Pattern.compile("h\\(([-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?)\\)");
     public static final Pattern machinePattern = Pattern.compile("ma\\((BASIC|AVERAGE|MEDIUM|GOOD|ADVANCED|END_GAME),\\s*(CAPACITOR|GENERATOR|MACHINE)\\)");
     public static final Pattern radioactivePattern = Pattern.compile("ra\\((LOW|MODERATE|HIGH|VERY_HIGH|VERY_DEADLY)\\)");
     public static final Pattern powerBufferPattern = Pattern.compile("pb\\((\\d+)\\)");
     public static final Pattern powerPerSecondPattern = Pattern.compile("pps\\((\\d+)\\)");
-    public static final Pattern powerChargedPattern = Pattern.compile("pc\\((\\d+,\\s*\\d+)\\)");
-    public static final Pattern powerPattern = Pattern.compile("p\\((\\d+,\\s*.+)\\)");
+    public static final Pattern powerChargedPattern = Pattern.compile("pc\\((\\d+),\\s*(\\d+)\\)");
+    public static final Pattern powerPattern = Pattern.compile("p\\((\\d+),\\s*(.+)\\)");
     public static final Pattern rangePattern = Pattern.compile("r\\((\\d+)\\)");
     public static final Pattern usesLeftPattern = Pattern.compile("ul\\((\\d+)\\)");
-    public static final Pattern speedPattern = Pattern.compile("s\\([-+]?[0-9]*\\\\.?[0-9]+([eE][-+]?[0-9]+)?\\)");
+    public static final Pattern speedPattern = Pattern.compile("s\\(([-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?)\\)");
     private static final Set<PersistentDataType<?, ?>> types = new HashSet<>(Arrays.asList(PersistentDataType.STRING, PersistentDataType.DOUBLE, PersistentDataType.INTEGER, PersistentDataType.BYTE, PersistentDataType.BOOLEAN, PersistentDataType.BYTE_ARRAY, PersistentDataType.FLOAT, PersistentDataType.INTEGER_ARRAY, PersistentDataType.LONG, PersistentDataType.LONG_ARRAY, PersistentDataType.SHORT, PersistentDataType.TAG_CONTAINER, PersistentDataType.TAG_CONTAINER_ARRAY));
     private final Set<Player> editingPlayers = new HashSet<>();
     private final Map<Player, Integer> selectingLines = new HashMap<>();
@@ -70,7 +70,7 @@ public class ItemEditListener implements Listener {
     }
 
     @Nonnull
-    public static String placeholder(@Nonnull String message, @Nullable Player player, @Nonnull String origin) {
+    public static String placeholder(@Nonnull String message, @Nullable Player player, @Nullable String origin) {
         if (message == null || message.isBlank()) {
             return "";
         }
@@ -79,8 +79,10 @@ public class ItemEditListener implements Listener {
                 .replace("%hsr", LoreBuilder.HAZMAT_SUIT_REQUIRED)
                 .replace("%rai", LoreBuilder.RAINBOW)
                 .replace("%rcto", LoreBuilder.RIGHT_CLICK_TO_OPEN)
-                .replace("%rctu", LoreBuilder.RIGHT_CLICK_TO_USE)
-                .replace("%0", origin);
+                .replace("%rctu", LoreBuilder.RIGHT_CLICK_TO_USE);
+        if (origin != null) {
+            newMessage = newMessage.replace("%0", origin);
+        }
         if (player != null) {
             newMessage = newMessage.replace("%p", player.getName());
         }
@@ -250,7 +252,7 @@ public class ItemEditListener implements Listener {
             player.sendMessage(compile("&bra(Radioactivity) = LoreBuilder.radioactive(Radioactivity)"));
             player.sendMessage(compile("&bpb(int) = LoreBuilder.powerBuffer(int)"));
             player.sendMessage(compile("&bpps(int) = LoreBuilder.powerPerSecond(int)"));
-            player.sendMessage(compile("&bppc(int, int) = LoreBuilder.powerCharged(int, int)"));
+            player.sendMessage(compile("&bpc(int, int) = LoreBuilder.powerCharged(int, int)"));
             player.sendMessage(compile("&bp(int, String) = LoreBuilder.power(int, String)"));
             player.sendMessage(compile("&br(int) = LoreBuilder.range(int)"));
             player.sendMessage(compile("&bul(int) = LoreBuilder.usesLeft(int)"));
@@ -331,7 +333,8 @@ public class ItemEditListener implements Listener {
                     return;
                 }
                 ItemMeta meta = itemStack.getItemMeta();
-                meta.setDisplayName(compile("&f" + value));
+                String oldName = meta.getDisplayName();
+                meta.setDisplayName(compile(placeholder("&f" + value, player, oldName)));
                 itemStack.setItemMeta(meta);
                 player.updateInventory();
                 event.setCancelled(true);
@@ -397,6 +400,7 @@ public class ItemEditListener implements Listener {
             } else if (message.startsWith("%q")) {
                 String value = message.substring(2);
                 event.setMessage(value);
+                return;
             } else if (message.startsWith("amt ")) {
                 String value = message.substring(4);
                 try {
@@ -516,7 +520,7 @@ public class ItemEditListener implements Listener {
         Debug.log("modify line " + line + ": " + value);
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
-        if (line < lore.size()) {
+        if (line >= 0 && line < lore.size()) {
             String oldLine = lore.get(line);
             lore.set(line, compile(placeholder(value, player, oldLine)));
             ItemMeta meta = itemStack.getItemMeta();
@@ -530,7 +534,7 @@ public class ItemEditListener implements Listener {
         Debug.log("add line: " + value);
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
-        if (line < lore.size()) {
+        if (line >= 0 && line < lore.size()) {
             String current = lore.get(line);
             lore.add(compile(placeholder(value, player, current)));
         } else {
@@ -546,7 +550,7 @@ public class ItemEditListener implements Listener {
         Debug.log("insert line " + line + ": " + value);
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
-        if (line < lore.size()) {
+        if (line >= 0 && line < lore.size()) {
             String current = lore.get(line);
             lore.add(line, compile(placeholder(value, player, current)));
             ItemMeta meta = itemStack.getItemMeta();
@@ -595,7 +599,7 @@ public class ItemEditListener implements Listener {
         Debug.log("remove line " + line);
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         List<String> lore = Objects.requireNonNullElse(itemStack.getItemMeta().getLore(), new ArrayList<>());
-        if (line < lore.size()) {
+        if (line >= 0 && line < lore.size()) {
             lore.remove(line);
             ItemMeta meta = itemStack.getItemMeta();
             meta.setLore(lore);

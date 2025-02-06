@@ -72,7 +72,7 @@ public class ItemGroupEditor extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -90,7 +90,7 @@ public class ItemGroupEditor extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, integer -> {
                             typeItem.setContent(i, integer);
                             menu.open(p);
@@ -107,7 +107,7 @@ public class ItemGroupEditor extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, integer -> {
                             typeItem.setContent(i, integer);
                             menu.open(p);

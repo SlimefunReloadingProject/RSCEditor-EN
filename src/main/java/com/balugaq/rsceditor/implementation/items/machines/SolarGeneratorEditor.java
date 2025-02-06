@@ -71,7 +71,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -89,7 +89,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -108,7 +108,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -127,7 +127,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -146,7 +146,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -163,7 +163,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
                     YamlWriter writer = new YamlWriter();
                     Pair<Boolean, String> p0 = ItemUtil.isString(menu, matrix, "n");
                     if (!p0.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的ID");
+                        p.sendMessage("You haven't set the item's id");
                         return false;
                     }
                     String id = p0.getSecondValue();

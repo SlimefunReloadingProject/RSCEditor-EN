@@ -72,7 +72,7 @@ public class MachineRecipeBuilder extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof TextTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -90,7 +90,7 @@ public class MachineRecipeBuilder extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof IntegerTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -108,7 +108,7 @@ public class MachineRecipeBuilder extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -126,7 +126,7 @@ public class MachineRecipeBuilder extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);
@@ -144,7 +144,7 @@ public class MachineRecipeBuilder extends AbstractContainer {
                     }
                     if (SlimefunItem.getByItem(i) instanceof BooleanTypeItem typeItem) {
                         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                        p.sendMessage("输入内容: ");
+                        p.sendMessage("Input content: ");
                         ChatUtils.awaitInput(p, text -> {
                             typeItem.setContent(i, text);
                             menu.open(p);

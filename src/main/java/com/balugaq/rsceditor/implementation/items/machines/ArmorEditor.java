@@ -11,13 +11,13 @@ import com.balugaq.rsceditor.utils.ClipboardUtil;
 import com.balugaq.rsceditor.utils.Icons;
 import com.balugaq.rsceditor.utils.ItemUtil;
 import com.balugaq.rsceditor.utils.YamlWriter;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
@@ -114,7 +114,7 @@ public class ArmorEditor extends AbstractContainer {
 
                     Pair<Boolean, ItemGroup> p2 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品组");
+                        p.sendMessage("You haven't set the item group of the item");
                         return false;
                     }
                     ItemGroup itemGroup = p2.getSecondValue();
@@ -130,10 +130,10 @@ public class ArmorEditor extends AbstractContainer {
                     // helmet
                     ArmorPiece helmetPart = null;
                     Location helmetContainer = b.getLocation().add(0, 4, 0);
-                    SlimefunItem helmet = StorageCacheUtils.getSfItem(helmetContainer);
+                    SlimefunItem helmet = BlockStorage.check(helmetContainer);
 
                     if (helmet instanceof ArmorPieceContainer apc) {
-                        BlockMenu helmetMenu = StorageCacheUtils.getMenu(helmetContainer);
+                        BlockMenu helmetMenu = BlockStorage.getInventory(helmetContainer);
                         if (helmetMenu == null) {
                             return false;
                         }
@@ -142,7 +142,7 @@ public class ArmorEditor extends AbstractContainer {
                     }
 
                     if (helmetPart == null) {
-                        p.sendMessage("你还没有设置这个装备的头部");
+                        p.sendMessage("You haven't set the armor set's helmet");
                         return false;
                     }
 
@@ -157,10 +157,10 @@ public class ArmorEditor extends AbstractContainer {
                     // chestplate
                     ArmorPiece chestplatePart = null;
                     Location chestplateContainer = b.getLocation().add(0, 3, 0);
-                    SlimefunItem chestplate = StorageCacheUtils.getSfItem(chestplateContainer);
+                    SlimefunItem chestplate = BlockStorage.check(chestplateContainer);
 
                     if (chestplate instanceof ArmorPieceContainer apc) {
-                        BlockMenu chestplateMenu = StorageCacheUtils.getMenu(chestplateContainer);
+                        BlockMenu chestplateMenu = BlockStorage.getInventory(chestplateContainer);
                         if (chestplateMenu == null) {
                             return false;
                         }
@@ -169,7 +169,7 @@ public class ArmorEditor extends AbstractContainer {
                     }
 
                     if (chestplatePart == null) {
-                        p.sendMessage("你还没有设置这个装备的胸甲");
+                        p.sendMessage("You haven't set the armor set's chestplate");
                         return false;
                     }
 
@@ -184,10 +184,10 @@ public class ArmorEditor extends AbstractContainer {
                     // leggings
                     ArmorPiece leggingsPart = null;
                     Location leggingsContainer = b.getLocation().add(0, 2, 0);
-                    SlimefunItem leggings = StorageCacheUtils.getSfItem(leggingsContainer);
+                    SlimefunItem leggings = BlockStorage.check(leggingsContainer);
 
                     if (leggings instanceof ArmorPieceContainer apc) {
-                        BlockMenu leggingsMenu = StorageCacheUtils.getMenu(leggingsContainer);
+                        BlockMenu leggingsMenu = BlockStorage.getInventory(leggingsContainer);
                         if (leggingsMenu == null) {
                             return false;
                         }
@@ -196,7 +196,7 @@ public class ArmorEditor extends AbstractContainer {
                     }
 
                     if (leggingsPart == null) {
-                        p.sendMessage("你还没有设置这个装备的护腿");
+                        p.sendMessage("You haven't set the armor set's leggings");
                         return false;
                     }
 
@@ -211,10 +211,10 @@ public class ArmorEditor extends AbstractContainer {
                     // boots
                     ArmorPiece bootsPart = null;
                     Location bootsContainer = b.getLocation().add(0, 1, 0);
-                    SlimefunItem boots = StorageCacheUtils.getSfItem(bootsContainer);
+                    SlimefunItem boots = BlockStorage.check(bootsContainer);
 
                     if (boots instanceof ArmorPieceContainer apc) {
-                        BlockMenu bootsMenu = StorageCacheUtils.getMenu(bootsContainer);
+                        BlockMenu bootsMenu = BlockStorage.getInventory(bootsContainer);
                         if (bootsMenu == null) {
                             return false;
                         }
@@ -223,7 +223,7 @@ public class ArmorEditor extends AbstractContainer {
                     }
 
                     if (bootsPart == null) {
-                        p.sendMessage("你还没有设置这个装备的靴子");
+                        p.sendMessage("You haven't set the armor set's boots");
                         return false;
                     }
 

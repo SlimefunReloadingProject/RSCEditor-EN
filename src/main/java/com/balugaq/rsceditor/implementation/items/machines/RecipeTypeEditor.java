@@ -82,7 +82,7 @@ public class RecipeTypeEditor extends AbstractContainer {
                     String id = p0.getSecondValue();
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品模型");
+                        p.sendMessage("You haven't set the item of the slimefun item");
                         return false;
                     }
                     ItemStack itemStack = p1.getSecondValue();

@@ -169,7 +169,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
                     String id = p0.getSecondValue();
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品模型");
+                        p.sendMessage("You haven't set the item of the slimefun item");
                         return false;
                     }
                     writer.setRoot(id);
@@ -179,7 +179,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
 
                     Pair<Boolean, ItemGroup> p2 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品组");
+                        p.sendMessage("You haven't set the item group of the item");
                         return false;
                     }
                     ItemGroup itemGroup = p2.getSecondValue();
@@ -199,7 +199,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
 
                     Pair<Boolean, Integer> p4 = ItemUtil.isInteger(menu, matrix, "c");
                     if (!p4.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的能量容量");
+                        p.sendMessage("You haven't set the energy capacity of the item");
                         return false;
                     }
                     int capacity = p4.getSecondValue();
@@ -207,7 +207,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
 
                     Pair<Boolean, Integer> p5 = ItemUtil.isInteger(menu, matrix, "d");
                     if (!p5.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的白天产电量");
+                        p.sendMessage("You haven't set the energy production in the day for the solar generator");
                         return false;
                     }
                     int dayEnergy = p5.getSecondValue();
@@ -215,7 +215,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
 
                     Pair<Boolean, Integer> p6 = ItemUtil.isInteger(menu, matrix, "h");
                     if (!p6.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的夜晚产电量");
+                        p.sendMessage("You haven't set the energy production in the night for the solar generator");
                         return false;
                     }
                     int nightEnergy = p6.getSecondValue();
@@ -223,7 +223,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
 
                     Pair<Boolean, Integer> p7 = ItemUtil.isInteger(menu, matrix, "v");
                     if (!p7.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的白天光照强度");
+                        p.sendMessage("You haven't set the required light level for the solar generator");
                         return false;
                     }
                     int lightLevel = p7.getSecondValue();
@@ -237,7 +237,7 @@ public class SolarGeneratorEditor extends AbstractContainer {
                         }
                     }
 
-                    ClipboardUtil.send(p, "太阳能发电机编辑器: ", writer.toString());
+                    ClipboardUtil.send(p, "Solar Generator Editor: ", writer.toString());
 
                     return false;
                 });

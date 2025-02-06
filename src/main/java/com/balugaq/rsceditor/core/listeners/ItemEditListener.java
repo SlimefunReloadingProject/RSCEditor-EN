@@ -216,27 +216,33 @@ public class ItemEditListener implements Listener {
         }
         if ("rhelp".equals(message)) {
             player.sendMessage(compile("&2=========ItemEditor Help========="));
+            player.sendMessage(compile(""));
             player.sendMessage(compile("&brhelp - Show this help message."));
             player.sendMessage(compile("&bdone - Exit the editor."));
             player.sendMessage(compile("&bl - Enter edit mode"));
             player.sendMessage(compile("&2=====ItemEditor Name Commands====="));
+            player.sendMessage(compile(""));
             player.sendMessage(compile("&bn [content] - Set the display name of the item to the specified content."));
             player.sendMessage(compile("&bp [content] - Preview the specified content."));
             player.sendMessage(compile("&2=====ItemEditor Lore Commands====="));
+            player.sendMessage(compile(""));
             player.sendMessage(compile("&eScroll to select lore lines!"));
             player.sendMessage(compile("&bdd - Delete the selected line."));
             player.sendMessage(compile("&baa [content] - Add a new line at the end of the lore with the specified content."));
             player.sendMessage(compile("&bii [content] - Insert a new line at the selected line with the specified content."));
             player.sendMessage(compile("&bmm [content] - Modify the selected line with the specified content."));
             player.sendMessage(compile("&2=====ItemEditor Rebase Commands====="));
+            player.sendMessage(compile(""));
             player.sendMessage(compile("&bcc [slot] - Rebase whole current item to the specified slot."));
             player.sendMessage(compile("&2=====ItemEditor Other Commands====="));
+            player.sendMessage(compile(""));
             player.sendMessage(compile("&bt<- - Rebase the current item's type to the next slot."));
             player.sendMessage(compile("&b->t - Rebase the current item's type to the previous slot."));
             player.sendMessage(compile("&btt [hashcode|base64|url|material] - Set the current item's type to the specified type. Allows head textures."));
             player.sendMessage(compile("&b%q[content] - Input content and avoid conflicts with commands."));
             player.sendMessage(compile("&bamt [int] - Set the amount of the current item to the specified value."));
             player.sendMessage(compile("&2==========Placeholders=========="));
+            player.sendMessage(compile(""));
             player.sendMessage(compile("&b%ctu = LoreBuilder.CROUCH_TO_USE"));
             player.sendMessage(compile("&b%hsr = LoreBuilder.HAZMAT_SUIT_REQUIRED"));
             player.sendMessage(compile("&b%rai = LoreBuilder.RAINBOW"));
@@ -245,6 +251,7 @@ public class ItemEditListener implements Listener {
             player.sendMessage(compile("&b%0 = original lore line"));
             player.sendMessage(compile("&b%p = your name"));
             player.sendMessage(compile("&2======Function Placeholders======"));
+            player.sendMessage(compile(""));
             player.sendMessage(compile("&bm(String) = LoreBuilder.material(String)"));
             player.sendMessage(compile("&bh(double) = LoreBuilder.hunger(double)"));
             player.sendMessage(compile("&bs(float) = LoreBuilder.speed(float)"));
@@ -258,7 +265,6 @@ public class ItemEditListener implements Listener {
             player.sendMessage(compile("&bul(int) = LoreBuilder.usesLeft(int)"));
             player.sendMessage(compile("&2=========ItemEditor Help========="));
             event.setCancelled(true);
-            return;
         } else if ("l".equals(message)) {
             editingPlayers.add(player);
             clearScreen(player);
@@ -288,8 +294,8 @@ public class ItemEditListener implements Listener {
                 return;
             }
             ItemStack itemStack = player.getInventory().getItemInMainHand();
-            if (itemStack == null || itemStack.getType() == Material.AIR) {
-                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold an item in your main hand."));
+            if (!itemStack.hasItemMeta()) {
+                player.sendMessage(compile("&c[RSCEditor] ItemEditor: &cYou need to hold a valid item in your main hand."));
                 event.setCancelled(true);
                 return;
             }

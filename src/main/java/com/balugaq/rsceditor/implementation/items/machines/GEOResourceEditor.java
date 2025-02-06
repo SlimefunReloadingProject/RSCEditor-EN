@@ -11,7 +11,6 @@ import com.balugaq.rsceditor.utils.ClipboardUtil;
 import com.balugaq.rsceditor.utils.Icons;
 import com.balugaq.rsceditor.utils.ItemUtil;
 import com.balugaq.rsceditor.utils.YamlWriter;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -19,6 +18,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
@@ -180,13 +180,13 @@ public class GEOResourceEditor extends AbstractContainer {
                     YamlWriter writer = new YamlWriter();
                     Pair<Boolean, String> p0 = ItemUtil.isString(menu, matrix, "n");
                     if (!p0.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的 ID.");
+                        p.sendMessage("You haven't set the geo id of the item");
                         return false;
                     }
                     String id = p0.getSecondValue();
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品模型.");
+                        p.sendMessage("You haven't set the item of the slimefun item.");
                         return false;
                     }
                     writer.setRoot(id);
@@ -196,7 +196,7 @@ public class GEOResourceEditor extends AbstractContainer {
 
                     Pair<Boolean, ItemGroup> p2 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品组.");
+                        p.sendMessage("You haven't set the item group of the item.");
                         return false;
                     }
                     ItemGroup itemGroup = p2.getSecondValue();
@@ -252,12 +252,12 @@ public class GEOResourceEditor extends AbstractContainer {
                     }
 
                     Location containLocation = b.getRelative(BlockFace.DOWN).getLocation();
-                    SlimefunItem slimefunItem = StorageCacheUtils.getSfItem(containLocation);
+                    SlimefunItem slimefunItem = BlockStorage.check(containLocation);
                     if (slimefunItem instanceof SupplyContainer container) {
-                        BlockMenu blockMenu = StorageCacheUtils.getMenu(containLocation);
+                        BlockMenu blockMenu = BlockStorage.getInventory(containLocation);
                         Map<World.Environment, Map<Biome, Integer>> supply = container.getSupply(blockMenu);
                         if (supply.isEmpty()) {
-                            p.sendMessage("你没有设置GEO供应容器");
+                            p.sendMessage("You haven't set the geo supply container of the item");
                             return false;
                         }
 
@@ -268,7 +268,7 @@ public class GEOResourceEditor extends AbstractContainer {
                             }
                         }
                     } else {
-                        p.sendMessage("你没有放置GEO供应容器");
+                        p.sendMessage("You haven't placed the geo supply container of the item");
                         return false;
                     }
 

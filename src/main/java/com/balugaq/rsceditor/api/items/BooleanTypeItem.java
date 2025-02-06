@@ -38,7 +38,7 @@ public class BooleanTypeItem extends BaseTypeItem<Boolean> {
             itemMeta.getPersistentDataContainer().set(CONTENT_KEY, DataType.BOOLEAN, value);
             List<String> lore = new ArrayList<>();
 
-            lore.add("§a已设置内容: " + value);
+            lore.add("§aContent: " + value);
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
         } catch (NumberFormatException ignored) {

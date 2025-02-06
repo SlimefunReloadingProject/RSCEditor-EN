@@ -9,11 +9,7 @@ import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
 import com.balugaq.rsceditor.api.objects.types.MachineRecipe;
 import com.balugaq.rsceditor.implementation.items.machines.container.ItemFlowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.MenuContainer;
-import com.balugaq.rsceditor.utils.ClipboardUtil;
-import com.balugaq.rsceditor.utils.Icons;
-import com.balugaq.rsceditor.utils.ItemUtil;
-import com.balugaq.rsceditor.utils.YamlWriter;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+import com.balugaq.rsceditor.utils.*;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -21,10 +17,10 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import net.guizhanss.guizhanlib.minecraft.helper.inventory.ItemStackHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -204,7 +200,7 @@ public class MaterialGeneratorEditor extends AbstractContainer {
                     String id = p0.getSecondValue();
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品模型");
+                        p.sendMessage("You haven't set the item of the slimefun item");
                         return false;
                     }
                     writer.setRoot(id);
@@ -214,7 +210,7 @@ public class MaterialGeneratorEditor extends AbstractContainer {
 
                     Pair<Boolean, ItemGroup> p2 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品组");
+                        p.sendMessage("You haven't set the item group of the item");
                         return false;
                     }
                     ItemGroup itemGroup = p2.getSecondValue();
@@ -234,7 +230,7 @@ public class MaterialGeneratorEditor extends AbstractContainer {
 
                     Pair<Boolean, Integer> p4 = ItemUtil.isInteger(menu, matrix, "c");
                     if (!p4.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的能量容量");
+                        p.sendMessage("You haven't set the energy capacity of the item");
                         return false;
                     }
                     int capacity = p4.getSecondValue();
@@ -243,7 +239,7 @@ public class MaterialGeneratorEditor extends AbstractContainer {
                     // tick rate
                     Pair<Boolean, Integer> p5 = ItemUtil.isInteger(menu, matrix, "k");
                     if (!p5.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的产出物品间隔");
+                        p.sendMessage("You haven't set the tick rate for the production of the material generator");
                         return false;
                     }
                     int tickRate = p5.getSecondValue();
@@ -252,7 +248,7 @@ public class MaterialGeneratorEditor extends AbstractContainer {
                     // per
                     Pair<Boolean, Integer> p6 = ItemUtil.isInteger(menu, matrix, "e");
                     if (!p6.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的产出物品耗电量");
+                        p.sendMessage("You haven't set the energy consumption for the production of the material generator");
                         return false;
                     }
                     int per = p6.getSecondValue();
@@ -261,7 +257,7 @@ public class MaterialGeneratorEditor extends AbstractContainer {
                     // status
                     Pair<Boolean, Integer> p8 = ItemUtil.isInteger(menu, matrix, "u");
                     if (!p8.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的状态槽");
+                        p.sendMessage("You haven't set the stats slot for the material generator");
                         return false;
                     }
                     int status = p8.getSecondValue();
@@ -288,11 +284,11 @@ public class MaterialGeneratorEditor extends AbstractContainer {
                     // for input, output slots and menu
                     int[] output = new int[0];
                     Location flowContainer = b.getRelative(BlockFace.DOWN).getLocation();
-                    SlimefunItem flowItem = StorageCacheUtils.getSfItem(flowContainer);
+                    SlimefunItem flowItem = BlockStorage.check(flowContainer);
                     if (flowItem instanceof ItemFlowContainer ifc) {
-                        BlockMenu flowMenu = StorageCacheUtils.getMenu(flowContainer);
+                        BlockMenu flowMenu = BlockStorage.getInventory(flowContainer);
                         if (flowMenu == null) {
-                            p.sendMessage("未检测到物流容器!");
+                            p.sendMessage("No item flow containers detected!");
                         } else {
                             Map<Integer, ItemFlowType> types = ifc.getFlowTypes(flowMenu);
 
@@ -316,15 +312,15 @@ public class MaterialGeneratorEditor extends AbstractContainer {
                     }
 
                     Location menuContainer = b.getRelative(BlockFace.UP).getLocation();
-                    SlimefunItem menuItem = StorageCacheUtils.getSfItem(menuContainer);
+                    SlimefunItem menuItem = BlockStorage.check(menuContainer);
                     if (menuItem instanceof MenuContainer mc) {
-                        BlockMenu menuBlockMenu = StorageCacheUtils.getMenu(menuContainer);
+                        BlockMenu menuBlockMenu = BlockStorage.getInventory(menuContainer);
                         if (menuBlockMenu == null) {
                             return false;
                         }
 
                         YamlWriter menuWriter = mc.getAsYamlWriter(menu, new int[0], output, id, title);
-                        ClipboardUtil.send(p, "菜单编辑器: ", menuWriter.toString());
+                        ClipboardUtil.send(p, "Menu Editor: ", menuWriter.toString());
                         p.sendMessage(ChatColor.YELLOW + "==============================");
                     }
 
@@ -336,7 +332,7 @@ public class MaterialGeneratorEditor extends AbstractContainer {
                         }
                     }
 
-                    ClipboardUtil.send(p, "材料生成器编辑器: ", writer.toString());
+                    ClipboardUtil.send(p, "Material Generator Editor: ", writer.toString());
 
                     return false;
                 });

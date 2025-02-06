@@ -161,7 +161,7 @@ public class ResearchEditor extends AbstractContainer {
 
                     Pair<Boolean, String> p9 = ItemUtil.isString(menu, matrix, "k");
                     if (!p9.getFirstValue()) {
-                        p.sendMessage("请先输入研究ID!");
+                        p.sendMessage("Please input the research id first!");
                         return false;
                     }
 
@@ -177,7 +177,7 @@ public class ResearchEditor extends AbstractContainer {
 
                     Pair<Boolean, String> p1 = ItemUtil.isString(menu, matrix, "n");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("请先输入研究名称!");
+                        p.sendMessage("Please input the research name first!");
                         return false;
                     }
 

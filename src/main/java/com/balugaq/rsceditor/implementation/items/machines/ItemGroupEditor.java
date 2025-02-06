@@ -122,14 +122,14 @@ public class ItemGroupEditor extends AbstractContainer {
                     YamlWriter writer = new YamlWriter();
                     Pair<Boolean, String> p0 = ItemUtil.isString(menu, matrix, "n");
                     if (!p0.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品组的ID");
+                        p.sendMessage("You haven't set the ID for this item group");
                         return false;
                     }
                     String id = p0.getSecondValue();
                     writer.setRoot(id);
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品组的物品模型");
+                        p.sendMessage("You haven't set the item for this item group");
                         return false;
                     }
                     ItemStack itemStack = p1.getSecondValue();
@@ -160,13 +160,13 @@ public class ItemGroupEditor extends AbstractContainer {
                         case SUB -> {
                             Pair<Boolean, ItemGroup> p4 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                             if (!p4.getFirstValue()) {
-                                p.sendMessage("你还没有设置这个物品组的父组");
+                                p.sendMessage("You haven't set the parent group for this item group");
                                 return false;
                             }
 
                             ItemGroup parent = p4.getSecondValue();
                             if (!(parent instanceof FlexItemGroup)) {
-                                p.sendMessage("父物品组不能是 非正常物品组");
+                                p.sendMessage("The parent group must not a FlexItemGroup");
                                 return false;
                             }
                             writer.set("type", "sub");
@@ -175,12 +175,12 @@ public class ItemGroupEditor extends AbstractContainer {
                         case SEASONAL -> {
                             Pair<Boolean, Integer> p5 = ItemUtil.isInteger(menu, matrix, "m");
                             if (!p5.getFirstValue()) {
-                                p.sendMessage("你还没有设置月份");
+                                p.sendMessage("You haven't set the month for this item group");
                                 return false;
                             }
                             int month = p5.getSecondValue();
                             if (month < 1 || month > 12) {
-                                p.sendMessage("月份必须在1-12之间");
+                                p.sendMessage("The month must be between 1 and 12");
                                 return false;
                             }
                             writer.set("type", "seasonal");
@@ -189,7 +189,7 @@ public class ItemGroupEditor extends AbstractContainer {
                         case LOCKED -> {
                             Pair<Boolean, List<ItemGroup>> p6 = ItemUtil.isItemGroupItems(menu, matrix, "s");
                             if (!p6.getFirstValue()) {
-                                p.sendMessage("你还没有设置这个物品组的爷物品组");
+                                p.sendMessage("You haven't set the grandparent group for this item group");
                                 return false;
                             }
 

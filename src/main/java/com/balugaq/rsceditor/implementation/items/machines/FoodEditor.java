@@ -186,7 +186,7 @@ public class FoodEditor extends AbstractContainer {
                     String id = p0.getSecondValue();
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品模型");
+                        p.sendMessage("You haven't set the item of the slimefun item");
                         return false;
                     }
                     writer.setRoot(id);
@@ -195,7 +195,7 @@ public class FoodEditor extends AbstractContainer {
 
                     Pair<Boolean, ItemGroup> p2 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品组");
+                        p.sendMessage("You haven't set the item group of the item");
                         return false;
                     }
 

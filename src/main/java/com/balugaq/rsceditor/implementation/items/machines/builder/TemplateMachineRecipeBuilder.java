@@ -12,12 +12,12 @@ import com.balugaq.rsceditor.implementation.items.machines.container.ItemFlowCon
 import com.balugaq.rsceditor.implementation.items.machines.container.MenuContainer;
 import com.balugaq.rsceditor.utils.Icons;
 import com.balugaq.rsceditor.utils.ItemUtil;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
@@ -160,25 +160,25 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("G"), (p, s, i, a) -> {
                     ItemStack machineRecipeCard = menu.getItemInSlot(matrix.getChar("c"));
                     if (!(SlimefunItem.getByItem(machineRecipeCard) instanceof TemplateMachineRecipeItem tmri)) {
-                        p.sendMessage("该物品不是机器配方卡!");
+                        p.sendMessage("This is not a template machine recipe card!");
                         return false;
                     }
 
                     Pair<Boolean, String> p0 = ItemUtil.isString(menu, matrix, "n");
                     if (!p0.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个配方的名字");
+                        p.sendMessage("You haven't set the recipe name for this recipe!");
                         return false;
                     }
 
                     Pair<Boolean, ItemStack> p8 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p8.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个配方的模板物品!");
+                        p.sendMessage("You haven't set the template item for this recipe!");
                         return false;
                     }
                     ItemStack templateItem = p8.getSecondValue();
                     SlimefunItem slimefunItem = SlimefunItem.getByItem(templateItem);
                     if (slimefunItem == null) {
-                        p.sendMessage("模板物品不正确!");
+                        p.sendMessage("The template item is not a valid Slimefun item!");
                         return false;
                     }
                     String id = slimefunItem.getId();
@@ -187,7 +187,7 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
 
                     Pair<Boolean, Integer> p2 = ItemUtil.isInteger(menu, matrix, "t");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个配方的处理时间");
+                        p.sendMessage("You haven't set the processing time for this recipe!");
                         return false;
                     }
 
@@ -196,34 +196,34 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
                     // let's read the item flow from the below container
                     Map<Integer, ItemFlowType> types;
                     Location flowContainer = b.getRelative(BlockFace.DOWN).getLocation();
-                    SlimefunItem flowItem = StorageCacheUtils.getSfItem(flowContainer);
+                    SlimefunItem flowItem = BlockStorage.check(flowContainer);
                     if (flowItem instanceof ItemFlowContainer ifc) {
-                        BlockMenu flowMenu = StorageCacheUtils.getMenu(flowContainer);
+                        BlockMenu flowMenu = BlockStorage.getInventory(flowContainer);
                         if (flowMenu == null) {
-                            p.sendMessage("物流容器不正确!");
+                            p.sendMessage("Item flow container not found!");
                             return false;
                         }
 
                         types = ifc.getFlowTypes(flowMenu);
                     } else {
-                        p.sendMessage("下方的物流容器不正确!");
+                        p.sendMessage("The item flow container below this machine is not a valid Slimefun item!");
                         return false;
                     }
 
                     Map<Integer, ItemStack> contents;
                     // then read the menu from the above container
                     Location menuContainer = b.getRelative(BlockFace.UP).getLocation();
-                    SlimefunItem menuItem = StorageCacheUtils.getSfItem(menuContainer);
+                    SlimefunItem menuItem = BlockStorage.check(menuContainer);
                     if (menuItem instanceof MenuContainer mc) {
-                        BlockMenu menuBlockMenu = StorageCacheUtils.getMenu(menuContainer);
+                        BlockMenu menuBlockMenu = BlockStorage.getInventory(menuContainer);
                         if (menuBlockMenu == null) {
-                            p.sendMessage("菜单容器不正确!");
+                            p.sendMessage("Menu container not found!");
                             return false;
                         }
 
                         contents = mc.getMenuContent(menuBlockMenu);
                     } else {
-                        p.sendMessage("上方的菜单容器不正确!");
+                        p.sendMessage("The menu container above this machine is not a valid Slimefun item!");
                         return false;
                     }
 
@@ -278,7 +278,7 @@ public class TemplateMachineRecipeBuilder extends AbstractContainer {
                     TemplateMachineRecipe recipe = new TemplateMachineRecipe(id, name, chooseOne, forDisplay, hide, processingTime, inputs, outputs);
                     tmri.setRecipe(machineRecipeCard, recipe);
 
-                    p.sendMessage("模板机器配方已保存!");
+                    p.sendMessage("Template machine recipe created successfully!");
 
                     return false;
                 });

@@ -110,7 +110,7 @@ public class MultiBlockEditor extends AbstractContainer {
                     String id = p0.getSecondValue();
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品模型");
+                        p.sendMessage("You haven't set the item of the slimefun item");
                         return false;
                     }
                     writer.setRoot(id);
@@ -120,7 +120,7 @@ public class MultiBlockEditor extends AbstractContainer {
 
                     Pair<Boolean, ItemGroup> p2 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品组");
+                        p.sendMessage("You haven't set the item group of the item");
                         return false;
                     }
                     ItemGroup itemGroup = p2.getSecondValue();
@@ -140,7 +140,7 @@ public class MultiBlockEditor extends AbstractContainer {
 
                     Pair<Boolean, Integer> p3 = ItemUtil.isInteger(menu, matrix, "w");
                     if (!p3.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的工作方块");
+                        p.sendMessage("You haven't set the work block of the multi block machine");
                         return false;
                     }
                     int work = p3.getSecondValue();
@@ -148,7 +148,7 @@ public class MultiBlockEditor extends AbstractContainer {
 
                     Pair<Boolean, Sound> p4 = ItemUtil.isSound(menu, matrix, "s");
                     if (!p4.getFirstValue()) {
-                        p.sendMessage("你还没有设置音效");
+                        p.sendMessage("You haven't set the sound of the multi block machine");
                         return false;
                     }
                     Sound sound = p4.getSecondValue();
@@ -162,7 +162,7 @@ public class MultiBlockEditor extends AbstractContainer {
                         }
                     }
 
-                    ClipboardUtil.send(p, "多方块结构编辑器: ", writer.toString());
+                    ClipboardUtil.send(p, "Multi Block Machine Editor: ", writer.toString());
 
                     return false;
                 });

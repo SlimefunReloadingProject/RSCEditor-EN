@@ -3,13 +3,13 @@ package com.balugaq.rsceditor.api.base;
 import com.balugaq.rsceditor.implementation.groups.RSCEItemGroups;
 import com.balugaq.rsceditor.implementation.items.tools.MenuCopier;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.ChatColor;
@@ -73,7 +73,7 @@ public abstract class AbstractContainer extends AContainer {
             @Override
             public void onPlayerBreak(@NotNull BlockBreakEvent blockBreakEvent, @NotNull ItemStack itemStack, @NotNull List<ItemStack> list) {
                 Location location = blockBreakEvent.getBlock().getLocation();
-                BlockMenu blockMenu = StorageCacheUtils.getMenu(location);
+                BlockMenu blockMenu = BlockStorage.getInventory(location);
                 if (blockMenu != null) {
                     SlimefunItem copierItem = SlimefunItem.getById("RSC_EDITOR_TOOL_MENU_COPIER");
                     if (copierItem instanceof MenuCopier mc) {

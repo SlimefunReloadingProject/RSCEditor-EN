@@ -140,7 +140,7 @@ public class RegisterBuilder extends AbstractContainer {
                 menu.addMenuClickHandler(matrix.getChar("G"), (p, s, i, a) -> {
                     ItemStack register_card = menu.getItemInSlot(matrix.getChar("d"));
                     if (!(SlimefunItem.getByItem(register_card) instanceof RegisterItem ri)) {
-                        p.sendMessage("你还没有放置注册选项占位符!");
+                        p.sendMessage("You need a register card to build a register!");
                         return false;
                     }
                     String id_alias = null;
@@ -175,7 +175,7 @@ public class RegisterBuilder extends AbstractContainer {
 
                     Register register = new Register(id_alias, late_init, warn, unfinished, conditions);
                     ri.setRegister(register_card, register);
-                    p.sendMessage("已设置注册选项占位符!");
+                    p.sendMessage("The register placeholder built successfully!");
                     return false;
                 });
             }

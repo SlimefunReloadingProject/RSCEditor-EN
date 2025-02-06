@@ -3,11 +3,11 @@ package com.balugaq.rsceditor.api.items;
 import com.balugaq.rsceditor.api.base.PlaceholderItem;
 import com.balugaq.rsceditor.api.objects.types.LinkedMachineRecipe;
 import com.balugaq.rsceditor.implementation.groups.RSCEItemGroups;
+import com.balugaq.rsceditor.utils.ItemStackHelper;
 import com.balugaq.rsceditor.utils.KeyUtil;
 import com.balugaq.rsceditor.utils.PersistentUtil;
 import com.balugaq.rsceditor.utils.datatypes.PersistentLinkedMachineRecipeType;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
-import net.guizhanss.guizhanlib.minecraft.helper.inventory.ItemStackHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -32,12 +32,12 @@ public class LinkedMachineRecipeItem extends PlaceholderItem {
         PersistentUtil.set(itemStack, PersistentLinkedMachineRecipeType.TYPE, KeyUtil.LINKED_MACHINE_RECIPE_KEY, recipe);
 
         List<String> lore = new ArrayList<>();
-        lore.add("&b强配方机器配方数据");
-        lore.add("&b 名称: " + recipe.getName());
-        lore.add("&d 生产耗时: " + recipe.getProcessingTime());
+        lore.add("&bLinked Machine Recipe");
+        lore.add("&b Name: " + recipe.getName());
+        lore.add("&d Processing Time: " + recipe.getProcessingTime());
 
         for (Map.Entry<Integer, ItemStack> entry : recipe.getLinkedInputs().entrySet()) {
-            lore.add("&b 链接至槽位（输入） " + entry.getKey() + ": " + ItemStackHelper.getDisplayName(entry.getValue()));
+            lore.add("&b Linked to slot (input) " + entry.getKey() + ": " + ItemStackHelper.getDisplayName(entry.getValue()));
         }
 
         for (Map.Entry<Integer, ItemStack> entry : recipe.getLinkedOutputs().entrySet()) {

@@ -12,7 +12,6 @@ import com.balugaq.rsceditor.utils.ClipboardUtil;
 import com.balugaq.rsceditor.utils.Icons;
 import com.balugaq.rsceditor.utils.ItemUtil;
 import com.balugaq.rsceditor.utils.YamlWriter;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -21,6 +20,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
@@ -289,7 +289,7 @@ public class ItemEditor extends AbstractContainer {
                     String id = p0.getSecondValue();
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品模型");
+                        p.sendMessage("You haven't set the item of the slimefun item");
                         return false;
                     }
                     writer.setRoot(id);
@@ -298,7 +298,7 @@ public class ItemEditor extends AbstractContainer {
 
                     Pair<Boolean, ItemGroup> p2 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品组");
+                        p.sendMessage("You haven't set the item group of the item");
                         return false;
                     }
                     ItemGroup itemGroup = p2.getSecondValue();
@@ -361,13 +361,13 @@ public class ItemEditor extends AbstractContainer {
                         writer.set("rainbow", typeItem.getRainbowType().name());
                         if (typeItem.isCustom()) {
                             Location containerLocation = b.getRelative(BlockFace.DOWN).getLocation();
-                            SlimefunItem slimefunItem = StorageCacheUtils.getSfItem(containerLocation);
+                            SlimefunItem slimefunItem = BlockStorage.check(containerLocation);
                             if (slimefunItem instanceof CustomRainbowContainer container) {
-                                BlockMenu containerMenu = StorageCacheUtils.getMenu(containerLocation);
+                                BlockMenu containerMenu = BlockStorage.getInventory(containerLocation);
                                 List<Material> materials = container.getMaterials(containerMenu);
                                 writer.set("rainbow_materials", materials.stream().map(Enum::name).toArray());
                             } else {
-                                p.sendMessage("你还没有放置自定义彩虹物品容器");
+                                p.sendMessage("You haven't placed the custom rainbow container");
                             }
                         }
                     }

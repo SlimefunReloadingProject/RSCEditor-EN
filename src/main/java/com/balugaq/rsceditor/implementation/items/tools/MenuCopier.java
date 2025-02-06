@@ -4,10 +4,10 @@ import com.balugaq.rsceditor.api.base.AbstractTool;
 import com.balugaq.rsceditor.utils.KeyUtil;
 import com.balugaq.rsceditor.utils.PersistentUtil;
 import com.jeff_media.morepersistentdatatypes.DataType;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -88,7 +88,7 @@ public class MenuCopier extends AbstractTool {
 
                 Block block = optional.get();
                 Location location = block.getLocation();
-                BlockMenu menu = StorageCacheUtils.getMenu(location);
+                BlockMenu menu = BlockStorage.getInventory(location);
                 if (menu == null) {
                     player.sendMessage("§cThere is no menu on this block.");
                     return;
@@ -112,7 +112,7 @@ public class MenuCopier extends AbstractTool {
             if (optional.isPresent()) {
                 Block block = optional.get();
                 Location location = block.getLocation();
-                BlockMenu menu = StorageCacheUtils.getMenu(location);
+                BlockMenu menu = BlockStorage.getInventory(location);
                 if (menu == null) {
                     player.sendMessage("§cThere is no menu on this block, cannot paste.");
                     return;

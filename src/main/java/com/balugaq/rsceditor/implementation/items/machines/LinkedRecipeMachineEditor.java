@@ -10,11 +10,7 @@ import com.balugaq.rsceditor.api.objects.types.ItemFlowType;
 import com.balugaq.rsceditor.api.objects.types.LinkedMachineRecipe;
 import com.balugaq.rsceditor.implementation.items.machines.container.ItemFlowContainer;
 import com.balugaq.rsceditor.implementation.items.machines.container.MenuContainer;
-import com.balugaq.rsceditor.utils.ClipboardUtil;
-import com.balugaq.rsceditor.utils.Icons;
-import com.balugaq.rsceditor.utils.ItemUtil;
-import com.balugaq.rsceditor.utils.YamlWriter;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+import com.balugaq.rsceditor.utils.*;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -22,10 +18,10 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import net.guizhanss.guizhanlib.minecraft.helper.inventory.ItemStackHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -243,7 +239,7 @@ public class LinkedRecipeMachineEditor extends AbstractContainer {
                     String id = p0.getSecondValue();
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品模型");
+                        p.sendMessage("You haven't set the item of the slimefun item");
                         return false;
                     }
                     writer.setRoot(id);
@@ -253,7 +249,7 @@ public class LinkedRecipeMachineEditor extends AbstractContainer {
 
                     Pair<Boolean, ItemGroup> p2 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品组");
+                        p.sendMessage("You haven't set the item group of the item");
                         return false;
                     }
                     ItemGroup itemGroup = p2.getSecondValue();
@@ -273,7 +269,7 @@ public class LinkedRecipeMachineEditor extends AbstractContainer {
 
                     Pair<Boolean, Integer> p4 = ItemUtil.isInteger(menu, matrix, "c");
                     if (!p4.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的电容量");
+                        p.sendMessage("You haven't set the energy capacity of the item");
                         return false;
                     }
                     int capacity = p4.getSecondValue();
@@ -282,7 +278,7 @@ public class LinkedRecipeMachineEditor extends AbstractContainer {
                     // energy per craft
                     Pair<Boolean, Integer> p5 = ItemUtil.isInteger(menu, matrix, "e");
                     if (!p5.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的每次制作消耗的能量");
+                        p.sendMessage("You haven't set the energy consumption each craft for the machine");
                         return false;
                     }
                     int energy_per_craft = p5.getSecondValue();
@@ -333,11 +329,11 @@ public class LinkedRecipeMachineEditor extends AbstractContainer {
                     int[] input = new int[0];
                     int[] output = new int[0];
                     Location flowContainer = b.getRelative(BlockFace.DOWN).getLocation();
-                    SlimefunItem flowItem = StorageCacheUtils.getSfItem(flowContainer);
+                    SlimefunItem flowItem = BlockStorage.check(flowContainer);
                     if (flowItem instanceof ItemFlowContainer ifc) {
-                        BlockMenu flowMenu = StorageCacheUtils.getMenu(flowContainer);
+                        BlockMenu flowMenu = BlockStorage.getInventory(flowContainer);
                         if (flowMenu == null) {
-                            p.sendMessage("未检测到物流容器!");
+                            p.sendMessage("No item flow containers detected!");
                         } else {
                             Map<Integer, ItemFlowType> types = ifc.getFlowTypes(flowMenu);
 
@@ -372,15 +368,15 @@ public class LinkedRecipeMachineEditor extends AbstractContainer {
                     }
 
                     Location menuContainer = b.getRelative(BlockFace.UP).getLocation();
-                    SlimefunItem menuItem = StorageCacheUtils.getSfItem(menuContainer);
+                    SlimefunItem menuItem = BlockStorage.check(menuContainer);
                     if (menuItem instanceof MenuContainer mc) {
-                        BlockMenu menuBlockMenu = StorageCacheUtils.getMenu(menuContainer);
+                        BlockMenu menuBlockMenu = BlockStorage.getInventory(menuContainer);
                         if (menuBlockMenu == null) {
                             return false;
                         }
 
                         YamlWriter menuWriter = mc.getAsYamlWriter(menuBlockMenu, input, output, id, title, progress_bar_slot);
-                        ClipboardUtil.send(p, "菜单编辑器: ", menuWriter.toString());
+                        ClipboardUtil.send(p, "Menu Editor: ", menuWriter.toString());
                         p.sendMessage(ChatColor.YELLOW + "==============================");
                     }
 
@@ -392,7 +388,7 @@ public class LinkedRecipeMachineEditor extends AbstractContainer {
                         }
                     }
 
-                    ClipboardUtil.send(p, "链接配方机器编辑器: ", writer.toString());
+                    ClipboardUtil.send(p, "Linked Recipe Machine Editor: ", writer.toString());
 
                     return false;
                 });

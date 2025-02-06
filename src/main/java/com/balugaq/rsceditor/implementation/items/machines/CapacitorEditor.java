@@ -108,7 +108,7 @@ public class CapacitorEditor extends AbstractContainer {
                     String id = p0.getSecondValue();
                     Pair<Boolean, ItemStack> p1 = ItemUtil.isItem(menu, matrix, "i");
                     if (!p1.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品模型");
+                        p.sendMessage("You haven't set the item of the slimefun item");
                         return false;
                     }
                     writer.setRoot(id);
@@ -117,7 +117,7 @@ public class CapacitorEditor extends AbstractContainer {
 
                     Pair<Boolean, ItemGroup> p2 = ItemUtil.isItemGroupItem(menu, matrix, "p");
                     if (!p2.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的物品组");
+                        p.sendMessage("You haven't set the item group of the item");
                         return false;
                     }
 
@@ -137,7 +137,7 @@ public class CapacitorEditor extends AbstractContainer {
                     // energy charge
                     Pair<Boolean, Integer> p6 = ItemUtil.isInteger(menu, matrix, "y");
                     if (!p6.getFirstValue()) {
-                        p.sendMessage("你还没有设置这个物品的能量容量");
+                        p.sendMessage("You haven't set the energy capacity of the item");
                         return false;
                     }
                     writer.set("capacity", p6.getSecondValue());

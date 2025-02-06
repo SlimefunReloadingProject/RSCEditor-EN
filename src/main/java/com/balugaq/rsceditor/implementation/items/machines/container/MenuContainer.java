@@ -92,7 +92,7 @@ public class MenuContainer extends AbstractContainer {
         writer.setRoot(id);
         writer.set("title", title);
 
-        if (progress_bar_slot >= 0 && progress_bar_slot <= 53) {
+        if (progress_bar_slot <= 53) {
             ItemStack itemStack = content.get(progress_bar_slot);
             if (itemStack != null && itemStack.getType() != Material.AIR) {
                 writer.set("slots." + progress_bar_slot, itemStack.clone());
@@ -116,7 +116,7 @@ public class MenuContainer extends AbstractContainer {
             int last_index = i;
             boolean found = false;
             ItemStack next_item = content.get(i + 1);
-            while (next_item != null && SlimefunUtils.isItemSimilar(item, next_item, true, true, true, true)) {
+            while (next_item != null && SlimefunUtils.isItemSimilar(item, next_item, true, true, true)) {
                 if (input_slot_list.contains(i) || output_slot_list.contains(i) || i == progress_bar_slot) {
                     found = true;
                     break;

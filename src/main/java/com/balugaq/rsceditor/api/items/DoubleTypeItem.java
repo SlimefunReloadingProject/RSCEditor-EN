@@ -37,7 +37,7 @@ public class DoubleTypeItem extends BaseTypeItem<Double> {
             itemMeta.getPersistentDataContainer().set(CONTENT_KEY, PersistentDataType.DOUBLE, value);
             List<String> lore = new ArrayList<>(itemMeta.getLore());
 
-            lore.add("§a已设置内容: " + content);
+            lore.add("§aContent: " + content);
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
         } catch (NumberFormatException ignored) {

@@ -32,22 +32,22 @@ public class RegisterItem extends PlaceholderItem {
         List<String> lore = new ArrayList<>();
         String id_alias = register.getIdAlias();
         if (id_alias != null) {
-            lore.add("&aID 注册名: " + id_alias);
+            lore.add("&aFinal Register ID: " + id_alias);
         }
 
         boolean lateInit = register.isLateInit();
-        lore.add("&b延迟加载: " + lateInit);
+        lore.add("&bInit later: " + lateInit);
 
         boolean warn = register.isWarn();
-        lore.add("&e警告: " + warn);
+        lore.add("&eWarnings on register: " + warn);
 
         boolean unfinished = register.isUnfinished();
-        lore.add("&c未完成: " + unfinished);
+        lore.add("&cIs unfinished: " + unfinished);
 
         List<String> conditions = register.getConditions();
         if (conditions != null && !conditions.isEmpty()) {
             for (String condition : conditions) {
-                lore.add("&e条件: " + condition);
+                lore.add("&eRegister condition: " + condition);
             }
         }
 

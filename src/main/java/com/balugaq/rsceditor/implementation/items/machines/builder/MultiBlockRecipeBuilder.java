@@ -63,9 +63,9 @@ public class MultiBlockRecipeBuilder extends AbstractContainer {
                         for (ItemStack itemStack : itemStackList) {
                             SlimefunItem slimefunItem = SlimefunItem.getByItem(itemStack);
                             if (slimefunItem == null) {
-                                // 非 Slimefun 物品，尝试获取 Minecraft 配方
+                                // Not a Slimefun item, try to get recipe from Minecraft
                                 Recipe[] recipes = Slimefun.getMinecraftRecipeService().getRecipesFor(itemStack);
-                                if (recipes != null && recipes.length > 0) {
+                                if (recipes.length > 0) {
                                     Recipe availableRecipe = recipes[0];
                                     if (availableRecipe instanceof ShapedRecipe sr) {
                                         String[] shape = sr.getShape();
@@ -126,12 +126,12 @@ public class MultiBlockRecipeBuilder extends AbstractContainer {
                             writer.set(id.toLowerCase() + ".output", item.clone(), false);
                         }
                     } else {
-                        p.sendMessage("§c你还没有放置物品");
+                        p.sendMessage("§cYou need to select at least one item in the grid");
                         return false;
                     }
 
                     ClipboardUtil.send(p, writer.toString());
-                    p.sendMessage("§a已编辑完毕");
+                    p.sendMessage("§aEdited successfully!");
 
                     return false;
                 });

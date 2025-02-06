@@ -36,7 +36,7 @@ public class TextTypeItem extends BaseTypeItem<String> {
         itemMeta.getPersistentDataContainer().set(CONTENT_KEY, PersistentDataType.STRING, content);
         List<String> lore = new ArrayList<>();
 
-        lore.add("§a已设置内容: " + content);
+        lore.add("§aContent: " + content);
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
     }

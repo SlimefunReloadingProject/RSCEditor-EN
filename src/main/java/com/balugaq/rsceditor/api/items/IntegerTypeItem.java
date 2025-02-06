@@ -38,7 +38,7 @@ public class IntegerTypeItem extends BaseTypeItem<Integer> {
             itemMeta.getPersistentDataContainer().set(CONTENT_KEY, PersistentDataType.INTEGER, value);
             List<String> lore = new ArrayList<>();
 
-            lore.add("§a已设置内容: " + content);
+            lore.add("§aContent: " + content);
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
         } catch (NumberFormatException ignored) {

@@ -109,9 +109,6 @@ public class ItemEditListener implements Listener {
             try {
                 MachineTier tierEnum = MachineTier.valueOf(tier);
                 MachineType typeEnum = MachineType.valueOf(type);
-                if (tierEnum == null || typeEnum == null) {
-                    return "";
-                }
 
                 return LoreBuilder.machine(tierEnum, typeEnum);
             } catch (IllegalArgumentException e) {
@@ -123,9 +120,6 @@ public class ItemEditListener implements Listener {
             String radioactivity = matchResult.group(1);
             try {
                 Radioactivity radioactivityEnum = Radioactivity.valueOf(radioactivity);
-                if (radioactivityEnum == null) {
-                    return "";
-                }
 
                 return LoreBuilder.radioactive(radioactivityEnum);
             } catch (IllegalArgumentException e) {

@@ -25,7 +25,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public abstract class AbstractContainer extends AContainer {
     public AbstractContainer(@NotNull SlimefunItemStack item) {
         super(RSCEItemGroups.MACHINE_GROUP, item, RecipeType.NULL, new ItemStack[]{null, null, null, null, null, null, null, null, null});
@@ -82,7 +81,7 @@ public abstract class AbstractContainer extends AContainer {
                         Player player = blockBreakEvent.getPlayer();
                         World world = player.getWorld();
                         world.dropItemNaturally(location, copier);
-                        player.sendMessage(ChatColor.GREEN + "Machine menu have been saved to the menu copier.");
+                        player.sendMessage("§aMachine menu have been saved to the menu copier.");
                     }
                 }
             }

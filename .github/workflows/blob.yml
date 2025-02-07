@@ -22,6 +22,6 @@ jobs:
       - name: Upload to Blob Builds
         uses: WalshyDev/blob-builds/gh-action@main
         with:
-          project: RSCEdtior
+          project: RSCEditor
           apiToken: ${{ secrets.BLOB_BUILDS_API_TOKEN }}
           releaseNotes: ${{ github.event.head_commit.message }}
